@@ -13,19 +13,23 @@ const Create = () => {
     <div className="min-h-screen bg-white">
       <Navigation />
       <div className="container mx-auto px-4 pt-32">
-        <h1 className="font-serif text-3xl md:text-4xl text-center mb-12">
+        <h1 className="font-serif text-3xl md:text-4xl text-center mb-4">
           Create Your Gallery
         </h1>
+        <p className="text-center text-gallery-warm mb-12 max-w-2xl mx-auto">
+          Choose a template that resonates with your story. Each design is inspired by literary works,
+          creating a unique space for your visual narrative.
+        </p>
         
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-serif text-2xl mb-6">Choose a Template</h2>
+          <h2 className="font-serif text-2xl mb-6">Select Your Canvas</h2>
           <GalleryTemplates
             selectedTemplate={selectedTemplate}
             onSelectTemplate={setSelectedTemplate}
           />
           
           <Card className={cn(
-            "p-8",
+            "p-8 transition-all duration-500",
             selectedTemplate === "brutalist-concrete" && "bg-gallery-accent text-white",
             selectedTemplate === "classic-frame" && "bg-gallery-soft",
             selectedTemplate === "modern-gradient" && "bg-gradient-to-r from-gallery-soft to-white"
