@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ImagePlus } from "lucide-react";
 import { GalleryTemplates } from "@/components/GalleryTemplates";
+import { cn } from "@/lib/utils";
 
 const Create = () => {
   const [selectedTemplate, setSelectedTemplate] = useState("minimal-white");
