@@ -4,6 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { Paintbrush } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 
+interface ArtisticRoleData {
+  medium: "writer" | "poet" | "musician" | "sculptor" | "painter" | "photographer" | "dancer";
+  group_id: string;
+  mindfulness_groups?: {
+    name: string;
+  };
+}
+
 const getArtisticRole = async () => {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) throw new Error("No session");
@@ -17,7 +25,7 @@ const getArtisticRole = async () => {
 
   if (roleError) throw roleError;
   
-  // If we have a role, get the group name
+  // If we have a role and a group_id, get the group name
   if (roleData?.group_id) {
     const { data: groupData, error: groupError } = await supabase
       .from('mindfulness_groups')
@@ -30,10 +38,10 @@ const getArtisticRole = async () => {
     return {
       ...roleData,
       mindfulness_groups: groupData
-    };
+    } as ArtisticRoleData;
   }
 
-  return roleData;
+  return roleData as ArtisticRoleData;
 };
 
 export const ArtisticRole = () => {
