@@ -79,11 +79,19 @@ export const GalleryTemplates = ({
   };
 
   return (
-    <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto transition-all duration-500">
+    <div className={cn(
+      "grid gap-6 max-w-4xl mx-auto transition-all duration-500",
+      expandedTemplate ? "grid-cols-1" : "grid-cols-2"
+    )}>
       {templates.map((template) => {
         const Icon = template.icon;
         const isHovered = hoveredTemplate === template.id;
         const isExpanded = expandedTemplate === template.id;
+        
+        // Only show the template if it's expanded or if no template is expanded
+        if (expandedTemplate && expandedTemplate !== template.id) {
+          return null;
+        }
         
         return (
           <Card
@@ -95,7 +103,7 @@ export const GalleryTemplates = ({
               template.style === "magical" && "magical-card",
               hoveredTemplate && hoveredTemplate !== template.id && "opacity-50",
               "group",
-              isExpanded ? "col-span-2 h-[70vh]" : "aspect-square"
+              isExpanded ? "h-[70vh]" : "aspect-square"
             )}
             onClick={() => handleTemplateClick(template.id)}
             onMouseEnter={() => setHoveredTemplate(template.id)}

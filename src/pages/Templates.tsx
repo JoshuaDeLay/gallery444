@@ -4,7 +4,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { GalleryTemplates } from "@/components/GalleryTemplates";
 import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Create } from "./Create";
+import Create from "./Create";
 
 const Templates = () => {
   const [selectedTemplate, setSelectedTemplate] = useState("minimal-essence");
