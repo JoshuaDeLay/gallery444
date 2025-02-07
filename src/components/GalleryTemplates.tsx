@@ -73,8 +73,9 @@ export const GalleryTemplates = ({
     setExpandedTemplate(expandedTemplate === templateId ? null : templateId);
   };
 
-  const handleUseTemplate = (templateId: string) => {
-    navigate(`/create?template=${templateId}`);
+  const handleUseTemplate = (templateId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/templates/design?template=${templateId}`);
   };
 
   return (
