@@ -151,7 +151,7 @@ export const GalleryTemplates = ({
                 <>
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/5" />
                   <div className="absolute inset-0 opacity-5 mix-blend-overlay" />
-                  <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] animate-pulse" />
+                  <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)]" />
                 </>
               )}
             </div>
