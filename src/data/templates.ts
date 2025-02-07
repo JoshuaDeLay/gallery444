@@ -1,5 +1,5 @@
 
-import { Minimize2, Sparkles, Palette, Box } from "lucide-react";
+import { Minimize2, GalleryHorizontal, GalleryVertical, Box } from "lucide-react";
 import type { GalleryTemplate } from "@/types/gallery";
 
 export const templates: GalleryTemplate[] = [
@@ -7,11 +7,9 @@ export const templates: GalleryTemplate[] = [
     id: "minimal-essence",
     name: "Minimal",
     style: "minimal",
-    description: "Clean lines, pure thoughts",
+    description: "",
     backgroundClass: "bg-white shadow-[inset_0_0_30px_rgba(0,0,0,0.03)]",
     icon: Minimize2,
-    poem: "White space speaks softly\nThoughts float in clarity here\nPeace finds its true form",
-    author: "The Minimalist",
     layout: [
       "grid-cols-12 gap-6",
       "col-span-8 aspect-video bg-gray-50",
@@ -21,13 +19,11 @@ export const templates: GalleryTemplate[] = [
   },
   {
     id: "magical-whispers",
-    name: "Abstract",
+    name: "Gallery",
     style: "magical",
-    description: "Where reality dances with dreams",
+    description: "",
     backgroundClass: "bg-gradient-to-br from-[#FFB5C5] via-[#FAF3E0] to-[#98D8D8] shadow-[inset_0_0_60px_rgba(255,181,197,0.2)]",
-    icon: Sparkles,
-    poem: "Through twilight's soft veil\nMagic whispers ancient tales\nDreams take wing and soar",
-    author: "The Dreamer",
+    icon: GalleryHorizontal,
     layout: [
       "grid-cols-3 gap-4",
       "col-span-2 aspect-[21/9] bg-white/20 shadow-inner backdrop-blur-sm",
@@ -37,13 +33,11 @@ export const templates: GalleryTemplate[] = [
   },
   {
     id: "digital-artistry",
-    name: "Digital Art",
+    name: "Portfolio",
     style: "magical",
-    description: "Showcase your digital masterpieces",
+    description: "",
     backgroundClass: "bg-gradient-to-br from-[#9b87f5] via-[#F1F0FB] to-[#e7f0fd] shadow-[inset_0_0_60px_rgba(155,135,245,0.2)]",
-    icon: Palette,
-    poem: "Digital dreams flow\nPixels dance in perfect light\nArt finds new wings here",
-    author: "The Digital Artist",
+    icon: GalleryVertical,
     layout: [
       "grid-cols-6 gap-4",
       "col-span-4 aspect-[16/9] bg-white/20 shadow-inner backdrop-blur-sm",
@@ -55,11 +49,9 @@ export const templates: GalleryTemplate[] = [
     id: "3d-gallery",
     name: "3D Gallery",
     style: "magical",
-    description: "Showcase your 3D artworks in an immersive space",
+    description: "",
     backgroundClass: "bg-gradient-to-br from-[#1A1F2C] via-[#6E59A5] to-[#9b87f5] shadow-[inset_0_0_60px_rgba(155,135,245,0.2)]",
     icon: Box,
-    poem: "In depths of space\nDimensions dance and intertwine\nArt breaks free",
-    author: "The 3D Artist",
     layout: [
       "grid-cols-6 gap-4",
       "col-span-4 aspect-[16/9] bg-black/20 shadow-inner backdrop-blur-sm",
