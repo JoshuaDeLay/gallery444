@@ -62,113 +62,81 @@ export const GalleryTemplates = ({
   selectedTemplate,
   onSelectTemplate,
 }: GalleryTemplatesProps) => {
-  const [expandedTemplate, setExpandedTemplate] = useState<string | null>(null);
-
-  const handleTemplateClick = (templateId: string) => {
-    if (expandedTemplate === templateId) {
-      setExpandedTemplate(null);
-    } else {
-      setExpandedTemplate(templateId);
-      onSelectTemplate(templateId);
-    }
-  };
+  const [hoveredTemplate, setHoveredTemplate] = useState<string | null>(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 h-[70vh] gap-0">
       {templates.map((template) => {
         const Icon = template.icon;
-        const isExpanded = expandedTemplate === template.id;
-        const isVisible = !expandedTemplate || expandedTemplate === template.id;
+        const isHovered = hoveredTemplate === template.id;
         
         return (
           <Card
             key={template.id}
             className={cn(
-              "relative overflow-hidden cursor-pointer transition-all duration-500 group",
+              "relative overflow-hidden cursor-pointer transition-all duration-500",
               template.backgroundClass,
-              isExpanded ? 
-                "col-span-1 md:col-span-2 ring-2 ring-murakami-teal/30" : 
-                "hover:scale-102 hover:shadow-lg",
-              !isVisible && "hidden",
+              "border-0 rounded-none",
               template.style === "magical" && "magical-card",
-              "transform-gpu"
+              hoveredTemplate && hoveredTemplate !== template.id && "opacity-50",
+              "group"
             )}
-            onClick={() => handleTemplateClick(template.id)}
+            onClick={() => onSelectTemplate(template.id)}
+            onMouseEnter={() => setHoveredTemplate(template.id)}
+            onMouseLeave={() => setHoveredTemplate(null)}
           >
-            <div 
-              className={cn(
-                "relative z-10",
-                isExpanded ? "p-8" : "p-4",
-                "transition-all duration-500"
-              )}
-            >
-              <div className="flex items-center gap-3 mb-3">
+            <div className={cn(
+              "absolute inset-0 transition-transform duration-500",
+              isHovered ? "scale-105" : "scale-100"
+            )}>
+              <div className={cn(
+                "relative h-full flex flex-col items-center justify-center p-8 text-center",
+                template.style === "minimal" ? "space-y-6" : "space-y-8"
+              )}>
                 <Icon className={cn(
                   "transition-all duration-500",
-                  isExpanded ? "h-7 w-7" : "h-5 w-5",
+                  isHovered ? "h-16 w-16" : "h-12 w-12",
                   template.style === "minimal" ? "opacity-60" : "opacity-90"
                 )} />
-                <h3 className={cn(
-                  "transition-all duration-500",
-                  isExpanded ? "text-2xl" : "text-lg",
-                  template.style === "minimal" ? "font-light" : "font-serif italic"
-                )}>{template.name}</h3>
-              </div>
-              
-              {isExpanded && (
-                <div className="animate-fade-up animate-duration-500">
-                  <div className={cn(
-                    "mt-6 prose prose-sm",
-                    template.style === "minimal" ? "prose-neutral" : "prose-pink"
+                
+                <div>
+                  <h3 className={cn(
+                    "transition-all duration-500 mb-3",
+                    isHovered ? "text-4xl" : "text-3xl",
+                    template.style === "minimal" ? "font-light" : "font-serif italic"
                   )}>
-                    <p className={cn(
-                      "text-sm leading-relaxed whitespace-pre-line",
-                      template.style === "minimal" ? 
-                        "font-light tracking-wide" : 
-                        "font-serif italic"
-                    )}>
-                      "{template.poem}"
-                    </p>
-                    <p className="text-xs opacity-70 text-right mt-2">
-                      — {template.author}
-                    </p>
-                  </div>
-
-                  <div className={cn(
-                    "mt-8 grid gap-4",
-                    template.layout[0]
+                    {template.name}
+                  </h3>
+                  
+                  <p className={cn(
+                    "max-w-md mx-auto transition-all duration-500",
+                    template.style === "minimal" ? 
+                      "text-gray-600 font-light" : 
+                      "text-gray-800 font-serif italic"
                   )}>
-                    {template.layout.slice(1).map((layoutClass, idx) => (
-                      <div
-                        key={idx}
-                        className={cn(
-                          layoutClass,
-                          "rounded-lg transition-all duration-300 hover:opacity-80",
-                          template.style === "magical" && 
-                            "border border-white/10 shadow-[0_0_15px_rgba(255,181,197,0.1)]"
-                        )}
-                      />
-                    ))}
-                  </div>
+                    {template.description}
+                  </p>
                 </div>
-              )}
 
-              <div className="mt-3">
-                <span className={cn(
-                  "inline-block px-2 py-0.5 text-xs rounded-full",
-                  template.style === "minimal" ? 
-                    "bg-gray-100 text-gray-600" : 
-                    "bg-white/20 backdrop-blur-sm text-gray-800",
+                <div className={cn(
                   "transition-all duration-500",
-                  isExpanded ? "opacity-90" : "opacity-60"
+                  isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 )}>
-                  {template.style}
-                </span>
+                  <p className={cn(
+                    "text-sm whitespace-pre-line mb-2",
+                    template.style === "minimal" ? 
+                      "font-light tracking-wide" : 
+                      "font-serif italic"
+                  )}>
+                    "{template.poem}"
+                  </p>
+                  <p className="text-xs opacity-70">
+                    — {template.author}
+                  </p>
+                </div>
               </div>
-            </div>
 
-            {/* Decorative elements */}
-            <div className="absolute inset-0 pointer-events-none">
+              {/* Decorative elements */}
               {template.style === "magical" && (
                 <>
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/5" />
