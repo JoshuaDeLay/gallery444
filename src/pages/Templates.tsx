@@ -11,7 +11,7 @@ const Templates = () => {
     <div className="min-h-screen bg-gradient-to-br from-murakami-cream to-white relative overflow-hidden">
       <Navigation />
       
-      <div className="container mx-auto px-4 pt-16 pb-4 relative z-10">
+      <div className="container mx-auto px-4 pt-16 pb-20 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 animate-fade-up">
             <h1 className="font-serif text-3xl text-murakami-wood mb-3 drop-shadow-sm">

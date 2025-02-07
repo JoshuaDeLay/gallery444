@@ -1,8 +1,10 @@
 
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Minimize2, Sparkles } from "lucide-react";
+import { Minimize2, Sparkles, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export type TemplateStyle = "minimal" | "magical";
 
@@ -63,12 +65,24 @@ export const GalleryTemplates = ({
   onSelectTemplate,
 }: GalleryTemplatesProps) => {
   const [hoveredTemplate, setHoveredTemplate] = useState<string | null>(null);
+  const [expandedTemplate, setExpandedTemplate] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleTemplateClick = (templateId: string) => {
+    onSelectTemplate(templateId);
+    setExpandedTemplate(expandedTemplate === templateId ? null : templateId);
+  };
+
+  const handleUseTemplate = (templateId: string) => {
+    navigate(`/create?template=${templateId}`);
+  };
 
   return (
-    <div className="grid grid-cols-2 h-[40vh] max-w-4xl mx-auto gap-6">
+    <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto transition-all duration-500">
       {templates.map((template) => {
         const Icon = template.icon;
         const isHovered = hoveredTemplate === template.id;
+        const isExpanded = expandedTemplate === template.id;
         
         return (
           <Card
@@ -79,14 +93,15 @@ export const GalleryTemplates = ({
               "border-0 rounded-lg",
               template.style === "magical" && "magical-card",
               hoveredTemplate && hoveredTemplate !== template.id && "opacity-50",
-              "group aspect-square"
+              "group",
+              isExpanded ? "col-span-2 h-[70vh]" : "aspect-square"
             )}
-            onClick={() => onSelectTemplate(template.id)}
+            onClick={() => handleTemplateClick(template.id)}
             onMouseEnter={() => setHoveredTemplate(template.id)}
             onMouseLeave={() => setHoveredTemplate(null)}
           >
             <div className={cn(
-              "absolute inset-0 transition-transform duration-500",
+              "absolute inset-0 transition-all duration-500",
               isHovered ? "scale-105" : "scale-100"
             )}>
               <div
@@ -97,54 +112,101 @@ export const GalleryTemplates = ({
                     "bg-[url('https://images.unsplash.com/photo-1582562124811-c09040d0a901?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')]"
                 )}
               />
-              <div className={cn(
-                "relative h-full flex flex-col items-center justify-center p-6 text-center",
-                template.style === "minimal" ? "space-y-4" : "space-y-4"
-              )}>
-                <Icon className={cn(
-                  "transition-all duration-500",
-                  isHovered ? "h-8 w-8" : "h-6 w-6",
-                  template.style === "minimal" ? "opacity-60" : "opacity-90"
-                )} />
-                
-                <div>
-                  <h3 className={cn(
-                    "transition-all duration-500 mb-2",
-                    isHovered ? "text-2xl" : "text-xl",
-                    template.style === "minimal" ? 
-                      "font-mono tracking-tight" : 
-                      "font-serif italic"
-                  )}>
-                    {template.name}
-                  </h3>
+              
+              {isExpanded ? (
+                <div className="relative h-full p-8 flex flex-col">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <Icon className={cn(
+                        "h-6 w-6",
+                        template.style === "minimal" ? "opacity-60" : "opacity-90"
+                      )} />
+                      <h3 className={cn(
+                        "text-2xl",
+                        template.style === "minimal" ? 
+                          "font-mono tracking-tight" : 
+                          "font-serif italic"
+                      )}>
+                        {template.name}
+                      </h3>
+                    </div>
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleUseTemplate(template.id);
+                      }}
+                      className={cn(
+                        "transition-all duration-300",
+                        template.style === "minimal" ?
+                          "bg-black text-white hover:bg-gray-800" :
+                          "bg-white/20 backdrop-blur-sm hover:bg-white/30"
+                      )}
+                    >
+                      Use Template
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </div>
                   
-                  <p className={cn(
-                    "max-w-[200px] mx-auto transition-all duration-500",
-                    template.style === "minimal" ? 
-                      "text-gray-600 font-mono text-xs tracking-wide" : 
-                      "text-gray-800 font-serif italic text-xs"
+                  <div className={cn(
+                    "grid flex-1",
+                    template.layout[0]
                   )}>
-                    {template.description}
-                  </p>
+                    {/* Layout preview boxes */}
+                    <div className={template.layout[1]} />
+                    <div className={template.layout[2]} />
+                    <div className={template.layout[3]} />
+                  </div>
                 </div>
-
+              ) : (
                 <div className={cn(
-                  "transition-all duration-500",
-                  isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  "relative h-full flex flex-col items-center justify-center p-6 text-center",
+                  template.style === "minimal" ? "space-y-4" : "space-y-4"
                 )}>
-                  <p className={cn(
-                    "text-xs whitespace-pre-line mb-1",
-                    template.style === "minimal" ? 
-                      "font-mono tracking-wide" : 
-                      "font-serif italic"
+                  <Icon className={cn(
+                    "transition-all duration-500",
+                    isHovered ? "h-8 w-8" : "h-6 w-6",
+                    template.style === "minimal" ? "opacity-60" : "opacity-90"
+                  )} />
+                  
+                  <div>
+                    <h3 className={cn(
+                      "transition-all duration-500 mb-2",
+                      isHovered ? "text-2xl" : "text-xl",
+                      template.style === "minimal" ? 
+                        "font-mono tracking-tight" : 
+                        "font-serif italic"
+                    )}>
+                      {template.name}
+                    </h3>
+                    
+                    <p className={cn(
+                      "max-w-[200px] mx-auto transition-all duration-500",
+                      template.style === "minimal" ? 
+                        "text-gray-600 font-mono text-xs tracking-wide" : 
+                        "text-gray-800 font-serif italic text-xs"
+                    )}>
+                      {template.description}
+                    </p>
+                  </div>
+
+                  <div className={cn(
+                    "transition-all duration-500",
+                    isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                   )}>
-                    "{template.poem}"
-                  </p>
-                  <p className="text-[10px] opacity-70">
-                    — {template.author}
-                  </p>
+                    <p className={cn(
+                      "text-xs whitespace-pre-line mb-1",
+                      template.style === "minimal" ? 
+                        "font-mono tracking-wide" : 
+                        "font-serif italic"
+                    )}>
+                      "{template.poem}"
+                    </p>
+                    <p className="text-[10px] opacity-70">
+                      — {template.author}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Decorative elements */}
               {template.style === "magical" && (
