@@ -1,6 +1,8 @@
+
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Minimize2, Box, Frame, Layers } from "lucide-react";
+import { useState } from "react";
 
 export type TemplateStyle = "minimal" | "brutalist" | "classic" | "modern";
 
@@ -92,56 +94,90 @@ export const GalleryTemplates = ({
   selectedTemplate,
   onSelectTemplate,
 }: GalleryTemplatesProps) => {
+  const [expandedTemplate, setExpandedTemplate] = useState<string | null>(null);
+
+  const handleTemplateClick = (templateId: string) => {
+    if (expandedTemplate === templateId) {
+      setExpandedTemplate(null);
+    } else {
+      setExpandedTemplate(templateId);
+      onSelectTemplate(templateId);
+    }
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {templates.map((template) => {
         const Icon = template.icon;
+        const isExpanded = expandedTemplate === template.id;
+        
         return (
           <Card
             key={template.id}
             className={cn(
-              "cursor-pointer transition-all duration-300 hover:scale-105",
-              "p-6 flex flex-col gap-4",
-              selectedTemplate === template.id
-                ? "ring-2 ring-gallery-accent"
-                : "hover:ring-1 hover:ring-gallery-warm",
-              template.backgroundClass
+              "cursor-pointer transition-all duration-500",
+              "hover:ring-1 hover:ring-gallery-warm",
+              template.backgroundClass,
+              isExpanded ? 
+                "col-span-2 md:col-span-4 ring-2 ring-gallery-accent scale-100" : 
+                "hover:scale-105",
+              "transform-gpu"
             )}
-            onClick={() => onSelectTemplate(template.id)}
+            onClick={() => handleTemplateClick(template.id)}
           >
-            <div className="flex items-center gap-3">
-              <Icon className="h-6 w-6" />
-              <h3 className="font-serif text-xl">{template.name}</h3>
-            </div>
-            
-            <div className="prose prose-sm">
-              <p className="text-sm text-gallery-warm font-serif italic">
-                "{template.poem}"
-              </p>
-              <p className="text-xs text-gallery-warm text-right">
-                — {template.author}
-              </p>
-            </div>
-
             <div className={cn(
-              "mt-4 grid",
-              template.layout[0]
+              "p-4",
+              isExpanded ? "p-6" : "p-3",
+              "transition-all duration-500"
             )}>
-              {template.layout.slice(1).map((layoutClass, idx) => (
-                <div
-                  key={idx}
-                  className={cn(
-                    layoutClass,
-                    "transition-all duration-300 hover:opacity-80"
-                  )}
-                />
-              ))}
-            </div>
+              <div className="flex items-center gap-2 mb-2">
+                <Icon className={cn(
+                  "transition-all duration-500",
+                  isExpanded ? "h-6 w-6" : "h-4 w-4"
+                )} />
+                <h3 className={cn(
+                  "font-serif transition-all duration-500",
+                  isExpanded ? "text-xl" : "text-sm"
+                )}>{template.name}</h3>
+              </div>
+              
+              {isExpanded && (
+                <div className="animate-fade-up">
+                  <div className="prose prose-sm mt-4">
+                    <p className="text-sm text-gallery-warm font-serif italic">
+                      "{template.poem}"
+                    </p>
+                    <p className="text-xs text-gallery-warm text-right">
+                      — {template.author}
+                    </p>
+                  </div>
 
-            <div className="mt-2">
-              <span className="inline-block px-2 py-1 text-xs bg-white/80 rounded">
-                {template.style}
-              </span>
+                  <div className={cn(
+                    "mt-6 grid gap-4",
+                    template.layout[0]
+                  )}>
+                    {template.layout.slice(1).map((layoutClass, idx) => (
+                      <div
+                        key={idx}
+                        className={cn(
+                          layoutClass,
+                          "transition-all duration-300 hover:opacity-80"
+                        )}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-2">
+                <span className={cn(
+                  "inline-block px-2 py-1 text-xs bg-white/80 rounded",
+                  "transition-all duration-500",
+                  isExpanded ? "opacity-100" : "opacity-70"
+                )}>
+                  {template.style}
+                </span>
+              </div>
             </div>
           </Card>
         );
