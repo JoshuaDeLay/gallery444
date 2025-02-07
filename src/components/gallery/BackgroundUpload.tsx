@@ -25,30 +25,30 @@ export const BackgroundUpload = ({ onBackgroundChange }: BackgroundUploadProps) 
       }
 
       const fileExt = file.name.split('.').pop();
-      const filePath = `${crypto.randomUUID()}.${fileExt}`;
+      const fileName = `${crypto.randomUUID()}.${fileExt}`;
 
-      const { error: uploadError } = await supabase.storage
+      const { error: uploadError, data } = await supabase.storage
         .from('gallery_images')
-        .upload(filePath, file);
+        .upload(fileName, file);
 
       if (uploadError) {
         throw uploadError;
       }
 
+      const { data: { publicUrl } } = supabase.storage
+        .from('gallery_images')
+        .getPublicUrl(fileName);
+
       const { error: updateError } = await supabase
         .from('gallery_settings')
-        .update({ background_image: filePath })
+        .update({ background_image: fileName })
         .eq('user_id', user.id);
 
       if (updateError) {
         throw updateError;
       }
 
-      const { data: imageUrl } = supabase.storage
-        .from('gallery_images')
-        .getPublicUrl(filePath);
-
-      onBackgroundChange(imageUrl.publicUrl);
+      onBackgroundChange(publicUrl);
       toast.success("Background image updated successfully");
     } catch (error) {
       console.error('Error uploading background:', error);
@@ -63,7 +63,7 @@ export const BackgroundUpload = ({ onBackgroundChange }: BackgroundUploadProps) 
       <label htmlFor="background-upload">
         <Button 
           variant="outline" 
-          className="bg-white/40 hover:bg-white/60"
+          className="bg-white/40 hover:bg-white/60 text-gallery.accent"
           disabled={isUploading}
         >
           <Upload className="h-4 w-4 mr-2" />

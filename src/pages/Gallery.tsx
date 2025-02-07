@@ -30,10 +30,10 @@ const Gallery = () => {
         if (data) {
           setGalleryName(data.gallery_name);
           if (data.background_image) {
-            const { data: imageUrl } = supabase.storage
+            const { data: { publicUrl } } = supabase.storage
               .from('gallery_images')
               .getPublicUrl(data.background_image);
-            setBackgroundImage(imageUrl.publicUrl);
+            setBackgroundImage(publicUrl);
           }
         } else {
           const { error: insertError } = await supabase
@@ -53,14 +53,14 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
-      {/* Artistic door background effect */}
+      {/* Background image and effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute w-full h-full opacity-90 bg-cover bg-center transform transition-transform duration-1000 hover:scale-105"
+          className="absolute w-full h-full opacity-90 bg-cover bg-center transform transition-transform duration-1000"
           style={{ 
             backgroundImage: `url(${backgroundImage || '/lovable-uploads/7efa2f9c-52e4-474d-a4bd-61252fa24863.png'})`,
-            backgroundRepeat: 'no-repeat', 
-            backgroundPosition: '50% 30%' 
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/30 via-transparent to-murakami.pink/30" />
