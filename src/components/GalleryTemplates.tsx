@@ -1,75 +1,12 @@
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Minimize2, Sparkles, Crown, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-export type TemplateStyle = "minimal" | "magical" | "exclusive";
-
-interface GalleryTemplate {
-  id: string;
-  name: string;
-  style: TemplateStyle;
-  description: string;
-  backgroundClass: string;
-  icon: React.ComponentType<any>;
-  poem?: string;
-  author?: string;
-  layout: string[];
-}
-
-const templates: GalleryTemplate[] = [
-  {
-    id: "minimal-essence",
-    name: "Minimal",
-    style: "minimal",
-    description: "Clean lines, pure thoughts",
-    backgroundClass: "bg-white shadow-[inset_0_0_30px_rgba(0,0,0,0.03)]",
-    icon: Minimize2,
-    poem: "White space speaks softly\nThoughts float in clarity here\nPeace finds its true form",
-    author: "The Minimalist",
-    layout: [
-      "grid-cols-12 gap-6",
-      "col-span-8 aspect-video bg-gray-50",
-      "col-span-4 aspect-square bg-gray-50",
-      "col-span-12 aspect-[4/1] bg-gray-50"
-    ]
-  },
-  {
-    id: "magical-whispers",
-    name: "Abstract",
-    style: "magical",
-    description: "Where reality dances with dreams",
-    backgroundClass: "bg-gradient-to-br from-[#FFB5C5] via-[#FAF3E0] to-[#98D8D8] shadow-[inset_0_0_60px_rgba(255,181,197,0.2)]",
-    icon: Sparkles,
-    poem: "Through twilight's soft veil\nMagic whispers ancient tales\nDreams take wing and soar",
-    author: "The Dreamer",
-    layout: [
-      "grid-cols-3 gap-4",
-      "col-span-2 aspect-[21/9] bg-white/20 shadow-inner backdrop-blur-sm",
-      "aspect-[3/4] bg-white/20 shadow-inner backdrop-blur-sm",
-      "col-span-3 aspect-[3/1] bg-white/20 shadow-inner backdrop-blur-sm"
-    ]
-  },
-  {
-    id: "exclusive-gallery",
-    name: "Exclusive Gallery",
-    style: "exclusive",
-    description: "Curated by Virgil Abloh",
-    backgroundClass: "bg-black text-white shadow-[inset_0_0_60px_rgba(255,255,255,0.1)]",
-    icon: Crown,
-    poem: "Bold visions unfold\nBreaking boundaries with grace\nArt meets street design",
-    author: "Virgil Abloh",
-    layout: [
-      "grid-cols-2 gap-8",
-      "aspect-[16/9] bg-white/10 shadow-inner backdrop-blur-sm",
-      "aspect-[1/1] bg-white/10 shadow-inner backdrop-blur-sm",
-      "col-span-2 aspect-[21/9] bg-white/10 shadow-inner backdrop-blur-sm"
-    ]
-  }
-];
+import { templates } from "@/data/templates";
+import { TemplateCardContent } from "./gallery/TemplateCardContent";
+import { ExpandedTemplate } from "./gallery/ExpandedTemplate";
+import type { GalleryTemplate } from "@/types/gallery";
 
 interface GalleryTemplatesProps {
   selectedTemplate: string;
@@ -99,12 +36,10 @@ export const GalleryTemplates = ({
       "grid gap-6 max-w-4xl mx-auto transition-all duration-500",
       expandedTemplate ? "grid-cols-1" : "grid-cols-2"
     )}>
-      {templates.map((template) => {
-        const Icon = template.icon;
+      {templates.map((template: GalleryTemplate) => {
         const isHovered = hoveredTemplate === template.id;
         const isExpanded = expandedTemplate === template.id;
         
-        // Only show the template if it's expanded or if no template is expanded
         if (expandedTemplate && expandedTemplate !== template.id) {
           return null;
         }
@@ -141,109 +76,17 @@ export const GalleryTemplates = ({
               />
               
               {isExpanded ? (
-                <div className="relative h-full p-8 flex flex-col">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <Icon className={cn(
-                        "h-6 w-6",
-                        template.style === "minimal" ? "opacity-60" : 
-                        template.style === "exclusive" ? "text-yellow-400" : "opacity-90"
-                      )} />
-                      <h3 className={cn(
-                        "text-2xl",
-                        template.style === "minimal" ? 
-                          "font-mono tracking-tight" : 
-                          template.style === "exclusive" ?
-                          "font-serif uppercase tracking-wider" :
-                          "font-serif italic"
-                      )}>
-                        {template.name}
-                      </h3>
-                    </div>
-                    <Button
-                      onClick={(e) => handleUseTemplate(template.id, e)}
-                      className={cn(
-                        "transition-all duration-300",
-                        template.style === "minimal" ?
-                          "bg-black text-white hover:bg-gray-800" :
-                          template.style === "exclusive" ?
-                          "bg-yellow-400 text-black hover:bg-yellow-500" :
-                          "bg-white/20 backdrop-blur-sm hover:bg-white/30"
-                      )}
-                    >
-                      Use Template
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </div>
-                  
-                  <div className={cn(
-                    "grid flex-1",
-                    template.layout[0]
-                  )}>
-                    <div className={template.layout[1]} />
-                    <div className={template.layout[2]} />
-                    <div className={template.layout[3]} />
-                  </div>
-                </div>
+                <ExpandedTemplate 
+                  template={template}
+                  onUseTemplate={handleUseTemplate}
+                />
               ) : (
-                <div className={cn(
-                  "relative h-full flex flex-col items-center justify-center p-6 text-center",
-                  template.style === "minimal" ? "space-y-4" : "space-y-4"
-                )}>
-                  <Icon className={cn(
-                    "transition-all duration-500",
-                    isHovered ? "h-8 w-8" : "h-6 w-6",
-                    template.style === "minimal" ? "opacity-60" : 
-                    template.style === "exclusive" ? "text-yellow-400" : "opacity-90"
-                  )} />
-                  
-                  <div>
-                    <h3 className={cn(
-                      "transition-all duration-500 mb-2",
-                      isHovered ? "text-2xl" : "text-xl",
-                      template.style === "minimal" ? 
-                        "font-mono tracking-tight" : 
-                        template.style === "exclusive" ?
-                        "font-serif uppercase tracking-wider" :
-                        "font-serif italic"
-                    )}>
-                      {template.name}
-                    </h3>
-                    
-                    <p className={cn(
-                      "max-w-[200px] mx-auto transition-all duration-500",
-                      template.style === "minimal" ? 
-                        "text-gray-600 font-mono text-xs tracking-wide" : 
-                        template.style === "exclusive" ?
-                        "text-gray-200 font-serif text-xs tracking-wide" :
-                        "text-gray-800 font-serif italic text-xs"
-                    )}>
-                      {template.description}
-                    </p>
-                  </div>
-
-                  <div className={cn(
-                    "transition-all duration-500",
-                    isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                  )}>
-                    <p className={cn(
-                      "text-xs whitespace-pre-line mb-1",
-                      template.style === "minimal" ? 
-                        "font-mono tracking-wide" : 
-                        template.style === "exclusive" ?
-                        "font-serif tracking-wide text-gray-300" :
-                        "font-serif italic"
-                    )}>
-                      "{template.poem}"
-                    </p>
-                    <p className="text-[10px] opacity-70">
-                      — {template.author}
-                    </p>
-                  </div>
-                </div>
+                <TemplateCardContent 
+                  template={template}
+                  isHovered={isHovered}
+                />
               )}
 
-              {/* Decorative elements */}
               {template.style === "magical" && (
                 <>
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/5" />
