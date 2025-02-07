@@ -1,7 +1,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { PaintBrush } from "lucide-react";
+import { Paintbrush } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 
 const getArtisticRole = async () => {
@@ -46,7 +46,7 @@ export const ArtisticRole = () => {
       <CardContent className="p-4">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-full bg-murakami.shadow/5">
-            <PaintBrush className="h-4 w-4 text-murakami.wood" />
+            <Paintbrush className="h-4 w-4 text-murakami.wood" />
           </div>
           <div>
             <h3 className="text-lg font-serif text-murakami.wood font-medium">

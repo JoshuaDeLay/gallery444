@@ -12,16 +12,19 @@ const getGroupMembers = async () => {
     .from('artistic_roles')
     .select('group_id')
     .eq('user_id', session.user.id)
-    .single();
+    .maybeSingle();
 
   if (roleError) throw roleError;
+  if (!userRole) return [];
 
   const { data: members, error: membersError } = await supabase
     .from('artistic_roles')
     .select(`
       user_id,
       medium,
-      profiles!inner(full_name)
+      profiles (
+        full_name
+      )
     `)
     .eq('group_id', userRole.group_id);
 
@@ -95,7 +98,7 @@ export const WeeklyPrompt = () => {
                   backdrop-blur-md font-serif
                   bg-murakami.wood/10 text-murakami.wood shadow-sm"
               >
-                {member.profiles.full_name} • {member.medium}
+                {member.profiles?.full_name} • {member.medium}
               </div>
             ))}
           </div>
