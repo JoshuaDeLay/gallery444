@@ -78,6 +78,38 @@ export type Database = {
         }
         Relationships: []
       }
+      group_invitations: {
+        Row: {
+          created_at: string
+          group_id: string
+          id: string
+          invitee_email: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          group_id: string
+          id?: string
+          invitee_email: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          group_id?: string
+          id?: string
+          invitee_email?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_invitations_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "mindfulness_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mindfulness_group_members: {
         Row: {
           created_at: string
