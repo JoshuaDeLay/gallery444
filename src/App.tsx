@@ -10,6 +10,7 @@ import Create from "./pages/Create";
 import NotFound from "./pages/NotFound";
 import Social from "./pages/Social";
 import Memories from "./pages/Memories";
+import Gallery from "./pages/Gallery";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/create" element={<Create />} />
           <Route path="/social" element={<Social />} />
           <Route path="/memories" element={<Memories />} />
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
@@ -33,3 +35,4 @@ const App = () => (
 );
 
 export default App;
+

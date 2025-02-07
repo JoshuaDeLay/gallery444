@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { MessageSquare, Grid, Users, Image } from "lucide-react";
+import { MessageSquare, Users, Image, DoorClosed } from "lucide-react";
 
 export const BottomNav = () => {
   const location = useLocation();
@@ -13,14 +13,16 @@ export const BottomNav = () => {
       icon: MessageSquare,
     },
     {
-      name: "Gallery",
-      href: "/create",
-      icon: Grid,
-    },
-    {
       name: "Social",
       href: "/social",
       icon: Users,
+    },
+    {
+      name: "Gallery",
+      href: "/gallery",
+      icon: DoorClosed,
+      timer: "5d 3h", // This matches the timer from WeeklyPrompt
+      isLocked: true,
     },
     {
       name: "Memories",
@@ -40,17 +42,27 @@ export const BottomNav = () => {
             return (
               <Link
                 key={item.name}
-                to={item.href}
+                to={item.isLocked ? "#" : item.href}
                 className={cn(
-                  "flex flex-col items-center px-3 py-2",
+                  "flex flex-col items-center px-3 py-2 relative",
                   "text-sm font-medium transition-colors",
                   isActive
                     ? "text-gallery-accent"
-                    : "text-gallery-warm hover:text-gallery-accent"
+                    : "text-gallery-warm hover:text-gallery-accent",
+                  item.isLocked && "cursor-not-allowed filter blur-[0.5px]"
                 )}
+                onClick={(e) => item.isLocked && e.preventDefault()}
               >
-                <Icon className="h-6 w-6" />
+                <Icon className={cn(
+                  "h-6 w-6",
+                  item.isLocked && "animate-pulse"
+                )} />
                 <span className="mt-1 text-xs">{item.name}</span>
+                {item.timer && (
+                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] px-2 py-0.5 rounded-full bg-gallery-accent/10 text-gallery-accent">
+                    {item.timer}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -59,3 +71,4 @@ export const BottomNav = () => {
     </nav>
   );
 };
+
