@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Loader2, Plus, Users } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { GroupInvitation } from "@/components/GroupInvitation";
 
 interface MindfulnessGroup {
   id: string;
@@ -19,23 +20,45 @@ interface MindfulnessGroup {
   owner_id: string;
 }
 
+interface GroupMember {
+  user_id: string;
+  profiles: {
+    full_name: string | null;
+    avatar_url: string | null;
+  };
+}
+
 const Groups = () => {
   const navigate = useNavigate();
   const [isCreating, setIsCreating] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
 
-  const { data: groups, isLoading } = useQuery({
+  const { data: groups, isLoading, refetch } = useQuery({
     queryKey: ['mindfulness-groups'],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('mindfulness_groups')
-        .select('id, name, description, created_at, owner_id')
+        .select(`
+          id, 
+          name, 
+          description, 
+          created_at, 
+          owner_id,
+          mindfulness_group_members (
+            user_id,
+            profiles (
+              full_name,
+              avatar_url
+            )
+          )
+        `)
         .order('created_at', { ascending: false });
       
       if (error) throw error;
-      return data as MindfulnessGroup[];
+      return data as (MindfulnessGroup & { mindfulness_group_members: GroupMember[] })[];
     }
   });
 
@@ -57,26 +80,31 @@ const Groups = () => {
 
       if (groupError) throw groupError;
 
-      const { error: roleError } = await supabase
-        .from('artistic_roles')
+      const { error: memberError } = await supabase
+        .from('mindfulness_group_members')
         .insert([
-          { 
-            user_id: user.id, 
-            group_id: group.id,
-            medium: 'writer'
-          }
+          { group_id: group.id, user_id: user.id }
         ]);
 
-      if (roleError) throw roleError;
+      if (memberError) throw memberError;
 
       toast.success("Group created successfully!");
       setIsCreating(false);
       setName("");
       setDescription("");
+      refetch();
     } catch (error: any) {
       toast.error(error.message);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleGroupClick = (groupId: string) => {
+    if (selectedGroupId === groupId) {
+      setSelectedGroupId(null);
+    } else {
+      setSelectedGroupId(groupId);
     }
   };
 
@@ -159,13 +187,32 @@ const Groups = () => {
               <div
                 key={group.id}
                 className="p-4 border rounded-lg hover:shadow-md transition-shadow cursor-pointer"
-                onClick={() => navigate(`/groups/${group.id}`)}
+                onClick={() => handleGroupClick(group.id)}
               >
                 <h3 className="font-medium text-lg mb-2">{group.name}</h3>
                 {group.description && (
                   <p className="text-gray-600 text-sm mb-4">{group.description}</p>
                 )}
-                <div className="text-xs text-gray-500">
+                <div className="mb-4">
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">Members ({group.mindfulness_group_members.length})</h4>
+                  <div className="flex -space-x-2">
+                    {group.mindfulness_group_members.map((member) => (
+                      <img
+                        key={member.user_id}
+                        src={member.profiles.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${member.user_id}`}
+                        alt={member.profiles.full_name || "Member"}
+                        className="w-8 h-8 rounded-full border-2 border-white"
+                      />
+                    ))}
+                  </div>
+                </div>
+                {selectedGroupId === group.id && (
+                  <div className="mt-4 border-t pt-4">
+                    <h4 className="text-sm font-medium text-gray-700 mb-2">Invite Members</h4>
+                    <GroupInvitation groupId={group.id} onInviteSent={refetch} />
+                  </div>
+                )}
+                <div className="text-xs text-gray-500 mt-4">
                   Created {new Date(group.created_at).toLocaleDateString()}
                 </div>
               </div>
