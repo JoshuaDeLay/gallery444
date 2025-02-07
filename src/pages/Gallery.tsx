@@ -33,13 +33,11 @@ const Gallery = () => {
             const { data: { publicUrl } } = supabase.storage
               .from('gallery_images')
               .getPublicUrl(data.background_image);
-            if (publicUrl) {
-              setBackgroundImage("https://qwbkypgccvxixvhkmxuu.supabase.co/storage/v1/object/public/gallery_images//Image.jpeg");
-            }
+            setBackgroundImage(publicUrl);
           }
         } else {
           // Create initial gallery settings with the default background image
-          const defaultBackgroundImage = "https://qwbkypgccvxixvhkmxuu.supabase.co/storage/v1/object/public/gallery_images//Image.jpeg";
+          const defaultBackgroundImage = "Image.jpeg";
           const { error: insertError } = await supabase
             .from('gallery_settings')
             .insert({ 
@@ -59,25 +57,28 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F2FCE2] via-[#FEF7CD] to-[#E5DEFF]/20 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
       {/* Background image and effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute w-full h-full bg-cover bg-center"
+          className="absolute w-full h-full opacity-90 bg-cover bg-center transform transition-transform duration-1000"
           style={{ 
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
+        <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/30 via-transparent to-murakami.pink/30" />
+        <div className="absolute w-96 h-96 bg-murakami.cream/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse" />
+        <div className="absolute w-96 h-96 bg-murakami.teal/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse" />
       </div>
       
       <Navigation />
       <div className="container mx-auto px-4 min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center relative">
-        <div className="max-w-4xl w-full text-center space-y-12 p-12 animate-fade-up">
+        <div className="max-w-4xl w-full text-center space-y-8 backdrop-blur-sm bg-white/20 p-12 rounded-2xl shadow-lg border border-white/30 animate-fade-up">
           <GalleryHeader galleryName={galleryName} setGalleryName={setGalleryName} />
           <BackgroundUpload onBackgroundChange={setBackgroundImage} />
-          <p className="font-['Caveat'] text-[#8E9196] text-2xl leading-relaxed max-w-xl mx-auto">
+          <p className="font-serif text-gallery.accent/80 text-xl leading-relaxed max-w-xl mx-auto italic">
             Behind these doors lie extraordinary creations waiting to be unveiled.
           </p>
           <CountdownTimer />
@@ -89,4 +90,3 @@ const Gallery = () => {
 };
 
 export default Gallery;
-
