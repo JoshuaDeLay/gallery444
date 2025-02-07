@@ -19,15 +19,12 @@ export const ExpandedTemplate = ({ template, onUseTemplate }: ExpandedTemplatePr
         <div className="flex items-center gap-3">
           <Icon className={cn(
             "h-6 w-6",
-            template.style === "minimal" ? "opacity-60" : 
-            template.style === "exclusive" ? "text-[#1EAEDB]" : "opacity-90"
+            template.style === "minimal" ? "opacity-60" : "opacity-90"
           )} />
           <h3 className={cn(
             "text-2xl",
             template.style === "minimal" ? 
               "font-mono tracking-tight" : 
-              template.style === "exclusive" ?
-              "font-serif uppercase tracking-wider" :
               "font-serif italic"
           )}>
             {template.name}
@@ -39,8 +36,6 @@ export const ExpandedTemplate = ({ template, onUseTemplate }: ExpandedTemplatePr
             "transition-all duration-300",
             template.style === "minimal" ?
               "bg-black text-white hover:bg-gray-800" :
-              template.style === "exclusive" ?
-              "bg-[#1EAEDB] text-white hover:bg-[#0FA0CE]" :
               "bg-white/20 backdrop-blur-sm hover:bg-white/30"
           )}
         >

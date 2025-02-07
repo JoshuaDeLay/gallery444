@@ -1,5 +1,5 @@
 
-import { Minimize2, Sparkles, Crown, Compass } from "lucide-react";
+import { Minimize2, Sparkles } from "lucide-react";
 import type { GalleryTemplate } from "@/types/gallery";
 
 export const templates: GalleryTemplate[] = [
@@ -33,22 +33,6 @@ export const templates: GalleryTemplate[] = [
       "col-span-2 aspect-[21/9] bg-white/20 shadow-inner backdrop-blur-sm",
       "aspect-[3/4] bg-white/20 shadow-inner backdrop-blur-sm",
       "col-span-3 aspect-[3/1] bg-white/20 shadow-inner backdrop-blur-sm"
-    ]
-  },
-  {
-    id: "exclusive-gallery",
-    name: "Exclusive Gallery",
-    style: "exclusive",
-    description: "Curated by Virgil Abloh",
-    backgroundClass: "bg-black text-white shadow-[inset_0_0_60px_rgba(255,255,255,0.1)]",
-    icon: Compass,
-    poem: "Bold visions unfold\nBreaking boundaries with grace\nArt meets street design",
-    author: "Virgil Abloh",
-    layout: [
-      "grid-cols-2 gap-8",
-      "aspect-[16/9] bg-white/10 shadow-inner backdrop-blur-sm",
-      "aspect-[1/1] bg-white/10 shadow-inner backdrop-blur-sm",
-      "col-span-2 aspect-[21/9] bg-white/10 shadow-inner backdrop-blur-sm"
     ]
   }
 ];

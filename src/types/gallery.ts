@@ -1,7 +1,7 @@
 
 import { LucideIcon } from "lucide-react";
 
-export type TemplateStyle = "minimal" | "magical" | "exclusive";
+export type TemplateStyle = "minimal" | "magical";
 
 export interface GalleryTemplate {
   id: string;

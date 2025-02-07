@@ -18,8 +18,7 @@ export const TemplateCardContent = ({ template, isHovered }: TemplateCardContent
       <Icon className={cn(
         "transition-all duration-500",
         isHovered ? "h-8 w-8" : "h-6 w-6",
-        template.style === "minimal" ? "opacity-60" : 
-        template.style === "exclusive" ? "text-[#1EAEDB]" : "opacity-90"
+        template.style === "minimal" ? "opacity-60" : "opacity-90"
       )} />
       
       <div>
@@ -28,8 +27,6 @@ export const TemplateCardContent = ({ template, isHovered }: TemplateCardContent
           isHovered ? "text-2xl" : "text-xl",
           template.style === "minimal" ? 
             "font-mono tracking-tight" : 
-            template.style === "exclusive" ?
-            "font-serif uppercase tracking-wider" :
             "font-serif italic"
         )}>
           {template.name}
@@ -39,8 +36,6 @@ export const TemplateCardContent = ({ template, isHovered }: TemplateCardContent
           "max-w-[200px] mx-auto transition-all duration-500",
           template.style === "minimal" ? 
             "text-gray-600 font-mono text-xs tracking-wide" : 
-            template.style === "exclusive" ?
-            "text-gray-200 font-serif text-xs tracking-wide" :
             "text-gray-800 font-serif italic text-xs"
         )}>
           {template.description}
@@ -55,8 +50,6 @@ export const TemplateCardContent = ({ template, isHovered }: TemplateCardContent
           "text-xs whitespace-pre-line mb-1",
           template.style === "minimal" ? 
             "font-mono tracking-wide" : 
-            template.style === "exclusive" ?
-            "font-serif tracking-wide text-gray-300" :
             "font-serif italic"
         )}>
           "{template.poem}"
