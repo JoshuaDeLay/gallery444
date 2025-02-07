@@ -18,6 +18,7 @@ const Gallery = () => {
   const [galleryName, setGalleryName] = useState("The Grand Gallery");
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGallerySettings = async () => {
@@ -25,7 +26,7 @@ const Gallery = () => {
       if (user) {
         const { data, error } = await supabase
           .from('gallery_settings')
-          .select('gallery_name')
+          .select('gallery_name, background_image')
           .eq('user_id', user.id)
           .maybeSingle();
 
@@ -37,6 +38,12 @@ const Gallery = () => {
         if (data) {
           setGalleryName(data.gallery_name);
           setEditedName(data.gallery_name);
+          if (data.background_image) {
+            const { data: imageUrl } = supabase.storage
+              .from('gallery_images')
+              .getPublicUrl(data.background_image);
+            setBackgroundImage(imageUrl.publicUrl);
+          }
         } else {
           const { error: insertError } = await supabase
             .from('gallery_settings')
@@ -109,8 +116,12 @@ const Gallery = () => {
       {/* Artistic door background effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute w-full h-full bg-[url('/lovable-uploads/7efa2f9c-52e4-474d-a4bd-61252fa24863.png')] opacity-90 bg-cover bg-center transform transition-transform duration-1000 hover:scale-105"
-          style={{ backgroundRepeat: 'no-repeat', backgroundPosition: '50% 30%' }}
+          className="absolute w-full h-full opacity-90 bg-cover bg-center transform transition-transform duration-1000 hover:scale-105"
+          style={{ 
+            backgroundImage: `url(${backgroundImage || '/lovable-uploads/7efa2f9c-52e4-474d-a4bd-61252fa24863.png'})`,
+            backgroundRepeat: 'no-repeat', 
+            backgroundPosition: '50% 30%' 
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/30 via-transparent to-murakami.pink/30" />
         <div className="absolute w-96 h-96 bg-murakami.cream/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse" />
