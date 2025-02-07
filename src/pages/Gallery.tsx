@@ -1,8 +1,10 @@
 
 import { Navigation } from "@/components/Navigation";
 import { BottomNav } from "@/components/BottomNav";
-import { Warehouse } from "lucide-react";
+import { Warehouse, Upload } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 const Gallery = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -11,6 +13,9 @@ const Gallery = () => {
     minutes: 0,
     seconds: 0
   });
+
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const { toast } = useToast();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -43,6 +48,34 @@ const Gallery = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files) return;
+
+    Array.from(files).forEach(file => {
+      if (!file.type.startsWith('image/')) {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload only image files.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          setUploadedImages(prev => [...prev, e.target!.result as string]);
+          toast({
+            title: "Image uploaded",
+            description: "Your image has been added to the gallery.",
+          });
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
       {/* Animated museum entrance effect */}
@@ -55,7 +88,7 @@ const Gallery = () => {
       
       <Navigation />
       <div className="container mx-auto px-4 min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center relative">
-        <div className="max-w-2xl w-full text-center space-y-8 backdrop-blur-sm bg-white/10 p-12 rounded-2xl shadow-lg border border-white/20 animate-fade-up">
+        <div className="max-w-4xl w-full text-center space-y-8 backdrop-blur-sm bg-white/10 p-12 rounded-2xl shadow-lg border border-white/20 animate-fade-up">
           <div className="relative w-40 h-40 mx-auto transition-all duration-1000 group">
             <div className="absolute inset-0 bg-gradient-to-r from-murakami.teal/20 to-murakami.pink/20 rounded-full group-hover:scale-110 transition-transform duration-700" />
             <Warehouse className="w-full h-full text-gallery.accent/80 group-hover:scale-105 transition-all duration-700" />
@@ -66,6 +99,46 @@ const Gallery = () => {
           <p className="font-serif text-gallery.accent/70 text-xl leading-relaxed max-w-xl mx-auto italic">
             Behind these doors lie extraordinary creations waiting to be unveiled.
           </p>
+          
+          {/* Upload Section */}
+          <div className="mt-8">
+            <label htmlFor="image-upload" className="cursor-pointer">
+              <div className="flex flex-col items-center gap-4">
+                <Button variant="outline" className="relative overflow-hidden group">
+                  <Upload className="w-5 h-5 mr-2" />
+                  Upload Images
+                  <input
+                    type="file"
+                    id="image-upload"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    accept="image/*"
+                    multiple
+                    onChange={handleFileUpload}
+                  />
+                </Button>
+              </div>
+            </label>
+          </div>
+
+          {/* Image Gallery */}
+          {uploadedImages.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+              {uploadedImages.map((image, index) => (
+                <div 
+                  key={index} 
+                  className="relative aspect-square rounded-lg overflow-hidden group hover:scale-105 transition-transform duration-300"
+                >
+                  <img
+                    src={image}
+                    alt={`Gallery image ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              ))}
+            </div>
+          )}
+
           <div className="grid grid-cols-4 gap-6 max-w-xl mx-auto">
             {Object.entries(timeLeft).map(([unit, value]) => (
               <div key={unit} className="flex flex-col items-center group">
@@ -88,4 +161,3 @@ const Gallery = () => {
 };
 
 export default Gallery;
-
