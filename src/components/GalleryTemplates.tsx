@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Minimize2, Box, Frame, Layers, Snowflake, Mountain, Wind, Camera, Waves, Trees, Cloud, Sunrise } from "lucide-react";
+import { Minimize2, Box, Frame, Layers, HeartHandshake, Palette, Sparkles, Sun, Waves, Trees, Cloud, Sunrise } from "lucide-react";
 import { useState } from "react";
 
-export type TemplateStyle = "minimal" | "brutalist" | "classic" | "modern" | "nordic" | "alpine" | "frost" | "polar" | "river" | "forest" | "meadow" | "sunrise";
+export type TemplateStyle = "minimal" | "warm" | "classic" | "modern" | "vibrant" | "dreamy" | "soft" | "bright" | "river" | "forest" | "meadow" | "sunrise";
 
 interface GalleryTemplate {
   id: string;
@@ -19,138 +19,74 @@ interface GalleryTemplate {
 
 const templates: GalleryTemplate[] = [
   {
-    id: "minimal-white",
-    name: "White Space",
-    style: "minimal",
-    description: "Inspired by e.e. cummings' minimalist poetry",
-    backgroundClass: "bg-white",
-    icon: Minimize2,
-    poem: "l(a\n\nle\naf\nfa\n\nll\n\ns)\none\nl\niness",
-    author: "e.e. cummings",
+    id: "warm-embrace",
+    name: "Warm Embrace",
+    style: "warm",
+    description: "A cozy space for your creative expressions",
+    backgroundClass: "bg-gradient-to-r from-[#ee9ca7] to-[#ffdde1]",
+    icon: HeartHandshake,
+    poem: "In gentle moments\nWe find our truest stories\nShared with loving care",
+    author: "Heart & Soul",
     layout: [
       "grid-cols-1 gap-8",
-      "aspect-[3/4] bg-gallery-soft/20",
-      "aspect-square bg-gallery-soft/20",
-      "aspect-[4/3] bg-gallery-soft/20"
+      "aspect-[3/4] bg-white/20 shadow-inner",
+      "aspect-square bg-white/20 shadow-inner",
+      "aspect-[4/3] bg-white/20 shadow-inner"
     ]
   },
   {
-    id: "brutalist-concrete",
-    name: "Concrete",
-    style: "brutalist",
-    description: "Raw typography meets architectural forms",
-    backgroundClass: "bg-gallery-accent",
-    icon: Box,
-    poem: "The city rises\nConcrete and steel\nAgainst the morning light",
-    author: "Contemporary Verse",
-    layout: [
-      "grid-cols-2 gap-2",
-      "col-span-2 aspect-[2/1] bg-white/10",
-      "aspect-square bg-white/10",
-      "aspect-square bg-white/10"
-    ]
-  },
-  {
-    id: "classic-frame",
-    name: "Classic Frame",
-    style: "classic",
-    description: "Inspired by William Wordsworth's nature poetry",
-    backgroundClass: "bg-gallery-soft",
-    icon: Frame,
-    poem: "I wandered lonely as a cloud\nThat floats on high o'er vales and hills",
-    author: "William Wordsworth",
-    layout: [
-      "grid-cols-3 gap-4",
-      "col-span-2 aspect-[2/1] bg-white border-2 border-gallery-accent/20",
-      "aspect-[3/4] bg-white border-2 border-gallery-accent/20",
-      "col-span-3 aspect-[3/1] bg-white border-2 border-gallery-accent/20"
-    ]
-  },
-  {
-    id: "modern-gradient",
-    name: "Modern Flow",
-    style: "modern",
-    description: "Contemporary poetry meets fluid design",
-    backgroundClass: "bg-gradient-to-r from-gallery-soft to-white",
-    icon: Layers,
-    poem: "Digital rivers flow\nPixels cascade through time's stream\nModern art evolves",
-    author: "Digital Haiku",
-    layout: [
-      "grid-cols-12 gap-4",
-      "col-span-8 aspect-video bg-gradient-to-r from-gallery-soft/40 to-white",
-      "col-span-4 aspect-square bg-gradient-to-l from-gallery-soft/40 to-white",
-      "col-span-12 aspect-[4/1] bg-gradient-to-t from-gallery-soft/40 to-white"
-    ]
-  },
-  {
-    id: "nordic-frost",
-    name: "Nordic Frost",
-    style: "nordic",
-    description: "Scandinavian simplicity meets winter's embrace",
-    backgroundClass: "bg-gradient-to-br from-white via-blue-50 to-blue-100",
-    icon: Snowflake,
-    poem: "Silent fjords whisper\nNorthern lights dance overhead\nWinter's pure essence",
-    author: "Nordic Verse",
-    layout: [
-      "grid-cols-3 gap-3",
-      "col-span-2 aspect-[2/1] bg-blue-50/40 border border-blue-100",
-      "aspect-square bg-blue-50/40 border border-blue-100",
-      "col-span-3 aspect-[3/1] bg-blue-50/40 border border-blue-100"
-    ]
-  },
-  {
-    id: "alpine-heights",
-    name: "Alpine Heights",
-    style: "alpine",
-    description: "Capturing the majesty of mountain winters",
-    backgroundClass: "bg-gradient-to-r from-slate-100 to-slate-200",
-    icon: Mountain,
-    poem: "Mountains touch the sky\nSnow-capped peaks in morning light\nNature's cathedral",
-    author: "Mountain Poet",
+    id: "vibrant-dreams",
+    name: "Vibrant Dreams",
+    style: "vibrant",
+    description: "Where colors dance with imagination",
+    backgroundClass: "bg-gradient-to-br from-[#d299c2] to-[#fef9d7]",
+    icon: Palette,
+    poem: "Colors bloom and shine\nPainting stories in the light\nDreams take wing and soar",
+    author: "Color Poet",
     layout: [
       "grid-cols-2 gap-4",
-      "aspect-[16/9] bg-white/80 shadow-inner",
-      "aspect-square bg-white/80 shadow-inner",
-      "col-span-2 aspect-[2/1] bg-white/80 shadow-inner"
+      "col-span-2 aspect-[2/1] bg-white/20",
+      "aspect-square bg-white/20",
+      "aspect-square bg-white/20"
     ]
   },
   {
-    id: "frost-minimalist",
-    name: "Frost Pattern",
-    style: "frost",
-    description: "Inspired by crystalline frost patterns",
-    backgroundClass: "bg-gradient-to-bl from-white via-blue-50 to-white",
-    icon: Wind,
-    poem: "Crystal lattice forms\nNature's geometric art\nFrost writes on windows",
-    author: "Winter Observer",
+    id: "soft-whispers",
+    name: "Soft Whispers",
+    style: "soft",
+    description: "A gentle canvas for delicate memories",
+    backgroundClass: "bg-gradient-to-r from-[#ffc3a0] to-[#ffafbd]",
+    icon: Sparkles,
+    poem: "Whispered memories\nFloat like petals in the wind\nGently touching hearts",
+    author: "Gentle Voice",
     layout: [
-      "grid-cols-12 gap-2",
-      "col-span-7 aspect-video bg-gradient-to-r from-white to-blue-50 border border-blue-100/50",
-      "col-span-5 aspect-square bg-gradient-to-l from-white to-blue-50 border border-blue-100/50",
-      "col-span-12 aspect-[5/1] bg-gradient-to-t from-white to-blue-50 border border-blue-100/50"
+      "grid-cols-3 gap-4",
+      "col-span-2 aspect-[2/1] bg-white/20 shadow-sm",
+      "aspect-[3/4] bg-white/20 shadow-sm",
+      "col-span-3 aspect-[3/1] bg-white/20 shadow-sm"
     ]
   },
   {
-    id: "polar-night",
-    name: "Polar Night",
-    style: "polar",
-    description: "Ethereal beauty of the arctic night",
-    backgroundClass: "bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900",
-    icon: Camera,
-    poem: "In darkness profound\nAurora paints the black sky\nStars dance with colors",
-    author: "Arctic Dreams",
+    id: "bright-day",
+    name: "Bright Day",
+    style: "bright",
+    description: "Celebrate the joy of the present moment",
+    backgroundClass: "bg-gradient-to-br from-[#accbee] to-[#e7f0fd]",
+    icon: Sun,
+    poem: "Morning light dances\nJoy sparkles in every ray\nNew stories unfold",
+    author: "Light Seeker",
     layout: [
-      "grid-cols-6 gap-3",
-      "col-span-4 aspect-video bg-white/5 border border-white/10",
-      "col-span-2 aspect-square bg-white/5 border border-white/10",
-      "col-span-6 aspect-[4/1] bg-white/5 border border-white/10"
+      "grid-cols-12 gap-4",
+      "col-span-8 aspect-video bg-white/30",
+      "col-span-4 aspect-square bg-white/30",
+      "col-span-12 aspect-[4/1] bg-white/30"
     ]
   },
   {
     id: "river-flow",
     name: "River Flow",
     style: "river",
-    description: "Inspired by the gentle flow of mountain streams",
+    description: "Let your creativity flow freely",
     backgroundClass: "bg-gradient-to-r from-[#accbee] to-[#e7f0fd]",
     icon: Waves,
     poem: "Water flows gently\nOver ancient river stones\nTime drifts endlessly",
@@ -166,10 +102,10 @@ const templates: GalleryTemplate[] = [
     id: "forest-whispers",
     name: "Forest Whispers",
     style: "forest",
-    description: "Deep in the ancient woods where silence speaks",
+    description: "Find peace in nature's embrace",
     backgroundClass: "bg-gradient-to-br from-[#c1c161] to-[#d4d4b1]",
     icon: Trees,
-    poem: "Tall pines reach skyward\nWhispering ancient secrets\nIn forest shadows",
+    poem: "Tall trees reaching high\nWhispering ancient stories\nNature's embrace holds",
     author: "Woodland Voice",
     layout: [
       "grid-cols-12 gap-3",
@@ -195,14 +131,14 @@ const templates: GalleryTemplate[] = [
     ]
   },
   {
-    id: "mountain-sunrise",
-    name: "Mountain Dawn",
+    id: "sunrise-stories",
+    name: "Sunrise Stories",
     style: "sunrise",
-    description: "First light touching mountain peaks",
+    description: "Begin each day with fresh inspiration",
     backgroundClass: "bg-gradient-to-br from-[#fdfcfb] to-[#e2d1c3]",
     icon: Sunrise,
-    poem: "Dawn breaks golden new\nMountain peaks touch morning sky\nDay awakens now",
-    author: "Dawn Observer",
+    poem: "New day awakens\nFresh stories wait to unfold\nBeginnings bloom bright",
+    author: "Dawn Dreamer",
     layout: [
       "grid-cols-6 gap-2",
       "col-span-4 aspect-[2/1] bg-white/40 shadow-sm",

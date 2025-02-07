@@ -5,11 +5,11 @@ import { GalleryTemplates } from "@/components/GalleryTemplates";
 import { useState } from "react";
 
 const Templates = () => {
-  const [selectedTemplate, setSelectedTemplate] = useState("minimal-white");
+  const [selectedTemplate, setSelectedTemplate] = useState("warm-embrace");
 
   return (
-    <div className="h-screen bg-gradient-to-b from-[#243949] to-[#517fa4] relative overflow-hidden">
-      {/* Magical snow effect */}
+    <div className="h-screen bg-gradient-to-r from-[#ffc3a0] to-[#ffafbd] relative overflow-hidden">
+      {/* Floating elements effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute w-2 h-2 bg-white/20 rounded-full blur-[1px] animate-float" style={{ left: '10%', top: '20%' }} />
         <div className="absolute w-1.5 h-1.5 bg-white/30 rounded-full blur-[1px] animate-float" style={{ left: '70%', top: '30%', animationDelay: '1s' }} />
@@ -22,11 +22,11 @@ const Templates = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-6 animate-fade-up">
             <h1 className="font-serif text-2xl text-white mb-2 drop-shadow-lg">
-              Winter Gallery Templates
+              Express Yourself
             </h1>
             <p className="text-white/80 text-sm max-w-2xl mx-auto">
-              Choose from our curated collection of winter-inspired templates. 
-              Each design tells a unique story, waiting for your creative touch.
+              Choose from our collection of thoughtfully designed templates.
+              Each one creates a unique space for your creative expression.
             </p>
           </div>
 
@@ -45,3 +45,4 @@ const Templates = () => {
 };
 
 export default Templates;
+
