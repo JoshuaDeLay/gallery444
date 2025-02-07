@@ -1,10 +1,9 @@
-
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Minimize2, Box, Frame, Layers } from "lucide-react";
+import { Minimize2, Box, Frame, Layers, Snowflake, Mountain, Wind, Camera } from "lucide-react";
 import { useState } from "react";
 
-export type TemplateStyle = "minimal" | "brutalist" | "classic" | "modern";
+export type TemplateStyle = "minimal" | "brutalist" | "classic" | "modern" | "nordic" | "alpine" | "frost" | "polar";
 
 interface GalleryTemplate {
   id: string;
@@ -83,6 +82,70 @@ const templates: GalleryTemplate[] = [
       "col-span-12 aspect-[4/1] bg-gradient-to-t from-gallery-soft/40 to-white"
     ]
   },
+  {
+    id: "nordic-frost",
+    name: "Nordic Frost",
+    style: "nordic",
+    description: "Scandinavian simplicity meets winter's embrace",
+    backgroundClass: "bg-gradient-to-br from-white via-blue-50 to-blue-100",
+    icon: Snowflake,
+    poem: "Silent fjords whisper\nNorthern lights dance overhead\nWinter's pure essence",
+    author: "Nordic Verse",
+    layout: [
+      "grid-cols-3 gap-3",
+      "col-span-2 aspect-[2/1] bg-blue-50/40 border border-blue-100",
+      "aspect-square bg-blue-50/40 border border-blue-100",
+      "col-span-3 aspect-[3/1] bg-blue-50/40 border border-blue-100"
+    ]
+  },
+  {
+    id: "alpine-heights",
+    name: "Alpine Heights",
+    style: "alpine",
+    description: "Capturing the majesty of mountain winters",
+    backgroundClass: "bg-gradient-to-r from-slate-100 to-slate-200",
+    icon: Mountain,
+    poem: "Mountains touch the sky\nSnow-capped peaks in morning light\nNature's cathedral",
+    author: "Mountain Poet",
+    layout: [
+      "grid-cols-2 gap-4",
+      "aspect-[16/9] bg-white/80 shadow-inner",
+      "aspect-square bg-white/80 shadow-inner",
+      "col-span-2 aspect-[2/1] bg-white/80 shadow-inner"
+    ]
+  },
+  {
+    id: "frost-minimalist",
+    name: "Frost Pattern",
+    style: "frost",
+    description: "Inspired by crystalline frost patterns",
+    backgroundClass: "bg-gradient-to-bl from-white via-blue-50 to-white",
+    icon: Wind,
+    poem: "Crystal lattice forms\nNature's geometric art\nFrost writes on windows",
+    author: "Winter Observer",
+    layout: [
+      "grid-cols-12 gap-2",
+      "col-span-7 aspect-video bg-gradient-to-r from-white to-blue-50 border border-blue-100/50",
+      "col-span-5 aspect-square bg-gradient-to-l from-white to-blue-50 border border-blue-100/50",
+      "col-span-12 aspect-[5/1] bg-gradient-to-t from-white to-blue-50 border border-blue-100/50"
+    ]
+  },
+  {
+    id: "polar-night",
+    name: "Polar Night",
+    style: "polar",
+    description: "Ethereal beauty of the arctic night",
+    backgroundClass: "bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900",
+    icon: Camera,
+    poem: "In darkness profound\nAurora paints the black sky\nStars dance with colors",
+    author: "Arctic Dreams",
+    layout: [
+      "grid-cols-6 gap-3",
+      "col-span-4 aspect-video bg-white/5 border border-white/10",
+      "col-span-2 aspect-square bg-white/5 border border-white/10",
+      "col-span-6 aspect-[4/1] bg-white/5 border border-white/10"
+    ]
+  }
 ];
 
 interface GalleryTemplatesProps {
