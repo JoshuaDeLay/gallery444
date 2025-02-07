@@ -36,9 +36,14 @@ const Gallery = () => {
             setBackgroundImage(publicUrl);
           }
         } else {
+          // Create initial gallery settings with the default background image
+          const defaultBackgroundImage = "Image.jpeg";
           const { error: insertError } = await supabase
             .from('gallery_settings')
-            .insert({ user_id: user.id });
+            .insert({ 
+              user_id: user.id,
+              background_image: defaultBackgroundImage 
+            });
 
           if (insertError) {
             console.error('Error creating gallery settings:', insertError);
