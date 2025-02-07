@@ -123,7 +123,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={() => setIsSignUp(!isSignUp)}
-                className="text-gallery.accent hover:underline text-sm"
+                className="text-gallery.accent hover:underline text-sm font-medium"
               >
                 {isSignUp 
                   ? "Already have an account? Sign in" 
