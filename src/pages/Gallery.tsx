@@ -63,24 +63,22 @@ const Gallery = () => {
       {/* Background image and effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute w-full h-full opacity-90 bg-cover bg-center transform transition-transform duration-1000"
+          className="absolute w-full h-full opacity-95 bg-cover bg-center"
           style={{ 
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/30 via-transparent to-murakami.pink/30" />
-        <div className="absolute w-96 h-96 bg-murakami.cream/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse" />
-        <div className="absolute w-96 h-96 bg-murakami.teal/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse" />
+        <div className="absolute inset-0 bg-black/10" />
       </div>
       
       <Navigation />
       <div className="container mx-auto px-4 min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center relative">
-        <div className="max-w-4xl w-full text-center space-y-8 backdrop-blur-sm bg-white/20 p-12 rounded-2xl shadow-lg border border-white/30 animate-fade-up">
+        <div className="max-w-4xl w-full text-center space-y-8 bg-white/5 backdrop-blur-sm p-12 rounded-3xl shadow-lg border border-white/10 animate-fade-up">
           <GalleryHeader galleryName={galleryName} setGalleryName={setGalleryName} />
           <BackgroundUpload onBackgroundChange={setBackgroundImage} />
-          <p className="font-serif text-gallery.accent/80 text-xl leading-relaxed max-w-xl mx-auto italic">
+          <p className="font-sans text-white/90 text-xl leading-relaxed max-w-xl mx-auto tracking-wide">
             Behind these doors lie extraordinary creations waiting to be unveiled.
           </p>
           <CountdownTimer />

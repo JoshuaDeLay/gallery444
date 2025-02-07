@@ -51,12 +51,12 @@ export const CountdownTimer = () => {
     <div className="grid grid-cols-4 gap-6 max-w-xl mx-auto">
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="flex flex-col items-center group">
-          <div className="w-20 h-20 rounded-2xl bg-white/40 backdrop-blur-sm border border-white/40 shadow-sm flex items-center justify-center mb-3 transition-all duration-300 group-hover:bg-white/50">
-            <span className="text-3xl font-light text-gallery.accent font-serif tracking-widest transition-all duration-300 group-hover:scale-110">
+          <div className="w-20 h-20 bg-black/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-3 transition-all duration-300 group-hover:bg-black/20">
+            <span className="text-3xl font-light text-white tracking-widest transition-all duration-300 group-hover:scale-110">
               {value.toString().padStart(2, '0')}
             </span>
           </div>
-          <span className="text-gallery.accent/70 capitalize font-serif italic text-sm tracking-wide">
+          <span className="text-white/70 capitalize font-sans text-sm tracking-wider">
             {unit}
           </span>
         </div>
