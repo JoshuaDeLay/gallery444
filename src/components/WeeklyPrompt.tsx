@@ -3,37 +3,47 @@ import { Calendar, Eye } from "lucide-react";
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const getGroupMembers = async () => {
   const { data: { session } } = await supabase.auth.getSession();
-  if (!session) throw new Error("No session");
+  if (!session) {
+    toast.error("Please sign in to view group members");
+    return [];
+  }
 
-  const { data: userRole, error: roleError } = await supabase
-    .from('artistic_roles')
-    .select('group_id')
-    .eq('user_id', session.user.id)
-    .maybeSingle();
+  try {
+    const { data: userRole, error: roleError } = await supabase
+      .from('artistic_roles')
+      .select('group_id')
+      .eq('user_id', session.user.id)
+      .maybeSingle();
 
-  if (roleError) throw roleError;
-  if (!userRole) return [];
+    if (roleError) throw roleError;
+    if (!userRole?.group_id) return [];
 
-  const { data: members, error: membersError } = await supabase
-    .from('artistic_roles')
-    .select(`
-      user_id,
-      medium,
-      profiles (
-        full_name
-      )
-    `)
-    .eq('group_id', userRole.group_id);
+    const { data: members, error: membersError } = await supabase
+      .from('artistic_roles')
+      .select(`
+        user_id,
+        medium,
+        profiles (
+          full_name
+        )
+      `)
+      .eq('group_id', userRole.group_id);
 
-  if (membersError) throw membersError;
-  return members;
+    if (membersError) throw membersError;
+    return members || [];
+  } catch (error: any) {
+    toast.error("Failed to load group members");
+    console.error("Error fetching group members:", error.message);
+    return [];
+  }
 };
 
 export const WeeklyPrompt = () => {
-  const { data: groupMembers = [] } = useQuery({
+  const { data: groupMembers = [], isLoading } = useQuery({
     queryKey: ['groupMembers'],
     queryFn: getGroupMembers
   });
@@ -95,18 +105,26 @@ export const WeeklyPrompt = () => {
             Fellow Curators
           </p>
           <div className="flex flex-wrap gap-1.5">
-            {groupMembers.map((member) => (
-              <div
-                key={member.user_id}
-                className="px-2 py-0.5 rounded-full text-xs
-                  transition-all duration-300
-                  backdrop-blur-md font-serif
-                  bg-white/20 text-indigo-900 shadow-sm
-                  hover:bg-white/30"
-              >
-                {member.profiles?.full_name || 'Anonymous'} • {member.medium}
-              </div>
-            ))}
+            {isLoading ? (
+              <div className="animate-pulse bg-white/20 h-6 w-32 rounded-full" />
+            ) : groupMembers.length > 0 ? (
+              groupMembers.map((member) => (
+                <div
+                  key={member.user_id}
+                  className="px-2 py-0.5 rounded-full text-xs
+                    transition-all duration-300
+                    backdrop-blur-md font-serif
+                    bg-white/20 text-indigo-900 shadow-sm
+                    hover:bg-white/30"
+                >
+                  {member.profiles?.full_name || 'Anonymous'} • {member.medium}
+                </div>
+              ))
+            ) : (
+              <span className="text-xs text-indigo-800/60 italic">
+                No curators found in your group
+              </span>
+            )}
           </div>
         </div>
       </CardFooter>
