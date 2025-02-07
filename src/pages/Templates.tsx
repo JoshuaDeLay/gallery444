@@ -12,7 +12,7 @@ const Templates = () => {
   const isDesignRoute = location.pathname.includes("/templates/design");
 
   return (
-    <div className="min-h-screen bg-[#E6D5A7] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-murakami-cream to-white relative overflow-hidden">
       <Navigation />
       
       <Routes>
