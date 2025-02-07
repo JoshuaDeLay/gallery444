@@ -1,5 +1,4 @@
-
-import { Minimize2, Sparkles, Palette } from "lucide-react";
+import { Minimize2, Sparkles, Palette, Cube } from "lucide-react";
 import type { GalleryTemplate } from "@/types/gallery";
 
 export const templates: GalleryTemplate[] = [
@@ -49,6 +48,22 @@ export const templates: GalleryTemplate[] = [
       "col-span-4 aspect-[16/9] bg-white/20 shadow-inner backdrop-blur-sm",
       "col-span-2 aspect-square bg-white/20 shadow-inner backdrop-blur-sm",
       "col-span-6 aspect-[21/9] bg-white/20 shadow-inner backdrop-blur-sm"
+    ]
+  },
+  {
+    id: "3d-gallery",
+    name: "3D Gallery",
+    style: "magical",
+    description: "Showcase your 3D artworks in an immersive space",
+    backgroundClass: "bg-gradient-to-br from-[#1A1F2C] via-[#6E59A5] to-[#9b87f5] shadow-[inset_0_0_60px_rgba(155,135,245,0.2)]",
+    icon: Cube,
+    poem: "In depths of space\nDimensions dance and intertwine\nArt breaks free",
+    author: "The 3D Artist",
+    layout: [
+      "grid-cols-6 gap-4",
+      "col-span-4 aspect-[16/9] bg-black/20 shadow-inner backdrop-blur-sm",
+      "col-span-2 aspect-square bg-black/20 shadow-inner backdrop-blur-sm",
+      "col-span-6 aspect-[21/9] bg-black/20 shadow-inner backdrop-blur-sm"
     ]
   }
 ];
