@@ -6,7 +6,7 @@ import { CommentWithVoice } from "@/components/CommentWithVoice";
 
 const Prompts = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-murakami.cream to-murakami.pink/20 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-murakami-cream to-white pb-20">
       <Navigation />
       <div className="container mx-auto px-4 min-h-[calc(100vh-8rem)]">
         <div className="w-full max-w-4xl mx-auto space-y-8 py-8">
@@ -30,4 +30,3 @@ const Prompts = () => {
 };
 
 export default Prompts;
-
