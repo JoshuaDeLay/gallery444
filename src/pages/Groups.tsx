@@ -11,6 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { Loader2, Plus, Users } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
+interface MindfulnessGroup {
+  id: string;
+  name: string;
+  description: string | null;
+  created_at: string;
+  owner_id: string;
+}
+
 const Groups = () => {
   const navigate = useNavigate();
   const [isCreating, setIsCreating] = useState(false);
@@ -27,7 +35,7 @@ const Groups = () => {
         .order('created_at', { ascending: false });
       
       if (error) throw error;
-      return data;
+      return data as MindfulnessGroup[];
     }
   });
 
@@ -49,14 +57,13 @@ const Groups = () => {
 
       if (groupError) throw groupError;
 
-      // Create artistic role for the creator
       const { error: roleError } = await supabase
         .from('artistic_roles')
         .insert([
           { 
             user_id: user.id, 
             group_id: group.id,
-            medium: 'writer' // Default role
+            medium: 'writer'
           }
         ]);
 
