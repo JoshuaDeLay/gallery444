@@ -20,6 +20,7 @@ export const Navigation = () => {
     { name: "Home", path: "/" },
     { name: "Weekly Prompts", path: "/prompts" },
     { name: "Create Gallery", path: "/create" },
+    { name: "Groups", path: "/groups" },
   ];
 
   useEffect(() => {

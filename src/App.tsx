@@ -12,6 +12,7 @@ import Memories from "./pages/Memories";
 import Gallery from "./pages/Gallery";
 import Templates from "./pages/Templates";
 import Mindfulness from "./pages/Mindfulness";
+import Groups from "./pages/Groups";
 import Login from "./pages/Login";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -61,6 +62,7 @@ const App = () => {
             <Route path="/social" element={<ProtectedRoute><Social /></ProtectedRoute>} />
             <Route path="/memories" element={<ProtectedRoute><Memories /></ProtectedRoute>} />
             <Route path="/mindfulness" element={<ProtectedRoute><Mindfulness /></ProtectedRoute>} />
+            <Route path="/groups" element={<ProtectedRoute><Groups /></ProtectedRoute>} />
             <Route path="/gallery" element={<ProtectedRoute><Gallery /></ProtectedRoute>} />
             <Route path="/templates" element={<ProtectedRoute><Templates /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
