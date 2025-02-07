@@ -13,25 +13,24 @@ export const BottomNav = () => {
       icon: MessageSquare,
     },
     {
-      name: "Social",
-      href: "/social",
-      icon: Users,
-    },
-    {
-      name: "Gallery Collection",
-      href: "/gallery",
-      icon: DoorClosed,
-      timer: "5d 3h",
-    },
-    {
       name: "Templates",
       href: "/templates",
       icon: GalleryHorizontal,
     },
     {
+      name: "Gallery Collection",
+      href: "/gallery",
+      icon: DoorClosed,
+    },
+    {
       name: "Memories",
       href: "/memories",
       icon: Image,
+    },
+    {
+      name: "Social",
+      href: "/social",
+      icon: Users,
     },
   ];
 
@@ -60,11 +59,6 @@ export const BottomNav = () => {
                   isActive && "animate-float"
                 )} />
                 <span className="mt-1 text-xs">{item.name}</span>
-                {item.timer && (
-                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] px-2 py-0.5 rounded-full bg-gallery-accent/10 text-gallery-accent backdrop-blur-sm animate-float">
-                    {item.timer}
-                  </span>
-                )}
               </Link>
             );
           })}
