@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Minimize2, Box, Frame, Layers, HeartHandshake, Palette, Sparkles, Sun, Waves, Trees, Cloud, Sunrise } from "lucide-react";
+import { Minimize2, Box, Frame, Layers, HeartHandshake, Palette, Sparkles, Sun, Waves, Trees, Cloud, Sunrise, Cpu, Binary } from "lucide-react";
 import { useState } from "react";
 
-export type TemplateStyle = "minimal" | "warm" | "classic" | "modern" | "vibrant" | "dreamy" | "soft" | "bright" | "river" | "forest" | "meadow" | "sunrise";
+export type TemplateStyle = "minimal" | "warm" | "classic" | "modern" | "vibrant" | "dreamy" | "soft" | "bright" | "river" | "forest" | "meadow" | "sunrise" | "cyber";
 
 interface GalleryTemplate {
   id: string;
@@ -144,6 +144,22 @@ const templates: GalleryTemplate[] = [
       "col-span-4 aspect-[2/1] bg-white/40 shadow-sm",
       "col-span-2 aspect-square bg-white/40 shadow-sm",
       "col-span-6 aspect-[3/1] bg-white/40 shadow-sm"
+    ]
+  },
+  {
+    id: "cyber-dreams",
+    name: "Cyber Dreams",
+    style: "cyber",
+    description: "Digital echoes in the neural network",
+    backgroundClass: "bg-gradient-to-br from-[#243949] to-[#517fa4]",
+    icon: Cpu,
+    poem: "Through circuits deep\nDigital dreams take their flight\nNeon thoughts ignite",
+    author: "Neural Poet v2.0",
+    layout: [
+      "grid-cols-12 gap-3",
+      "col-span-8 aspect-video bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.15)]",
+      "col-span-4 aspect-square bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.15)]",
+      "col-span-12 aspect-[4/1] bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.15)]"
     ]
   }
 ];

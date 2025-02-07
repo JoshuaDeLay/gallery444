@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -90,11 +89,25 @@ export default {
             opacity: "0.8",
           },
         },
+        fall: {
+          "0%": {
+            transform: "translateY(-100%)",
+            opacity: "0",
+          },
+          "50%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateY(100vh)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out",
         "float": "float 6s ease-in-out infinite",
         "pulse": "pulse 3s ease-in-out infinite",
+        "fall": "fall 8s linear infinite",
       },
     },
   },
