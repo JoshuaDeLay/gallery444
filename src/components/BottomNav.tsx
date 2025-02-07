@@ -13,6 +13,11 @@ export const BottomNav = () => {
       icon: MessageSquare,
     },
     {
+      name: "Social",
+      href: "/social",
+      icon: Users,
+    },
+    {
       name: "Templates",
       href: "/templates",
       icon: GalleryHorizontal,
@@ -31,11 +36,6 @@ export const BottomNav = () => {
       name: "Memories",
       href: "/memories",
       icon: Image,
-    },
-    {
-      name: "Social",
-      href: "/social",
-      icon: Users,
     },
   ];
 
