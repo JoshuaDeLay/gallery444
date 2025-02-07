@@ -14,7 +14,7 @@ import Gallery from "./pages/Gallery";
 import Templates from "./pages/Templates";
 import Login from "./pages/Login";
 import { useEffect, useState } from "react";
-import { supabase } from "./lib/supabase";
+import { supabase } from "@/integrations/supabase/client";
 
 const queryClient = new QueryClient();
 
