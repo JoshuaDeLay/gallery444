@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 const Gallery = () => {
   const [galleryName, setGalleryName] = useState("The Grand Gallery");
-  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
+  const [backgroundImage, setBackgroundImage] = useState<string | null>("https://qwbkypgccvxixvhkmxuu.supabase.co/storage/v1/object/public/gallery_images//Image.jpeg");
 
   useEffect(() => {
     const fetchGallerySettings = async () => {
@@ -58,7 +58,7 @@ const Gallery = () => {
         <div 
           className="absolute w-full h-full opacity-90 bg-cover bg-center transform transition-transform duration-1000"
           style={{ 
-            backgroundImage: `url(${backgroundImage || '/lovable-uploads/7efa2f9c-52e4-474d-a4bd-61252fa24863.png'})`,
+            backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
