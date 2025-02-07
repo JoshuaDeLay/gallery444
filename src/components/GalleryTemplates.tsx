@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Minimize2, Box, Frame, Layers, Snowflake, Mountain, Wind, Camera } from "lucide-react";
+import { Minimize2, Box, Frame, Layers, Snowflake, Mountain, Wind, Camera, Waves, Trees, Cloud, Sunrise } from "lucide-react";
 import { useState } from "react";
 
-export type TemplateStyle = "minimal" | "brutalist" | "classic" | "modern" | "nordic" | "alpine" | "frost" | "polar";
+export type TemplateStyle = "minimal" | "brutalist" | "classic" | "modern" | "nordic" | "alpine" | "frost" | "polar" | "river" | "forest" | "meadow" | "sunrise";
 
 interface GalleryTemplate {
   id: string;
@@ -144,6 +144,70 @@ const templates: GalleryTemplate[] = [
       "col-span-4 aspect-video bg-white/5 border border-white/10",
       "col-span-2 aspect-square bg-white/5 border border-white/10",
       "col-span-6 aspect-[4/1] bg-white/5 border border-white/10"
+    ]
+  },
+  {
+    id: "river-flow",
+    name: "River Flow",
+    style: "river",
+    description: "Inspired by the gentle flow of mountain streams",
+    backgroundClass: "bg-gradient-to-r from-[#accbee] to-[#e7f0fd]",
+    icon: Waves,
+    poem: "Water flows gently\nOver ancient river stones\nTime drifts endlessly",
+    author: "River Sage",
+    layout: [
+      "grid-cols-3 gap-4",
+      "col-span-2 aspect-[21/9] bg-white/30 shadow-inner",
+      "aspect-[3/4] bg-white/30 shadow-inner",
+      "col-span-3 aspect-[3/1] bg-white/30 shadow-inner"
+    ]
+  },
+  {
+    id: "forest-whispers",
+    name: "Forest Whispers",
+    style: "forest",
+    description: "Deep in the ancient woods where silence speaks",
+    backgroundClass: "bg-gradient-to-br from-[#c1c161] to-[#d4d4b1]",
+    icon: Trees,
+    poem: "Tall pines reach skyward\nWhispering ancient secrets\nIn forest shadows",
+    author: "Woodland Voice",
+    layout: [
+      "grid-cols-12 gap-3",
+      "col-span-8 aspect-video bg-black/5",
+      "col-span-4 aspect-square bg-black/5",
+      "col-span-12 aspect-[4/1] bg-black/5"
+    ]
+  },
+  {
+    id: "meadow-dreams",
+    name: "Meadow Dreams",
+    style: "meadow",
+    description: "Where wildflowers dance with clouds",
+    backgroundClass: "bg-gradient-to-t from-[#e6b980] to-[#eacda3]",
+    icon: Cloud,
+    poem: "Summer meadow sways\nWildflowers dance with the breeze\nNature's lullaby",
+    author: "Field Dreamer",
+    layout: [
+      "grid-cols-2 gap-6",
+      "aspect-[16/9] bg-white/20",
+      "aspect-square bg-white/20",
+      "col-span-2 aspect-[2/1] bg-white/20"
+    ]
+  },
+  {
+    id: "mountain-sunrise",
+    name: "Mountain Dawn",
+    style: "sunrise",
+    description: "First light touching mountain peaks",
+    backgroundClass: "bg-gradient-to-br from-[#fdfcfb] to-[#e2d1c3]",
+    icon: Sunrise,
+    poem: "Dawn breaks golden new\nMountain peaks touch morning sky\nDay awakens now",
+    author: "Dawn Observer",
+    layout: [
+      "grid-cols-6 gap-2",
+      "col-span-4 aspect-[2/1] bg-white/40 shadow-sm",
+      "col-span-2 aspect-square bg-white/40 shadow-sm",
+      "col-span-6 aspect-[3/1] bg-white/40 shadow-sm"
     ]
   }
 ];
