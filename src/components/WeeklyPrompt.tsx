@@ -13,15 +13,23 @@ const getGroupMembers = async () => {
   }
 
   try {
+    // First get the user's role and group
     const { data: userRole, error: roleError } = await supabase
       .from('artistic_roles')
       .select('group_id')
       .eq('user_id', session.user.id)
       .maybeSingle();
 
-    if (roleError) throw roleError;
-    if (!userRole?.group_id) return [];
+    if (roleError) {
+      console.error("Error fetching user role:", roleError);
+      throw roleError;
+    }
+    
+    if (!userRole?.group_id) {
+      return [];
+    }
 
+    // Then get all members in the same group
     const { data: members, error: membersError } = await supabase
       .from('artistic_roles')
       .select(`
@@ -33,11 +41,15 @@ const getGroupMembers = async () => {
       `)
       .eq('group_id', userRole.group_id);
 
-    if (membersError) throw membersError;
+    if (membersError) {
+      console.error("Error fetching group members:", membersError);
+      throw membersError;
+    }
+
     return members || [];
   } catch (error: any) {
+    console.error("Error in getGroupMembers:", error);
     toast.error("Failed to load group members");
-    console.error("Error fetching group members:", error.message);
     return [];
   }
 };
