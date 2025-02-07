@@ -1,4 +1,3 @@
-
 import { Navigation } from "@/components/Navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Circle, Heart, Lotus } from "lucide-react";
+import { Circle, Heart, Flower2 } from "lucide-react";
 
 // Mock data for example profiles
 const exampleProfiles = [
@@ -106,7 +105,7 @@ const Mindfulness = () => {
               );
             })}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <Lotus className="w-8 h-8 text-gallery-accent" />
+              <Flower2 className="w-8 h-8 text-gallery-accent" />
             </div>
           </div>
 
