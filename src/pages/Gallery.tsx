@@ -4,13 +4,11 @@ import { BottomNav } from "@/components/BottomNav";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { GalleryHeader } from "@/components/gallery/GalleryHeader";
-import { BackgroundUpload } from "@/components/gallery/BackgroundUpload";
 import { CountdownTimer } from "@/components/gallery/CountdownTimer";
 import { toast } from "sonner";
 
 const Gallery = () => {
   const [galleryName, setGalleryName] = useState("The Grand Gallery");
-  const [backgroundImage, setBackgroundImage] = useState<string | null>("https://qwbkypgccvxixvhkmxuu.supabase.co/storage/v1/object/public/gallery_images//Image.jpeg");
 
   useEffect(() => {
     const fetchGallerySettings = async () => {
@@ -18,7 +16,7 @@ const Gallery = () => {
       if (user) {
         const { data, error } = await supabase
           .from('gallery_settings')
-          .select('gallery_name, background_image')
+          .select('gallery_name')
           .eq('user_id', user.id)
           .maybeSingle();
 
@@ -29,20 +27,11 @@ const Gallery = () => {
 
         if (data) {
           setGalleryName(data.gallery_name);
-          if (data.background_image) {
-            const { data: { publicUrl } } = supabase.storage
-              .from('gallery_images')
-              .getPublicUrl(data.background_image);
-            setBackgroundImage(publicUrl);
-          }
         } else {
-          // Create initial gallery settings with the default background image
-          const defaultBackgroundImage = "Image.jpeg";
           const { error: insertError } = await supabase
             .from('gallery_settings')
             .insert({ 
               user_id: user.id,
-              background_image: defaultBackgroundImage 
             });
 
           if (insertError) {
@@ -57,27 +46,11 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
-      {/* Background image and effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div 
-          className="absolute w-full h-full opacity-90 bg-cover bg-center transform transition-transform duration-1000"
-          style={{ 
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/30 via-transparent to-murakami.pink/30" />
-        <div className="absolute w-96 h-96 bg-murakami.cream/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse" />
-        <div className="absolute w-96 h-96 bg-murakami.teal/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse" />
-      </div>
-      
+    <div className="min-h-screen bg-[#E6D5A7] pb-20 relative overflow-hidden">
       <Navigation />
       <div className="container mx-auto px-4 min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center relative">
         <div className="max-w-4xl w-full text-center space-y-8 backdrop-blur-sm bg-white/20 p-12 rounded-2xl shadow-lg border border-white/30 animate-fade-up">
           <GalleryHeader galleryName={galleryName} setGalleryName={setGalleryName} />
-          <BackgroundUpload onBackgroundChange={setBackgroundImage} />
           <p className="font-serif text-gallery.accent/80 text-xl leading-relaxed max-w-xl mx-auto italic">
             Behind these doors lie extraordinary creations waiting to be unveiled.
           </p>
@@ -90,3 +63,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
