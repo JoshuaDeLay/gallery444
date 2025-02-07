@@ -23,12 +23,12 @@ export const BottomNav = () => {
       icon: GalleryHorizontal,
     },
     {
-      name: "Gallery Collection",
+      name: "Gallery",
       href: "/gallery",
       icon: DoorClosed,
     },
     {
-      name: "Mindfulness",
+      name: "Mindful",
       href: "/mindfulness",
       icon: Circle,
     },
@@ -42,7 +42,7 @@ export const BottomNav = () => {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-white/80 backdrop-blur-sm">
       <div className="mx-auto max-w-md">
-        <div className="flex justify-around">
+        <div className="flex justify-between px-2">
           {navigation.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.href;
@@ -52,18 +52,18 @@ export const BottomNav = () => {
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "flex flex-col items-center px-3 py-2 relative",
+                  "flex flex-col items-center px-1 py-1.5 relative",
                   "text-sm font-medium transition-all duration-500",
                   isActive
-                    ? "text-gallery-accent scale-110"
-                    : "text-gallery-warm hover:text-gallery-accent hover:scale-105"
+                    ? "text-gallery-accent scale-105"
+                    : "text-gallery-warm hover:text-gallery-accent hover:scale-102"
                 )}
               >
                 <Icon className={cn(
-                  "h-6 w-6 transition-transform duration-500",
+                  "h-5 w-5 transition-transform duration-500",
                   isActive && "animate-float"
                 )} />
-                <span className="mt-1 text-xs">{item.name}</span>
+                <span className="mt-0.5 text-[10px]">{item.name}</span>
               </Link>
             );
           })}
