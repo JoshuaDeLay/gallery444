@@ -49,8 +49,8 @@ const Gallery = () => {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute w-full h-full bg-[url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')] opacity-5 bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/20 via-transparent to-[#6E59A5]/20" />
-        <div className="absolute w-96 h-96 bg-[#D946EF]/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse" />
-        <div className="absolute w-96 h-96 bg-[#F97316]/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse" />
+        <div className="absolute w-96 h-96 bg-[#D946EF]/10 rounded-full blur-3xl -top-20 -left-20" />
+        <div className="absolute w-96 h-96 bg-[#F97316]/10 rounded-full blur-3xl -bottom-20 -right-20" />
       </div>
       
       <Navigation />
@@ -69,8 +69,8 @@ const Gallery = () => {
           <div className="grid grid-cols-4 gap-4 max-w-xl mx-auto">
             {Object.entries(timeLeft).map(([unit, value]) => (
               <div key={unit} className="flex flex-col items-center">
-                <div className="w-20 h-20 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg flex items-center justify-center mb-2">
-                  <span className="text-3xl font-bold text-white/90 font-mono">{value.toString().padStart(2, '0')}</span>
+                <div className="w-20 h-20 rounded-xl bg-[#1A1F2C] backdrop-blur-sm border border-white/20 shadow-lg flex items-center justify-center mb-2">
+                  <span className="text-3xl font-bold text-white font-mono">{value.toString().padStart(2, '0')}</span>
                 </div>
                 <span className="text-white/70 capitalize">{unit}</span>
               </div>
