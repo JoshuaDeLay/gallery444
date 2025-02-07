@@ -106,7 +106,7 @@ export const GalleryTemplates = ({
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
       {templates.map((template) => {
         const Icon = template.icon;
         const isExpanded = expandedTemplate === template.id;
@@ -129,24 +129,24 @@ export const GalleryTemplates = ({
           >
             <div className={cn(
               "p-4",
-              isExpanded ? "p-6" : "p-3",
+              isExpanded ? "p-4" : "p-2",
               "transition-all duration-500"
             )}>
               <div className="flex items-center gap-2 mb-2">
                 <Icon className={cn(
                   "transition-all duration-500",
-                  isExpanded ? "h-6 w-6" : "h-4 w-4"
+                  isExpanded ? "h-5 w-5" : "h-3 w-3"
                 )} />
                 <h3 className={cn(
                   "font-serif transition-all duration-500",
-                  isExpanded ? "text-xl" : "text-sm"
+                  isExpanded ? "text-lg" : "text-xs"
                 )}>{template.name}</h3>
               </div>
               
               {isExpanded && (
                 <div className="animate-fade-up">
-                  <div className="prose prose-sm mt-4">
-                    <p className="text-sm text-gallery-warm font-serif italic">
+                  <div className="prose prose-sm mt-2">
+                    <p className="text-xs text-gallery-warm font-serif italic">
                       "{template.poem}"
                     </p>
                     <p className="text-xs text-gallery-warm text-right">
@@ -155,7 +155,7 @@ export const GalleryTemplates = ({
                   </div>
 
                   <div className={cn(
-                    "mt-6 grid gap-4",
+                    "mt-4 grid gap-2",
                     template.layout[0]
                   )}>
                     {template.layout.slice(1).map((layoutClass, idx) => (
@@ -173,7 +173,7 @@ export const GalleryTemplates = ({
 
               <div className="mt-2">
                 <span className={cn(
-                  "inline-block px-2 py-1 text-xs bg-white/80 rounded",
+                  "inline-block px-2 py-0.5 text-xs bg-white/80 rounded",
                   "transition-all duration-500",
                   isExpanded ? "opacity-100" : "opacity-70"
                 )}>
