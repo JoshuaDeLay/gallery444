@@ -27,7 +27,7 @@ const Gallery = () => {
           .from('gallery_settings')
           .select('gallery_name')
           .eq('user_id', user.id)
-          .single();
+          .maybeSingle();
 
         if (error) {
           console.error('Error fetching gallery settings:', error);
