@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Index from "./pages/Index";
 import Prompts from "./pages/Prompts";
 import Create from "./pages/Create";
 import NotFound from "./pages/NotFound";
@@ -74,19 +73,17 @@ const App = () => {
             <Route 
               path="/login" 
               element={
-                isAuthenticated ? <Navigate to="/gallery" replace /> : <Login />
+                isAuthenticated ? <Navigate to="/prompts" replace /> : <Login />
               } 
             />
-            {/* Redirect root path to login if not authenticated */}
+            {/* Redirect root path to login if not authenticated, otherwise to prompts */}
             <Route 
               path="/" 
               element={
                 !isAuthenticated ? (
                   <Navigate to="/login" replace />
                 ) : (
-                  <ProtectedRoute>
-                    <Index />
-                  </ProtectedRoute>
+                  <Navigate to="/prompts" replace />
                 )
               } 
             />
