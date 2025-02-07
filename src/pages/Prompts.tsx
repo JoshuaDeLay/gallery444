@@ -3,6 +3,7 @@ import { Navigation } from "@/components/Navigation";
 import { WeeklyPrompt } from "@/components/WeeklyPrompt";
 import { BottomNav } from "@/components/BottomNav";
 import { CommentWithVoice } from "@/components/CommentWithVoice";
+import { ArtisticRole } from "@/components/ArtisticRole";
 
 const Prompts = () => {
   return (
@@ -15,6 +16,11 @@ const Prompts = () => {
             italic">
             Daily Reflections
           </h1>
+          
+          <div className="mb-8 animate-fade-up">
+            <ArtisticRole />
+          </div>
+
           <div className="grid md:grid-cols-2 gap-8">
             <WeeklyPrompt />
             <div>

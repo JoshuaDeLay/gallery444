@@ -1,15 +1,40 @@
 
 import { Calendar, Eye } from "lucide-react";
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
-const groupMembers = [
-  { id: 1, name: "Emma", hasSeen: true },
-  { id: 2, name: "James", hasSeen: true },
-  { id: 3, name: "Sofia", hasSeen: false },
-  { id: 4, name: "Lucas", hasSeen: false },
-];
+const getGroupMembers = async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) throw new Error("No session");
+
+  const { data: userRole, error: roleError } = await supabase
+    .from('artistic_roles')
+    .select('group_id')
+    .eq('user_id', session.user.id)
+    .single();
+
+  if (roleError) throw roleError;
+
+  const { data: members, error: membersError } = await supabase
+    .from('artistic_roles')
+    .select(`
+      user_id,
+      medium,
+      profiles!inner(full_name)
+    `)
+    .eq('group_id', userRole.group_id);
+
+  if (membersError) throw membersError;
+  return members;
+};
 
 export const WeeklyPrompt = () => {
+  const { data: groupMembers = [] } = useQuery({
+    queryKey: ['groupMembers'],
+    queryFn: getGroupMembers
+  });
+
   return (
     <Card className={`
       relative w-full
@@ -59,23 +84,18 @@ export const WeeklyPrompt = () => {
         <div className="w-full">
           <p className="text-xs mb-1.5 flex items-center gap-1.5 text-murakami.shadow/70">
             <Eye className="h-3 w-3" />
-            Contemplated by
+            Group Members
           </p>
           <div className="flex flex-wrap gap-1.5">
             {groupMembers.map((member) => (
               <div
-                key={member.id}
-                className={`
-                  px-2 py-0.5 rounded-full text-xs
+                key={member.user_id}
+                className="px-2 py-0.5 rounded-full text-xs
                   transition-all duration-300
                   backdrop-blur-md font-serif
-                  ${member.hasSeen
-                    ? 'bg-murakami.wood/10 text-murakami.wood shadow-sm'
-                    : 'bg-murakami.shadow/5 text-murakami.shadow/50'
-                  }
-                `}
+                  bg-murakami.wood/10 text-murakami.wood shadow-sm"
               >
-                {member.name}
+                {member.profiles.full_name} • {member.medium}
               </div>
             ))}
           </div>
@@ -84,4 +104,3 @@ export const WeeklyPrompt = () => {
     </Card>
   );
 };
-

@@ -9,6 +9,41 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      artistic_roles: {
+        Row: {
+          created_at: string
+          group_id: string
+          id: string
+          medium: Database["public"]["Enums"]["artistic_medium"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          group_id: string
+          id?: string
+          medium: Database["public"]["Enums"]["artistic_medium"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          group_id?: string
+          id?: string
+          medium?: Database["public"]["Enums"]["artistic_medium"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "artistic_roles_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "mindfulness_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       gallery_settings: {
         Row: {
           background_image: string | null
@@ -139,7 +174,14 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      artistic_medium:
+        | "writer"
+        | "poet"
+        | "musician"
+        | "sculptor"
+        | "painter"
+        | "photographer"
+        | "dancer"
     }
     CompositeTypes: {
       [_ in never]: never
