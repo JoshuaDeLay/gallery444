@@ -16,18 +16,6 @@ const Mindfulness = () => {
     setIsLoading(true);
 
     try {
-      // First, get the recipient's user ID from their email
-      const { data: recipientData, error: recipientError } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('email', recipientEmail)
-        .single();
-
-      if (recipientError || !recipientData) {
-        toast.error("Recipient not found");
-        return;
-      }
-
       // Get current user's ID
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
@@ -35,17 +23,18 @@ const Mindfulness = () => {
         return;
       }
 
-      // Create the mindfulness reminder
+      // Create the mindfulness reminder directly with recipient email
       const { error } = await supabase
         .from('mindfulness_reminders')
         .insert({
           sender_id: user.id,
-          recipient_id: recipientData.id,
+          recipient_id: recipientEmail, // Store email directly as recipient
           message,
           type: 'breath'
         });
 
       if (error) {
+        console.error('Error sending reminder:', error);
         toast.error("Failed to send reminder");
       } else {
         toast.success("Mindfulness reminder sent!");
@@ -53,6 +42,7 @@ const Mindfulness = () => {
         setRecipientEmail("");
       }
     } catch (error) {
+      console.error('Error:', error);
       toast.error("An error occurred");
     } finally {
       setIsLoading(false);
