@@ -31,7 +31,7 @@ const Groups = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('mindfulness_groups')
-        .select('*')
+        .select('id, name, description, created_at, owner_id')
         .order('created_at', { ascending: false });
       
       if (error) throw error;
