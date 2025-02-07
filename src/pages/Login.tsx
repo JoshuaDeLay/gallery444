@@ -78,7 +78,7 @@ const Login = () => {
       <div className="container mx-auto px-4 min-h-[calc(100vh-4rem)] flex items-center justify-center">
         <div className="max-w-md w-full space-y-8 backdrop-blur-sm bg-white/10 p-8 rounded-2xl shadow-lg border border-white/20">
           <div className="text-center">
-            <h2 className="font-serif text-3xl text-gallery.accent/90">
+            <h2 className="font-serif text-3xl text-gallery.accent/90 animate-float">
               {isSignUp ? "Create Account" : "Welcome Back"}
             </h2>
             <p className="mt-2 text-gallery.accent/70">
@@ -94,7 +94,7 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="bg-white/50 border-white/30"
+                  className="bg-white/50 border-white/30 text-gallery.accent placeholder:text-gallery.accent/50"
                 />
               </div>
               <div>
@@ -104,14 +104,14 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="bg-white/50 border-white/30"
+                  className="bg-white/50 border-white/30 text-gallery.accent placeholder:text-gallery.accent/50"
                 />
               </div>
             </div>
 
             <Button
               type="submit"
-              className="w-full bg-gallery.accent hover:bg-gallery.accent/90"
+              className="w-full bg-gallery.accent hover:bg-gallery.accent/90 text-white"
               disabled={isLoading}
             >
               {isLoading 
