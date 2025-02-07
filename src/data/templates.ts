@@ -1,4 +1,5 @@
-import { Minimize2, Sparkles, Palette, Cube } from "lucide-react";
+
+import { Minimize2, Sparkles, Palette, Box } from "lucide-react";
 import type { GalleryTemplate } from "@/types/gallery";
 
 export const templates: GalleryTemplate[] = [
@@ -56,7 +57,7 @@ export const templates: GalleryTemplate[] = [
     style: "magical",
     description: "Showcase your 3D artworks in an immersive space",
     backgroundClass: "bg-gradient-to-br from-[#1A1F2C] via-[#6E59A5] to-[#9b87f5] shadow-[inset_0_0_60px_rgba(155,135,245,0.2)]",
-    icon: Cube,
+    icon: Box,
     poem: "In depths of space\nDimensions dance and intertwine\nArt breaks free",
     author: "The 3D Artist",
     layout: [
