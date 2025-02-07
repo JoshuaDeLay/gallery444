@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -28,6 +29,13 @@ export default {
           warm: "#8E9196",
           soft: "#F1F0FB",
           accent: "#243949",
+        },
+        murakami: {
+          pink: "#FFB5C5",
+          teal: "#98D8D8",
+          cream: "#FAF3E0",
+          wood: "#8B4513",
+          shadow: "#5E4B56",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -78,7 +86,7 @@ export default {
             transform: "translateY(0)",
           },
           "50%": {
-            transform: "translateY(-5px)",
+            transform: "translateY(-10px)",
           },
         },
         pulse: {
