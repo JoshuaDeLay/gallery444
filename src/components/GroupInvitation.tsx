@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { PlusCircle, Mail, Loader2 } from "lucide-react";
+import { PlusCircle, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { toast } from "sonner";
@@ -20,10 +20,17 @@ export const GroupInvitation = ({ groupId, onInviteSent }: GroupInvitationProps)
     setIsSubmitting(true);
 
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
       const { error } = await supabase
         .from('group_invitations')
         .insert([
-          { group_id: groupId, invitee_email: email }
+          { 
+            group_id: groupId, 
+            invitee_email: email,
+            status: 'pending'
+          }
         ]);
 
       if (error) throw error;

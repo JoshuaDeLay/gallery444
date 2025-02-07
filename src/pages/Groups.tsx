@@ -7,10 +7,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 import { Loader2, Plus, Users } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { GroupInvitation } from "@/components/GroupInvitation";
+
+interface Profile {
+  full_name: string | null;
+  avatar_url: string | null;
+}
+
+interface GroupMember {
+  user_id: string;
+  profile: Profile;
+}
 
 interface MindfulnessGroup {
   id: string;
@@ -18,18 +27,10 @@ interface MindfulnessGroup {
   description: string | null;
   created_at: string;
   owner_id: string;
-}
-
-interface GroupMember {
-  user_id: string;
-  profiles: {
-    full_name: string | null;
-    avatar_url: string | null;
-  };
+  members: GroupMember[];
 }
 
 const Groups = () => {
-  const navigate = useNavigate();
   const [isCreating, setIsCreating] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -39,26 +40,45 @@ const Groups = () => {
   const { data: groups, isLoading, refetch } = useQuery({
     queryKey: ['mindfulness-groups'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      // First, fetch the groups
+      const { data: groupsData, error: groupsError } = await supabase
         .from('mindfulness_groups')
-        .select(`
-          id, 
-          name, 
-          description, 
-          created_at, 
-          owner_id,
-          mindfulness_group_members (
-            user_id,
-            profiles (
-              full_name,
-              avatar_url
-            )
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      return data as (MindfulnessGroup & { mindfulness_group_members: GroupMember[] })[];
+
+      if (groupsError) throw groupsError;
+
+      // Then, for each group, fetch its members and their profiles
+      const groupsWithMembers = await Promise.all(groupsData.map(async (group) => {
+        const { data: membersData, error: membersError } = await supabase
+          .from('mindfulness_group_members')
+          .select('user_id')
+          .eq('group_id', group.id);
+
+        if (membersError) throw membersError;
+
+        const members = await Promise.all(membersData.map(async (member) => {
+          const { data: profileData, error: profileError } = await supabase
+            .from('profiles')
+            .select('full_name, avatar_url')
+            .eq('id', member.user_id)
+            .single();
+
+          if (profileError) throw profileError;
+
+          return {
+            user_id: member.user_id,
+            profile: profileData
+          };
+        }));
+
+        return {
+          ...group,
+          members
+        };
+      }));
+
+      return groupsWithMembers as MindfulnessGroup[];
     }
   });
 
@@ -194,13 +214,13 @@ const Groups = () => {
                   <p className="text-gray-600 text-sm mb-4">{group.description}</p>
                 )}
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">Members ({group.mindfulness_group_members.length})</h4>
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">Members ({group.members.length})</h4>
                   <div className="flex -space-x-2">
-                    {group.mindfulness_group_members.map((member) => (
+                    {group.members.map((member) => (
                       <img
                         key={member.user_id}
-                        src={member.profiles.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${member.user_id}`}
-                        alt={member.profiles.full_name || "Member"}
+                        src={member.profile.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${member.user_id}`}
+                        alt={member.profile.full_name || "Member"}
                         className="w-8 h-8 rounded-full border-2 border-white"
                       />
                     ))}
