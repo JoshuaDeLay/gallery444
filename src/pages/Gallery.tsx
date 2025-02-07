@@ -59,26 +59,25 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#F2FCE2] via-[#FEF7CD] to-[#E5DEFF]/20 pb-20 relative overflow-hidden">
       {/* Background image and effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute w-full h-full opacity-95 bg-cover bg-center"
+          className="absolute w-full h-full bg-cover bg-center"
           style={{ 
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
-        <div className="absolute inset-0 bg-black/10" />
       </div>
       
       <Navigation />
       <div className="container mx-auto px-4 min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center relative">
-        <div className="max-w-4xl w-full text-center space-y-8 bg-white/5 backdrop-blur-sm p-12 rounded-3xl shadow-lg border border-white/10 animate-fade-up">
+        <div className="max-w-4xl w-full text-center space-y-12 p-12 animate-fade-up">
           <GalleryHeader galleryName={galleryName} setGalleryName={setGalleryName} />
           <BackgroundUpload onBackgroundChange={setBackgroundImage} />
-          <p className="font-sans text-white/90 text-xl leading-relaxed max-w-xl mx-auto tracking-wide">
+          <p className="font-['Caveat'] text-[#8E9196] text-2xl leading-relaxed max-w-xl mx-auto">
             Behind these doors lie extraordinary creations waiting to be unveiled.
           </p>
           <CountdownTimer />
@@ -90,3 +89,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+

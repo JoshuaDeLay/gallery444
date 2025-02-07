@@ -48,15 +48,15 @@ export const CountdownTimer = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-4 gap-6 max-w-xl mx-auto">
+    <div className="grid grid-cols-4 gap-8 max-w-xl mx-auto">
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="flex flex-col items-center group">
-          <div className="w-20 h-20 bg-black/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-3 transition-all duration-300 group-hover:bg-black/20">
-            <span className="text-3xl font-light text-white tracking-widest transition-all duration-300 group-hover:scale-110">
+          <div className="relative">
+            <span className="text-4xl font-['Caveat'] text-[#8E9196] tracking-wide transition-all duration-300 group-hover:scale-110">
               {value.toString().padStart(2, '0')}
             </span>
           </div>
-          <span className="text-white/70 capitalize font-sans text-sm tracking-wider">
+          <span className="text-[#8E9196]/70 capitalize font-['Caveat'] text-lg mt-2">
             {unit}
           </span>
         </div>
@@ -64,3 +64,4 @@ export const CountdownTimer = () => {
     </div>
   );
 };
+
