@@ -1,5 +1,5 @@
 
-import { Minimize2, Sparkles } from "lucide-react";
+import { Minimize2, Sparkles, Palette } from "lucide-react";
 import type { GalleryTemplate } from "@/types/gallery";
 
 export const templates: GalleryTemplate[] = [
@@ -33,6 +33,22 @@ export const templates: GalleryTemplate[] = [
       "col-span-2 aspect-[21/9] bg-white/20 shadow-inner backdrop-blur-sm",
       "aspect-[3/4] bg-white/20 shadow-inner backdrop-blur-sm",
       "col-span-3 aspect-[3/1] bg-white/20 shadow-inner backdrop-blur-sm"
+    ]
+  },
+  {
+    id: "digital-artistry",
+    name: "Digital Art",
+    style: "magical",
+    description: "Showcase your digital masterpieces",
+    backgroundClass: "bg-gradient-to-br from-[#9b87f5] via-[#F1F0FB] to-[#e7f0fd] shadow-[inset_0_0_60px_rgba(155,135,245,0.2)]",
+    icon: Palette,
+    poem: "Digital dreams flow\nPixels dance in perfect light\nArt finds new wings here",
+    author: "The Digital Artist",
+    layout: [
+      "grid-cols-6 gap-4",
+      "col-span-4 aspect-[16/9] bg-white/20 shadow-inner backdrop-blur-sm",
+      "col-span-2 aspect-square bg-white/20 shadow-inner backdrop-blur-sm",
+      "col-span-6 aspect-[21/9] bg-white/20 shadow-inner backdrop-blur-sm"
     ]
   }
 ];
