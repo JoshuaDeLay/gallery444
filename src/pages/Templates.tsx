@@ -27,7 +27,6 @@ const Templates = () => {
                     Choose Your Path
                   </h1>
                   <p className="text-murakami-shadow text-sm max-w-2xl mx-auto leading-relaxed">
-                    Two paths diverge before you - one of serene minimalism, another of enchanting magic.
                     Which story will you tell?
                   </p>
                 </div>
