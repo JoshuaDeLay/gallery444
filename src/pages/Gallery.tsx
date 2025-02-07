@@ -1,4 +1,3 @@
-
 import { Navigation } from "@/components/Navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { useState, useEffect } from "react";
@@ -57,7 +56,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-murakami.cream to-white pb-20 relative overflow-hidden">
       {/* Background image and effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
