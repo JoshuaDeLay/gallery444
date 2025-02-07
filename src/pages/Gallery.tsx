@@ -2,8 +2,47 @@
 import { Navigation } from "@/components/Navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { DoorClosed } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const Gallery = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 5,
+    hours: 3,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        let { days, hours, minutes, seconds } = prev;
+        
+        if (seconds > 0) {
+          seconds--;
+        } else {
+          seconds = 59;
+          if (minutes > 0) {
+            minutes--;
+          } else {
+            minutes = 59;
+            if (hours > 0) {
+              hours--;
+            } else {
+              hours = 23;
+              if (days > 0) {
+                days--;
+              }
+            }
+          }
+        }
+        
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] pb-20 relative overflow-hidden">
       {/* Ethereal light beams effect */}
@@ -25,11 +64,17 @@ const Gallery = () => {
             The Grand Gallery
           </h1>
           <p className="text-white/80 text-xl leading-relaxed max-w-xl mx-auto">
-            Behind these doors lie extraordinary creations waiting to be unveiled. 
-            Return in 5 days and 3 hours to witness this collection of masterpieces.
+            Behind these doors lie extraordinary creations waiting to be unveiled.
           </p>
-          <div className="inline-block px-8 py-4 rounded-full bg-white/10 text-white/90 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/15 transition-colors duration-300 text-xl font-medium">
-            Opening in: 5d 3h
+          <div className="grid grid-cols-4 gap-4 max-w-xl mx-auto">
+            {Object.entries(timeLeft).map(([unit, value]) => (
+              <div key={unit} className="flex flex-col items-center">
+                <div className="w-20 h-20 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg flex items-center justify-center mb-2">
+                  <span className="text-3xl font-bold text-white/90 font-mono">{value.toString().padStart(2, '0')}</span>
+                </div>
+                <span className="text-white/70 capitalize">{unit}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
