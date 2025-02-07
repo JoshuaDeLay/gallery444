@@ -47,7 +47,7 @@ const Gallery = () => {
       {/* Painted door background effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute w-full h-full bg-[url('/lovable-uploads/8fc5129a-d353-4d8e-8456-27554c9eebc1.png')] opacity-30 bg-cover bg-center blur-[2px] transform transition-transform duration-1000 hover:scale-105"
+          className="absolute w-full h-full bg-[url('/lovable-uploads/691d8172-d4c9-463f-943a-aed6d6560228.png')] opacity-30 bg-cover bg-center blur-[2px] transform transition-transform duration-1000 hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/10 via-transparent to-murakami.pink/10" />
         <div className="absolute w-96 h-96 bg-murakami.pink/5 rounded-full blur-3xl -top-20 -left-20 animate-pulse" />
