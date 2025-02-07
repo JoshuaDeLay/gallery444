@@ -11,6 +11,7 @@ import Social from "./pages/Social";
 import Memories from "./pages/Memories";
 import Gallery from "./pages/Gallery";
 import Templates from "./pages/Templates";
+import Mindfulness from "./pages/Mindfulness";
 import Login from "./pages/Login";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -105,6 +106,11 @@ const App = () => {
             <Route path="/memories" element={
               <ProtectedRoute>
                 <Memories />
+              </ProtectedRoute>
+            } />
+            <Route path="/mindfulness" element={
+              <ProtectedRoute>
+                <Mindfulness />
               </ProtectedRoute>
             } />
             <Route path="/gallery" element={
