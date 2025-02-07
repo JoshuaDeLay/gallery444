@@ -24,9 +24,10 @@ const getArtisticRole = async () => {
     .maybeSingle();
 
   if (roleError) throw roleError;
+  if (!roleData) return null;
   
   // If we have a role and a group_id, get the group name
-  if (roleData?.group_id) {
+  if (roleData.group_id) {
     const { data: groupData, error: groupError } = await supabase
       .from('mindfulness_groups')
       .select('name')
