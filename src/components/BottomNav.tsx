@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { MessageSquare, Users, Image, DoorClosed } from "lucide-react";
+import { MessageSquare, Users, Image, DoorClosed, GalleryHorizontal } from "lucide-react";
 
 export const BottomNav = () => {
   const location = useLocation();
@@ -23,6 +23,11 @@ export const BottomNav = () => {
       icon: DoorClosed,
       timer: "5d 3h",
       isLocked: true,
+    },
+    {
+      name: "Templates",
+      href: "/templates",
+      icon: GalleryHorizontal,
     },
     {
       name: "Memories",
