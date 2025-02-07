@@ -11,6 +11,7 @@ export type Database = {
     Tables: {
       gallery_settings: {
         Row: {
+          background_image: string | null
           created_at: string
           gallery_name: string
           id: string
@@ -18,6 +19,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          background_image?: string | null
           created_at?: string
           gallery_name?: string
           id?: string
@@ -25,6 +27,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          background_image?: string | null
           created_at?: string
           gallery_name?: string
           id?: string

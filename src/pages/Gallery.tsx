@@ -110,10 +110,10 @@ const Gallery = () => {
       {/* Vintage door background effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute w-full h-full bg-[url('/lovable-uploads/7719a0a4-2b84-48cc-9eb5-c6a2f9738f05.png')] opacity-60 bg-cover bg-center blur-[0.5px] transform transition-transform duration-1000 hover:scale-105"
-          style={{ backgroundRepeat: 'repeat' }}
+          className="absolute w-full h-full bg-[url('https://images.unsplash.com/photo-1635774855317-edf3ee4463db?q=80&w=1974&auto=format&fit=crop')] opacity-80 bg-cover bg-center transform transition-transform duration-1000 hover:scale-105"
+          style={{ backgroundRepeat: 'no-repeat' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/10 via-transparent to-murakami.pink/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/20 via-transparent to-murakami.pink/20" />
         <div className="absolute w-96 h-96 bg-murakami.pink/5 rounded-full blur-3xl -top-20 -left-20 animate-pulse" />
         <div className="absolute w-96 h-96 bg-murakami.teal/5 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse" />
       </div>
