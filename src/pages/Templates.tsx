@@ -9,13 +9,24 @@ const Templates = () => {
 
   return (
     <div className="min-h-screen bg-[#1A1F2C] relative overflow-hidden">
-      {/* Abstract geometric patterns with meditative colors */}
-      <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
-        <div className="absolute w-px h-20 bg-gradient-to-b from-transparent via-[#8B5CF6] to-transparent animate-fall" style={{ left: '10%', animationDelay: '0.5s' }} />
-        <div className="absolute w-px h-32 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent animate-fall" style={{ left: '25%', animationDelay: '1.2s' }} />
-        <div className="absolute w-px h-16 bg-gradient-to-b from-transparent via-[#2F4F4F] to-transparent animate-fall" style={{ left: '45%', animationDelay: '0.8s' }} />
-        <div className="absolute w-px h-24 bg-gradient-to-b from-transparent via-[#8B4513] to-transparent animate-fall" style={{ left: '65%', animationDelay: '1.5s' }} />
-        <div className="absolute w-px h-28 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent animate-fall" style={{ left: '85%', animationDelay: '0.3s' }} />
+      {/* Animated nature background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Animated leaves */}
+        <div className="absolute inset-0">
+          <div className="absolute w-4 h-4 border-2 border-[#D4AF37] rotate-45 animate-fall opacity-20" style={{ left: '10%', animationDelay: '0.5s', animationDuration: '15s' }} />
+          <div className="absolute w-3 h-3 border-2 border-[#8B4513] rotate-[30deg] animate-fall opacity-20" style={{ left: '25%', animationDelay: '1.2s', animationDuration: '12s' }} />
+          <div className="absolute w-5 h-5 border-2 border-[#2F4F4F] rotate-[60deg] animate-fall opacity-20" style={{ left: '45%', animationDelay: '0.8s', animationDuration: '18s' }} />
+          <div className="absolute w-4 h-4 border-2 border-[#D4AF37] rotate-[15deg] animate-fall opacity-20" style={{ left: '65%', animationDelay: '1.5s', animationDuration: '14s' }} />
+          <div className="absolute w-3 h-3 border-2 border-[#8B4513] rotate-[75deg] animate-fall opacity-20" style={{ left: '85%', animationDelay: '0.3s', animationDuration: '16s' }} />
+        </div>
+
+        {/* Light rays */}
+        <div className="absolute inset-0 bg-gradient-radial from-[#D4AF37]/5 via-transparent to-transparent opacity-30" 
+             style={{ transform: 'scale(2)', top: '-50%', left: '-50%', width: '200%', height: '200%' }} />
+        
+        {/* Forest silhouette */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-[#0F1419] opacity-30"
+             style={{ maskImage: 'linear-gradient(to top, black, transparent)', WebkitMaskImage: 'linear-gradient(to top, black, transparent)' }} />
       </div>
       
       <Navigation />
@@ -47,4 +58,3 @@ const Templates = () => {
 };
 
 export default Templates;
-
