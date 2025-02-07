@@ -42,6 +42,13 @@ export type Database = {
             referencedRelation: "mindfulness_groups"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "artistic_roles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       gallery_settings: {
