@@ -78,9 +78,9 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
-      {/* Animated museum entrance effect */}
+      {/* Painted door background effect */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute w-full h-full bg-[url('https://images.unsplash.com/photo-1576799515938-626d749e8fc8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8museum,entrance,door|0|fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')] opacity-10 bg-cover bg-center transform transition-transform duration-1000 hover:scale-105" />
+        <div className="absolute w-full h-full bg-[url('/lovable-uploads/6bcbf11e-1c34-4689-9758-8efda97e5be3.png')] opacity-30 bg-cover bg-center blur-[2px] transform transition-transform duration-1000 hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/10 via-transparent to-murakami.pink/10" />
         <div className="absolute w-96 h-96 bg-murakami.pink/5 rounded-full blur-3xl -top-20 -left-20 animate-pulse" />
         <div className="absolute w-96 h-96 bg-murakami.teal/5 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse" />
