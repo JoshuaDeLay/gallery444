@@ -19,7 +19,7 @@ export const TemplateCardContent = ({ template, isHovered }: TemplateCardContent
         "transition-all duration-500",
         isHovered ? "h-8 w-8" : "h-6 w-6",
         template.style === "minimal" ? "opacity-60" : 
-        template.style === "exclusive" ? "text-yellow-400" : "opacity-90"
+        template.style === "exclusive" ? "text-[#1EAEDB]" : "opacity-90"
       )} />
       
       <div>

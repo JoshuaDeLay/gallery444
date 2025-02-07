@@ -20,7 +20,7 @@ export const ExpandedTemplate = ({ template, onUseTemplate }: ExpandedTemplatePr
           <Icon className={cn(
             "h-6 w-6",
             template.style === "minimal" ? "opacity-60" : 
-            template.style === "exclusive" ? "text-yellow-400" : "opacity-90"
+            template.style === "exclusive" ? "text-[#1EAEDB]" : "opacity-90"
           )} />
           <h3 className={cn(
             "text-2xl",
@@ -40,7 +40,7 @@ export const ExpandedTemplate = ({ template, onUseTemplate }: ExpandedTemplatePr
             template.style === "minimal" ?
               "bg-black text-white hover:bg-gray-800" :
               template.style === "exclusive" ?
-              "bg-yellow-400 text-black hover:bg-yellow-500" :
+              "bg-[#1EAEDB] text-white hover:bg-[#0FA0CE]" :
               "bg-white/20 backdrop-blur-sm hover:bg-white/30"
           )}
         >

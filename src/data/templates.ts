@@ -1,5 +1,5 @@
 
-import { Minimize2, Sparkles, Crown } from "lucide-react";
+import { Minimize2, Sparkles, Crown, Compass } from "lucide-react";
 import type { GalleryTemplate } from "@/types/gallery";
 
 export const templates: GalleryTemplate[] = [
@@ -41,7 +41,7 @@ export const templates: GalleryTemplate[] = [
     style: "exclusive",
     description: "Curated by Virgil Abloh",
     backgroundClass: "bg-black text-white shadow-[inset_0_0_60px_rgba(255,255,255,0.1)]",
-    icon: Crown,
+    icon: Compass,
     poem: "Bold visions unfold\nBreaking boundaries with grace\nArt meets street design",
     author: "Virgil Abloh",
     layout: [
