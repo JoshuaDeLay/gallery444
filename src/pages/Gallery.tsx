@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Pencil } from "lucide-react";
+import { Pencil, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 const Gallery = () => {
@@ -19,6 +19,7 @@ const Gallery = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState("");
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     const fetchGallerySettings = async () => {
@@ -111,6 +112,52 @@ const Gallery = () => {
     toast.success("Gallery name updated successfully");
   };
 
+  const handleBackgroundUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast.error("You must be logged in to upload images");
+        return;
+      }
+
+      const fileExt = file.name.split('.').pop();
+      const filePath = `${crypto.randomUUID()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('gallery_images')
+        .upload(filePath, file);
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { error: updateError } = await supabase
+        .from('gallery_settings')
+        .update({ background_image: filePath })
+        .eq('user_id', user.id);
+
+      if (updateError) {
+        throw updateError;
+      }
+
+      const { data: imageUrl } = supabase.storage
+        .from('gallery_images')
+        .getPublicUrl(filePath);
+
+      setBackgroundImage(imageUrl.publicUrl);
+      toast.success("Background image updated successfully");
+    } catch (error) {
+      console.error('Error uploading background:', error);
+      toast.error("Failed to upload background image");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
       {/* Artistic door background effect */}
@@ -170,6 +217,27 @@ const Gallery = () => {
                 </Button>
               </>
             )}
+          </div>
+
+          <div className="flex justify-center">
+            <label htmlFor="background-upload">
+              <Button 
+                variant="outline" 
+                className="bg-white/40 hover:bg-white/60"
+                disabled={isUploading}
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                {isUploading ? 'Uploading...' : 'Change Background'}
+              </Button>
+            </label>
+            <input
+              id="background-upload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleBackgroundUpload}
+              disabled={isUploading}
+            />
           </div>
 
           <p className="font-serif text-gallery.accent/80 text-xl leading-relaxed max-w-xl mx-auto italic">
