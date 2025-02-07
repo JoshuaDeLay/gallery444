@@ -65,7 +65,7 @@ export const GalleryTemplates = ({
   const [hoveredTemplate, setHoveredTemplate] = useState<string | null>(null);
 
   return (
-    <div className="grid grid-cols-2 h-[70vh] gap-0">
+    <div className="grid grid-cols-2 h-[60vh] gap-0">
       {templates.map((template) => {
         const Icon = template.icon;
         const isHovered = hoveredTemplate === template.id;
@@ -89,21 +89,31 @@ export const GalleryTemplates = ({
               "absolute inset-0 transition-transform duration-500",
               isHovered ? "scale-105" : "scale-100"
             )}>
+              <div
+                className={cn(
+                  "absolute inset-0 bg-center bg-cover bg-no-repeat opacity-10",
+                  template.style === "minimal" ? 
+                    "bg-[url('https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')]" : 
+                    "bg-[url('https://images.unsplash.com/photo-1582562124811-c09040d0a901?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')]"
+                )}
+              />
               <div className={cn(
                 "relative h-full flex flex-col items-center justify-center p-8 text-center",
                 template.style === "minimal" ? "space-y-6" : "space-y-8"
               )}>
                 <Icon className={cn(
                   "transition-all duration-500",
-                  isHovered ? "h-16 w-16" : "h-12 w-12",
+                  isHovered ? "h-12 w-12" : "h-10 w-10",
                   template.style === "minimal" ? "opacity-60" : "opacity-90"
                 )} />
                 
                 <div>
                   <h3 className={cn(
                     "transition-all duration-500 mb-3",
-                    isHovered ? "text-4xl" : "text-3xl",
-                    template.style === "minimal" ? "font-light" : "font-serif italic"
+                    isHovered ? "text-3xl" : "text-2xl",
+                    template.style === "minimal" ? 
+                      "font-mono tracking-tight" : 
+                      "font-serif italic"
                   )}>
                     {template.name}
                   </h3>
@@ -111,7 +121,7 @@ export const GalleryTemplates = ({
                   <p className={cn(
                     "max-w-md mx-auto transition-all duration-500",
                     template.style === "minimal" ? 
-                      "text-gray-600 font-light" : 
+                      "text-gray-600 font-mono text-sm tracking-wide" : 
                       "text-gray-800 font-serif italic"
                   )}>
                     {template.description}
@@ -125,7 +135,7 @@ export const GalleryTemplates = ({
                   <p className={cn(
                     "text-sm whitespace-pre-line mb-2",
                     template.style === "minimal" ? 
-                      "font-light tracking-wide" : 
+                      "font-mono tracking-wide" : 
                       "font-serif italic"
                   )}>
                     "{template.poem}"
@@ -140,7 +150,7 @@ export const GalleryTemplates = ({
               {template.style === "magical" && (
                 <>
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/5" />
-                  <div className="absolute inset-0 bg-[url('/lovable-uploads/ca402feb-bcce-4d90-84d4-0e49c3566fce.png')] opacity-5 mix-blend-overlay" />
+                  <div className="absolute inset-0 opacity-5 mix-blend-overlay" />
                   <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] animate-pulse" />
                 </>
               )}

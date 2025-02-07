@@ -9,8 +9,6 @@ const Templates = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-murakami-cream to-white relative overflow-hidden">
-      {/* Background elements removed for cleaner split design */}
-      
       <Navigation />
       
       <div className="container mx-auto px-4 pt-16 pb-4 relative z-10">
