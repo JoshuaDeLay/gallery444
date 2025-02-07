@@ -60,19 +60,19 @@ const Gallery = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#D946EF]/20 to-[#F97316]/20 rounded-full group-hover:scale-110 transition-transform duration-700" />
             <DoorClosed className="w-full h-full text-white/90 group-hover:scale-105 transition-all duration-700" />
           </div>
-          <h1 className="font-serif text-5xl text-white/90 drop-shadow-lg tracking-wide">
+          <h1 className="font-serif text-5xl text-white/90 drop-shadow-lg tracking-wider italic">
             The Grand Gallery
           </h1>
-          <p className="text-white/80 text-xl leading-relaxed max-w-xl mx-auto">
+          <p className="font-serif text-white/80 text-xl leading-relaxed max-w-xl mx-auto italic">
             Behind these doors lie extraordinary creations waiting to be unveiled.
           </p>
           <div className="grid grid-cols-4 gap-4 max-w-xl mx-auto">
             {Object.entries(timeLeft).map(([unit, value]) => (
               <div key={unit} className="flex flex-col items-center">
                 <div className="w-20 h-20 rounded-xl bg-[#1A1F2C] backdrop-blur-sm border border-white/20 shadow-lg flex items-center justify-center mb-2">
-                  <span className="text-3xl font-bold text-white font-mono">{value.toString().padStart(2, '0')}</span>
+                  <span className="text-3xl font-bold text-white font-serif tracking-widest">{value.toString().padStart(2, '0')}</span>
                 </div>
-                <span className="text-white/70 capitalize">{unit}</span>
+                <span className="text-white/70 capitalize font-serif italic">{unit}</span>
               </div>
             ))}
           </div>
