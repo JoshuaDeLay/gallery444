@@ -4,7 +4,7 @@ import { BottomNav } from "@/components/BottomNav";
 
 const Social = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-yellow-200 to-orange-200 pb-20">
+    <div className="min-h-screen bg-[#E6D5A7] pb-20">
       <Navigation />
       <div className="container mx-auto px-4 pt-32">
         <h1 className="font-serif text-3xl md:text-4xl text-center mb-4">

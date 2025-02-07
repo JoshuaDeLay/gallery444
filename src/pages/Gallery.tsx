@@ -57,7 +57,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FEF7CD] pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-[#E6D5A7] pb-20 relative overflow-hidden">
       <Navigation />
       <div className="container mx-auto px-4 min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center relative">
         <div className="max-w-4xl w-full text-center space-y-8 backdrop-blur-sm bg-white/20 p-12 rounded-2xl shadow-lg border border-white/30 animate-fade-up">
