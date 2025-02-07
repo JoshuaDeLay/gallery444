@@ -22,7 +22,7 @@ const getGroupMembers = async () => {
     .select(`
       user_id,
       medium,
-      profiles:user_id (
+      users:profiles!user_id(
         full_name
       )
     `)
@@ -98,7 +98,7 @@ export const WeeklyPrompt = () => {
                   backdrop-blur-md font-serif
                   bg-murakami.wood/10 text-murakami.wood shadow-sm"
               >
-                {member.profiles?.full_name || 'Anonymous'} • {member.medium}
+                {member.users?.full_name || 'Anonymous'} • {member.medium}
               </div>
             ))}
           </div>
