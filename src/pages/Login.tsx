@@ -12,25 +12,39 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+      if (isSignUp) {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
 
-      if (error) {
-        toast.error(error.message);
+        if (error) {
+          toast.error(error.message);
+        } else {
+          toast.success("Check your email to confirm your account!");
+        }
       } else {
-        toast.success("Successfully logged in!");
-        navigate("/gallery");
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) {
+          toast.error(error.message);
+        } else {
+          toast.success("Successfully logged in!");
+          navigate("/gallery");
+        }
       }
     } catch (error) {
-      toast.error("An error occurred during login");
+      toast.error("An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -43,13 +57,13 @@ const Login = () => {
         <div className="max-w-md w-full space-y-8 backdrop-blur-sm bg-white/10 p-8 rounded-2xl shadow-lg border border-white/20">
           <div className="text-center">
             <h2 className="font-serif text-3xl text-gallery.accent/90">
-              Welcome Back
+              {isSignUp ? "Create Account" : "Welcome Back"}
             </h2>
             <p className="mt-2 text-gallery.accent/70">
-              Sign in to access your gallery
+              {isSignUp ? "Sign up to start creating" : "Sign in to access your gallery"}
             </p>
           </div>
-          <form onSubmit={handleLogin} className="mt-8 space-y-6">
+          <form onSubmit={handleAuth} className="mt-8 space-y-6">
             <div className="space-y-4">
               <div>
                 <Input
@@ -78,8 +92,22 @@ const Login = () => {
               className="w-full bg-gallery.accent hover:bg-gallery.accent/90"
               disabled={isLoading}
             >
-              {isLoading ? "Signing in..." : "Sign in"}
+              {isLoading 
+                ? (isSignUp ? "Creating account..." : "Signing in...") 
+                : (isSignUp ? "Sign up" : "Sign in")}
             </Button>
+
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={() => setIsSignUp(!isSignUp)}
+                className="text-gallery.accent hover:underline text-sm"
+              >
+                {isSignUp 
+                  ? "Already have an account? Sign in" 
+                  : "Don't have an account? Sign up"}
+              </button>
+            </div>
           </form>
         </div>
       </div>

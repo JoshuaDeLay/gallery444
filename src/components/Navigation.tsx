@@ -1,18 +1,36 @@
-import { Menu } from "lucide-react";
+
+import { Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Navigation = () => {
+  const navigate = useNavigate();
   const links = [
     { name: "Home", path: "/" },
     { name: "Weekly Prompts", path: "/prompts" },
     { name: "Create Gallery", path: "/create" },
   ];
+
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("Successfully logged out!");
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error("An error occurred during logout");
+    }
+  };
 
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b">
@@ -22,7 +40,7 @@ export const Navigation = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <Link
               key={link.path}
@@ -32,6 +50,14 @@ export const Navigation = () => {
               {link.name}
             </Link>
           ))}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleLogout}
+            className="text-gray-600 hover:text-gallery-accent"
+          >
+            <LogOut className="h-5 w-5" />
+          </Button>
         </div>
 
         {/* Mobile Navigation */}
@@ -52,6 +78,14 @@ export const Navigation = () => {
                   {link.name}
                 </Link>
               ))}
+              <Button
+                variant="ghost"
+                onClick={handleLogout}
+                className="text-lg text-gray-600 hover:text-gallery-accent transition-colors justify-start"
+              >
+                <LogOut className="h-5 w-5 mr-2" />
+                Logout
+              </Button>
             </div>
           </SheetContent>
         </Sheet>
