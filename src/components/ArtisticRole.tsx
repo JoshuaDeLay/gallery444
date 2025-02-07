@@ -8,17 +8,32 @@ const getArtisticRole = async () => {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) throw new Error("No session");
 
-  const { data, error } = await supabase
+  // First get the artistic role
+  const { data: roleData, error: roleError } = await supabase
     .from('artistic_roles')
-    .select(`
-      medium,
-      mindfulness_groups(name)
-    `)
+    .select('medium, group_id')
     .eq('user_id', session.user.id)
-    .single();
+    .maybeSingle();
 
-  if (error) throw error;
-  return data;
+  if (roleError) throw roleError;
+  
+  // If we have a role, get the group name
+  if (roleData?.group_id) {
+    const { data: groupData, error: groupError } = await supabase
+      .from('mindfulness_groups')
+      .select('name')
+      .eq('id', roleData.group_id)
+      .single();
+
+    if (groupError) throw groupError;
+
+    return {
+      ...roleData,
+      mindfulness_groups: groupData
+    };
+  }
+
+  return roleData;
 };
 
 export const ArtisticRole = () => {
