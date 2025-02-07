@@ -2,11 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Minimize2, Sparkles, ArrowRight } from "lucide-react";
+import { Minimize2, Sparkles, Crown, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export type TemplateStyle = "minimal" | "magical";
+export type TemplateStyle = "minimal" | "magical" | "exclusive";
 
 interface GalleryTemplate {
   id: string;
@@ -23,7 +23,7 @@ interface GalleryTemplate {
 const templates: GalleryTemplate[] = [
   {
     id: "minimal-essence",
-    name: "Minimal Essence",
+    name: "Minimal",
     style: "minimal",
     description: "Clean lines, pure thoughts",
     backgroundClass: "bg-white shadow-[inset_0_0_30px_rgba(0,0,0,0.03)]",
@@ -39,7 +39,7 @@ const templates: GalleryTemplate[] = [
   },
   {
     id: "magical-whispers",
-    name: "Magical Whispers",
+    name: "Abstract",
     style: "magical",
     description: "Where reality dances with dreams",
     backgroundClass: "bg-gradient-to-br from-[#FFB5C5] via-[#FAF3E0] to-[#98D8D8] shadow-[inset_0_0_60px_rgba(255,181,197,0.2)]",
@@ -51,6 +51,22 @@ const templates: GalleryTemplate[] = [
       "col-span-2 aspect-[21/9] bg-white/20 shadow-inner backdrop-blur-sm",
       "aspect-[3/4] bg-white/20 shadow-inner backdrop-blur-sm",
       "col-span-3 aspect-[3/1] bg-white/20 shadow-inner backdrop-blur-sm"
+    ]
+  },
+  {
+    id: "exclusive-gallery",
+    name: "Exclusive Gallery",
+    style: "exclusive",
+    description: "Curated by Virgil Abloh",
+    backgroundClass: "bg-black text-white shadow-[inset_0_0_60px_rgba(255,255,255,0.1)]",
+    icon: Crown,
+    poem: "Bold visions unfold\nBreaking boundaries with grace\nArt meets street design",
+    author: "Virgil Abloh",
+    layout: [
+      "grid-cols-2 gap-8",
+      "aspect-[16/9] bg-white/10 shadow-inner backdrop-blur-sm",
+      "aspect-[1/1] bg-white/10 shadow-inner backdrop-blur-sm",
+      "col-span-2 aspect-[21/9] bg-white/10 shadow-inner backdrop-blur-sm"
     ]
   }
 ];
@@ -118,7 +134,9 @@ export const GalleryTemplates = ({
                   "absolute inset-0 bg-center bg-cover bg-no-repeat opacity-10",
                   template.style === "minimal" ? 
                     "bg-[url('https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')]" : 
-                    "bg-[url('https://images.unsplash.com/photo-1582562124811-c09040d0a901?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')]"
+                    template.style === "magical" ?
+                    "bg-[url('https://images.unsplash.com/photo-1582562124811-c09040d0a901?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')]" :
+                    "bg-[url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')]"
                 )}
               />
               
@@ -128,26 +146,28 @@ export const GalleryTemplates = ({
                     <div className="flex items-center gap-3">
                       <Icon className={cn(
                         "h-6 w-6",
-                        template.style === "minimal" ? "opacity-60" : "opacity-90"
+                        template.style === "minimal" ? "opacity-60" : 
+                        template.style === "exclusive" ? "text-yellow-400" : "opacity-90"
                       )} />
                       <h3 className={cn(
                         "text-2xl",
                         template.style === "minimal" ? 
                           "font-mono tracking-tight" : 
+                          template.style === "exclusive" ?
+                          "font-serif uppercase tracking-wider" :
                           "font-serif italic"
                       )}>
                         {template.name}
                       </h3>
                     </div>
                     <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleUseTemplate(template.id);
-                      }}
+                      onClick={(e) => handleUseTemplate(template.id, e)}
                       className={cn(
                         "transition-all duration-300",
                         template.style === "minimal" ?
                           "bg-black text-white hover:bg-gray-800" :
+                          template.style === "exclusive" ?
+                          "bg-yellow-400 text-black hover:bg-yellow-500" :
                           "bg-white/20 backdrop-blur-sm hover:bg-white/30"
                       )}
                     >
@@ -160,7 +180,6 @@ export const GalleryTemplates = ({
                     "grid flex-1",
                     template.layout[0]
                   )}>
-                    {/* Layout preview boxes */}
                     <div className={template.layout[1]} />
                     <div className={template.layout[2]} />
                     <div className={template.layout[3]} />
@@ -174,7 +193,8 @@ export const GalleryTemplates = ({
                   <Icon className={cn(
                     "transition-all duration-500",
                     isHovered ? "h-8 w-8" : "h-6 w-6",
-                    template.style === "minimal" ? "opacity-60" : "opacity-90"
+                    template.style === "minimal" ? "opacity-60" : 
+                    template.style === "exclusive" ? "text-yellow-400" : "opacity-90"
                   )} />
                   
                   <div>
@@ -183,6 +203,8 @@ export const GalleryTemplates = ({
                       isHovered ? "text-2xl" : "text-xl",
                       template.style === "minimal" ? 
                         "font-mono tracking-tight" : 
+                        template.style === "exclusive" ?
+                        "font-serif uppercase tracking-wider" :
                         "font-serif italic"
                     )}>
                       {template.name}
@@ -192,6 +214,8 @@ export const GalleryTemplates = ({
                       "max-w-[200px] mx-auto transition-all duration-500",
                       template.style === "minimal" ? 
                         "text-gray-600 font-mono text-xs tracking-wide" : 
+                        template.style === "exclusive" ?
+                        "text-gray-200 font-serif text-xs tracking-wide" :
                         "text-gray-800 font-serif italic text-xs"
                     )}>
                       {template.description}
@@ -206,6 +230,8 @@ export const GalleryTemplates = ({
                       "text-xs whitespace-pre-line mb-1",
                       template.style === "minimal" ? 
                         "font-mono tracking-wide" : 
+                        template.style === "exclusive" ?
+                        "font-serif tracking-wide text-gray-300" :
                         "font-serif italic"
                     )}>
                       "{template.poem}"
