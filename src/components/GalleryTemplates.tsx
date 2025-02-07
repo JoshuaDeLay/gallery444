@@ -65,7 +65,7 @@ export const GalleryTemplates = ({
   const [hoveredTemplate, setHoveredTemplate] = useState<string | null>(null);
 
   return (
-    <div className="grid grid-cols-2 h-[60vh] gap-0">
+    <div className="grid grid-cols-2 h-[40vh] max-w-4xl mx-auto gap-6">
       {templates.map((template) => {
         const Icon = template.icon;
         const isHovered = hoveredTemplate === template.id;
@@ -76,10 +76,10 @@ export const GalleryTemplates = ({
             className={cn(
               "relative overflow-hidden cursor-pointer transition-all duration-500",
               template.backgroundClass,
-              "border-0 rounded-none",
+              "border-0 rounded-lg",
               template.style === "magical" && "magical-card",
               hoveredTemplate && hoveredTemplate !== template.id && "opacity-50",
-              "group"
+              "group aspect-square"
             )}
             onClick={() => onSelectTemplate(template.id)}
             onMouseEnter={() => setHoveredTemplate(template.id)}
@@ -98,19 +98,19 @@ export const GalleryTemplates = ({
                 )}
               />
               <div className={cn(
-                "relative h-full flex flex-col items-center justify-center p-8 text-center",
-                template.style === "minimal" ? "space-y-6" : "space-y-8"
+                "relative h-full flex flex-col items-center justify-center p-6 text-center",
+                template.style === "minimal" ? "space-y-4" : "space-y-4"
               )}>
                 <Icon className={cn(
                   "transition-all duration-500",
-                  isHovered ? "h-12 w-12" : "h-10 w-10",
+                  isHovered ? "h-8 w-8" : "h-6 w-6",
                   template.style === "minimal" ? "opacity-60" : "opacity-90"
                 )} />
                 
                 <div>
                   <h3 className={cn(
-                    "transition-all duration-500 mb-3",
-                    isHovered ? "text-3xl" : "text-2xl",
+                    "transition-all duration-500 mb-2",
+                    isHovered ? "text-2xl" : "text-xl",
                     template.style === "minimal" ? 
                       "font-mono tracking-tight" : 
                       "font-serif italic"
@@ -119,10 +119,10 @@ export const GalleryTemplates = ({
                   </h3>
                   
                   <p className={cn(
-                    "max-w-md mx-auto transition-all duration-500",
+                    "max-w-[200px] mx-auto transition-all duration-500",
                     template.style === "minimal" ? 
-                      "text-gray-600 font-mono text-sm tracking-wide" : 
-                      "text-gray-800 font-serif italic"
+                      "text-gray-600 font-mono text-xs tracking-wide" : 
+                      "text-gray-800 font-serif italic text-xs"
                   )}>
                     {template.description}
                   </p>
@@ -133,14 +133,14 @@ export const GalleryTemplates = ({
                   isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 )}>
                   <p className={cn(
-                    "text-sm whitespace-pre-line mb-2",
+                    "text-xs whitespace-pre-line mb-1",
                     template.style === "minimal" ? 
                       "font-mono tracking-wide" : 
                       "font-serif italic"
                   )}>
                     "{template.poem}"
                   </p>
-                  <p className="text-xs opacity-70">
+                  <p className="text-[10px] opacity-70">
                     — {template.author}
                   </p>
                 </div>
