@@ -22,7 +22,7 @@ export const templates: GalleryTemplate[] = [
     name: "Abstract",
     style: "magical",
     description: "",
-    backgroundClass: "bg-gradient-to-br from-[#FFB5C5] via-[#FAF3E0] to-[#98D8D8] shadow-[inset_0_0_60px_rgba(255,181,197,0.2)]",
+    backgroundClass: "bg-gradient-to-br from-[#E5DEFF] via-[#F1F0FB] to-[#D3E4FD] shadow-[inset_0_0_60px_rgba(211,228,253,0.2)]",
     icon: GalleryHorizontal,
     layout: [
       "grid-cols-3 gap-4",
@@ -36,7 +36,7 @@ export const templates: GalleryTemplate[] = [
     name: "Portfolio",
     style: "magical",
     description: "",
-    backgroundClass: "bg-gradient-to-br from-[#9b87f5] via-[#F1F0FB] to-[#e7f0fd] shadow-[inset_0_0_60px_rgba(155,135,245,0.2)]",
+    backgroundClass: "bg-gradient-to-br from-[#FDE1D3] via-[#FEF7CD] to-[#F2FCE2] shadow-[inset_0_0_60px_rgba(253,225,211,0.2)]",
     icon: GalleryVertical,
     layout: [
       "grid-cols-6 gap-4",
@@ -50,7 +50,7 @@ export const templates: GalleryTemplate[] = [
     name: "3D Gallery",
     style: "magical",
     description: "",
-    backgroundClass: "bg-gradient-to-br from-[#1A1F2C] via-[#6E59A5] to-[#9b87f5] shadow-[inset_0_0_60px_rgba(155,135,245,0.2)]",
+    backgroundClass: "bg-gradient-to-br from-[#F1F0FB] via-[#E5DEFF] to-[#FFDEE2] shadow-[inset_0_0_60px_rgba(229,222,255,0.2)]",
     icon: Box,
     layout: [
       "grid-cols-6 gap-4",
