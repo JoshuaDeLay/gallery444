@@ -1,5 +1,5 @@
 
-import { Menu, LogOut } from "lucide-react";
+import { Menu, LogOut, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -48,8 +48,8 @@ export const Navigation = () => {
     }
   };
 
-  // Don't show navigation links on login page or when not authenticated
-  const shouldShowNavLinks = isAuthenticated && location.pathname !== '/login';
+  // Don't show navigation links on login page
+  const shouldShowNavLinks = location.pathname !== '/login';
 
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b">
@@ -59,17 +59,17 @@ export const Navigation = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        {shouldShowNavLinks && (
-          <div className="hidden md:flex items-center gap-8">
-            {links.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="text-gray-600 hover:text-gallery-accent transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
+        <div className="hidden md:flex items-center gap-8">
+          {shouldShowNavLinks && isAuthenticated && links.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className="text-gray-600 hover:text-gallery-accent transition-colors"
+            >
+              {link.name}
+            </Link>
+          ))}
+          {isAuthenticated ? (
             <Button
               variant="ghost"
               size="icon"
@@ -78,8 +78,17 @@ export const Navigation = () => {
             >
               <LogOut className="h-5 w-5" />
             </Button>
-          </div>
-        )}
+          ) : (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate('/login')}
+              className="text-gray-600 hover:text-gallery-accent"
+            >
+              <LogIn className="h-5 w-5" />
+            </Button>
+          )}
+        </div>
 
         {/* Mobile Navigation */}
         {shouldShowNavLinks && (
@@ -91,7 +100,7 @@ export const Navigation = () => {
             </SheetTrigger>
             <SheetContent>
               <div className="flex flex-col gap-4 mt-8">
-                {links.map((link) => (
+                {isAuthenticated && links.map((link) => (
                   <Link
                     key={link.path}
                     to={link.path}
@@ -100,14 +109,25 @@ export const Navigation = () => {
                     {link.name}
                   </Link>
                 ))}
-                <Button
-                  variant="ghost"
-                  onClick={handleLogout}
-                  className="text-lg text-gray-600 hover:text-gallery-accent transition-colors justify-start"
-                >
-                  <LogOut className="h-5 w-5 mr-2" />
-                  Logout
-                </Button>
+                {isAuthenticated ? (
+                  <Button
+                    variant="ghost"
+                    onClick={handleLogout}
+                    className="text-lg text-gray-600 hover:text-gallery-accent transition-colors justify-start"
+                  >
+                    <LogOut className="h-5 w-5 mr-2" />
+                    Logout
+                  </Button>
+                ) : (
+                  <Button
+                    variant="ghost"
+                    onClick={() => navigate('/login')}
+                    className="text-lg text-gray-600 hover:text-gallery-accent transition-colors justify-start"
+                  >
+                    <LogIn className="h-5 w-5 mr-2" />
+                    Login
+                  </Button>
+                )}
               </div>
             </SheetContent>
           </Sheet>
