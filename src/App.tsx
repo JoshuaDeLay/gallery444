@@ -52,20 +52,41 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Index />} />
-          <Route path="/prompts" element={<Prompts />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/social" element={<Social />} />
-          <Route path="/memories" element={<Memories />} />
-          <Route 
-            path="/gallery" 
-            element={
-              <ProtectedRoute>
-                <Gallery />
-              </ProtectedRoute>
-            } 
-          />
-          <Route path="/templates" element={<Templates />} />
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Index />
+            </ProtectedRoute>
+          } />
+          <Route path="/prompts" element={
+            <ProtectedRoute>
+              <Prompts />
+            </ProtectedRoute>
+          } />
+          <Route path="/create" element={
+            <ProtectedRoute>
+              <Create />
+            </ProtectedRoute>
+          } />
+          <Route path="/social" element={
+            <ProtectedRoute>
+              <Social />
+            </ProtectedRoute>
+          } />
+          <Route path="/memories" element={
+            <ProtectedRoute>
+              <Memories />
+            </ProtectedRoute>
+          } />
+          <Route path="/gallery" element={
+            <ProtectedRoute>
+              <Gallery />
+            </ProtectedRoute>
+          } />
+          <Route path="/templates" element={
+            <ProtectedRoute>
+              <Templates />
+            </ProtectedRoute>
+          } />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
