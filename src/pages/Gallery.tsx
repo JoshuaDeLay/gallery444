@@ -44,35 +44,39 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gallery.soft via-murakami.cream to-murakami.teal/20 pb-20 relative overflow-hidden">
       {/* Ethereal light beams effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute w-full h-full bg-[url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NDg1ODQ5Mg&ixlib=rb-4.0.3&q=80&w=1080')] opacity-5 bg-cover bg-center" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/20 via-transparent to-[#6E59A5]/20" />
-        <div className="absolute w-96 h-96 bg-[#D946EF]/10 rounded-full blur-3xl -top-20 -left-20" />
-        <div className="absolute w-96 h-96 bg-[#F97316]/10 rounded-full blur-3xl -bottom-20 -right-20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-murakami.teal/10 via-transparent to-murakami.pink/10" />
+        <div className="absolute w-96 h-96 bg-murakami.pink/5 rounded-full blur-3xl -top-20 -left-20" />
+        <div className="absolute w-96 h-96 bg-murakami.teal/5 rounded-full blur-3xl -bottom-20 -right-20" />
       </div>
       
       <Navigation />
       <div className="container mx-auto px-4 min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center relative">
-        <div className="max-w-2xl w-full text-center space-y-8 backdrop-blur-sm bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10 animate-fade-up">
+        <div className="max-w-2xl w-full text-center space-y-8 backdrop-blur-sm bg-white/10 p-12 rounded-2xl shadow-lg border border-white/20 animate-fade-up">
           <div className="relative w-40 h-40 mx-auto transition-all duration-1000 group">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#D946EF]/20 to-[#F97316]/20 rounded-full group-hover:scale-110 transition-transform duration-700" />
-            <DoorClosed className="w-full h-full text-white/90 group-hover:scale-105 transition-all duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-r from-murakami.teal/20 to-murakami.pink/20 rounded-full group-hover:scale-110 transition-transform duration-700" />
+            <DoorClosed className="w-full h-full text-gallery.accent/80 group-hover:scale-105 transition-all duration-700" />
           </div>
-          <h1 className="font-serif text-5xl text-white/90 drop-shadow-lg tracking-wider italic">
+          <h1 className="font-serif text-5xl text-gallery.accent/90 drop-shadow-sm tracking-wider italic">
             The Grand Gallery
           </h1>
-          <p className="font-serif text-white/80 text-xl leading-relaxed max-w-xl mx-auto italic">
+          <p className="font-serif text-gallery.accent/70 text-xl leading-relaxed max-w-xl mx-auto italic">
             Behind these doors lie extraordinary creations waiting to be unveiled.
           </p>
-          <div className="grid grid-cols-4 gap-4 max-w-xl mx-auto">
+          <div className="grid grid-cols-4 gap-6 max-w-xl mx-auto">
             {Object.entries(timeLeft).map(([unit, value]) => (
-              <div key={unit} className="flex flex-col items-center">
-                <div className="w-20 h-20 rounded-xl bg-[#1A1F2C] backdrop-blur-sm border border-white/20 shadow-lg flex items-center justify-center mb-2">
-                  <span className="text-3xl font-bold text-white font-serif tracking-widest">{value.toString().padStart(2, '0')}</span>
+              <div key={unit} className="flex flex-col items-center group">
+                <div className="w-20 h-20 rounded-2xl bg-white/30 backdrop-blur-sm border border-white/30 shadow-sm flex items-center justify-center mb-3 transition-all duration-300 group-hover:bg-white/40">
+                  <span className="text-3xl font-light text-gallery.accent font-serif tracking-widest transition-all duration-300 group-hover:scale-110">
+                    {value.toString().padStart(2, '0')}
+                  </span>
                 </div>
-                <span className="text-white/70 capitalize font-serif italic">{unit}</span>
+                <span className="text-gallery.accent/60 capitalize font-serif italic text-sm tracking-wide">
+                  {unit}
+                </span>
               </div>
             ))}
           </div>
@@ -84,3 +88,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
