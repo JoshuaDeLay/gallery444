@@ -77,11 +77,19 @@ const App = () => {
                 isAuthenticated ? <Navigate to="/gallery" replace /> : <Login />
               } 
             />
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Index />
-              </ProtectedRoute>
-            } />
+            {/* Redirect root path to login if not authenticated */}
+            <Route 
+              path="/" 
+              element={
+                !isAuthenticated ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <ProtectedRoute>
+                    <Index />
+                  </ProtectedRoute>
+                )
+              } 
+            />
             <Route path="/prompts" element={
               <ProtectedRoute>
                 <Prompts />
