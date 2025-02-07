@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -73,9 +74,27 @@ export default {
             transform: "translateY(0)",
           },
         },
+        float: {
+          "0%, 100%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(-5px)",
+          },
+        },
+        pulse: {
+          "0%, 100%": {
+            opacity: "1",
+          },
+          "50%": {
+            opacity: "0.8",
+          },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "pulse": "pulse 3s ease-in-out infinite",
       },
     },
   },
