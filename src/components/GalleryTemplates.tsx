@@ -110,6 +110,7 @@ export const GalleryTemplates = ({
       {templates.map((template) => {
         const Icon = template.icon;
         const isExpanded = expandedTemplate === template.id;
+        const isVisible = !expandedTemplate || expandedTemplate === template.id;
         
         return (
           <Card
@@ -121,6 +122,7 @@ export const GalleryTemplates = ({
               isExpanded ? 
                 "col-span-2 md:col-span-4 ring-2 ring-gallery-accent scale-100" : 
                 "hover:scale-105",
+              !isVisible && "hidden",
               "transform-gpu"
             )}
             onClick={() => handleTemplateClick(template.id)}
