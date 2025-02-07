@@ -31,7 +31,7 @@ const getTimeBasedGradient = () => {
     return "from-[#243949] to-[#517fa4]";
   }
   // Night (20-5)
-  return "from-[#0f2027] to-[#203a43] text-white";
+  return "from-[#0f2027] to-[#203a43]";
 };
 
 export const WeeklyPrompt = () => {
@@ -62,57 +62,42 @@ export const WeeklyPrompt = () => {
     >
       <CardHeader className={`
         flex flex-row items-center gap-4 
-        border-b border-gallery-accent/20 pb-6
+        border-b border-white/20 pb-6
         transition-all duration-500
       `}>
         <div className={`
           p-2 rounded-full
-          ${isNightTime ? 'bg-white/20' : 'bg-gallery-accent'}
+          ${isNightTime ? 'bg-white/20' : 'bg-white/30'}
           transform motion-safe:hover:rotate-12 transition-transform
         `}>
-          <Calendar className={`h-6 w-6 ${isNightTime ? 'text-white' : 'text-white'}`} />
+          <Calendar className="h-6 w-6 text-white" />
         </div>
-        <h3 className={`
-          font-serif text-2xl md:text-3xl 
-          ${isNightTime ? 'text-white' : 'text-gallery-accent'}
-        `}>
+        <h3 className="font-serif text-2xl md:text-3xl text-white font-medium">
           This Week's Prompt
         </h3>
       </CardHeader>
       <CardContent className="prose prose-gray max-w-none p-8">
         <blockquote className={`
           text-xl md:text-2xl font-serif italic 
-          border-l-4 border-gallery-accent pl-6 my-6
-          ${isNightTime ? 'text-white/90' : 'text-gallery-accent'}
+          border-l-4 border-white/40 pl-6 my-6
+          text-white font-medium
           transform transition-all duration-500
           motion-safe:hover:scale-105
         `}>
           "What moments of unexpected beauty have you encountered in your daily routine?"
         </blockquote>
-        <p className={`
-          mt-6 text-lg leading-relaxed
-          ${isNightTime ? 'text-white/80' : 'text-gray-600'}
-        `}>
+        <p className="mt-6 text-lg leading-relaxed text-white/90">
           Share a photograph, sketch, or written reflection that captures a moment of
           serendipitous beauty in your everyday life. Consider the interplay of
           light, shadow, texture, or human connection.
         </p>
-        <div className={`
-          mt-6 text-sm
-          ${isNightTime ? 'text-white/60' : 'text-gallery-warm'}
-        `}>
+        <div className="mt-6 text-sm text-white/80">
           New prompt in: 5 days, 3 hours
         </div>
       </CardContent>
-      <CardFooter className={`
-        border-t border-gallery-accent/20 pt-4
-        ${isNightTime ? 'text-white/80' : ''}
-      `}>
+      <CardFooter className="border-t border-white/20 pt-4">
         <div className="w-full">
-          <p className={`
-            text-sm mb-2 flex items-center gap-2
-            ${isNightTime ? 'text-white/60' : 'text-gallery-warm'}
-          `}>
+          <p className="text-sm mb-2 flex items-center gap-2 text-white/80">
             <Eye className="h-4 w-4" />
             Seen by
           </p>
@@ -124,12 +109,8 @@ export const WeeklyPrompt = () => {
                   px-3 py-1 rounded-full text-sm
                   transition-all duration-300
                   ${member.hasSeen
-                    ? isNightTime
-                      ? 'bg-white/20 text-white'
-                      : 'bg-gallery-accent/10 text-gallery-accent'
-                    : isNightTime
-                      ? 'bg-white/5 text-white/40'
-                      : 'bg-gray-100 text-gray-400'
+                    ? 'bg-white/20 text-white'
+                    : 'bg-white/5 text-white/60'
                   }
                 `}
               >
