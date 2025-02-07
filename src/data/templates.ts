@@ -19,7 +19,7 @@ export const templates: GalleryTemplate[] = [
   },
   {
     id: "magical-whispers",
-    name: "Gallery",
+    name: "Abstract",
     style: "magical",
     description: "",
     backgroundClass: "bg-gradient-to-br from-[#FFB5C5] via-[#FAF3E0] to-[#98D8D8] shadow-[inset_0_0_60px_rgba(255,181,197,0.2)]",
