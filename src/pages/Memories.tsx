@@ -1,21 +1,22 @@
 
 import { Navigation } from "@/components/Navigation";
-import { WeeklyPrompt } from "@/components/WeeklyPrompt";
 import { BottomNav } from "@/components/BottomNav";
 
-const Prompts = () => {
+const Memories = () => {
   return (
     <div className="min-h-screen bg-white pb-20">
       <Navigation />
       <div className="container mx-auto px-4 pt-32">
-        <h1 className="font-serif text-3xl md:text-4xl text-center mb-12">
-          Weekly Prompts
+        <h1 className="font-serif text-3xl md:text-4xl text-center mb-4">
+          Your Gallery Memories
         </h1>
-        <WeeklyPrompt />
+        <p className="text-center text-gallery-warm mb-12">
+          Revisit your creative journey through past galleries and moments.
+        </p>
       </div>
       <BottomNav />
     </div>
   );
 };
 
-export default Prompts;
+export default Memories;

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
@@ -5,12 +6,13 @@ import { Card } from "@/components/ui/card";
 import { ImagePlus } from "lucide-react";
 import { GalleryTemplates } from "@/components/GalleryTemplates";
 import { cn } from "@/lib/utils";
+import { BottomNav } from "@/components/BottomNav";
 
 const Create = () => {
   const [selectedTemplate, setSelectedTemplate] = useState("minimal-white");
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pb-20">
       <Navigation />
       <div className="container mx-auto px-4 pt-32">
         <h1 className="font-serif text-3xl md:text-4xl text-center mb-4">
@@ -46,6 +48,7 @@ const Create = () => {
           </Card>
         </div>
       </div>
+      <BottomNav />
     </div>
   );
 };

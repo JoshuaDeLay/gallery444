@@ -1,12 +1,14 @@
+
 import { ArrowRight, Image, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { WeeklyPrompt } from "@/components/WeeklyPrompt";
 import { Link } from "react-router-dom";
+import { BottomNav } from "@/components/BottomNav";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pb-20">
       <Navigation />
       
       {/* Hero Section */}
@@ -68,6 +70,8 @@ const Index = () => {
           <WeeklyPrompt />
         </div>
       </section>
+      
+      <BottomNav />
     </div>
   );
 };
