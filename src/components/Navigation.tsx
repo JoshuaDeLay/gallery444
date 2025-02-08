@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 import { Menu, LogOut, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -137,3 +138,26 @@ export const Navigation = () => {
     </nav>
   );
 };
+=======
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+export const Navigation = () => {
+  return (
+    <nav className="bg-white shadow-lg">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <Link to="/" className="text-xl font-bold">Gallery</Link>
+          <div className="space-x-4">
+            <Link to="/templates" className="hover:text-gray-600">Templates</Link>
+            <Link to="/community" className="hover:text-gray-600">Community</Link>
+            <Link to="/upload" className="hover:text-gray-600">Upload</Link>
+          </div>
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+export default Navigation
+>>>>>>> Stashed changes

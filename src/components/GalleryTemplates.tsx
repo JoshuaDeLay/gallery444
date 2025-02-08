@@ -1,18 +1,107 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+<<<<<<< Updated upstream
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { templates } from "@/data/templates";
 import { TemplateCardContent } from "./gallery/TemplateCardContent";
 import { ExpandedTemplate } from "./gallery/ExpandedTemplate";
 import type { GalleryTemplate } from "@/types/gallery";
+=======
+import { Minimize2, Box, Frame, Layers } from "lucide-react";
+import { FC } from 'react';
+import { GalleryProps, Season } from '@/types';
 
-interface GalleryTemplatesProps {
-  selectedTemplate: string;
-  onSelectTemplate: (templateId: string) => void;
+export type TemplateStyle = "minimal" | "brutalist" | "classic" | "modern";
+
+interface GalleryTemplate {
+  id: string;
+  name: string;
+  style: TemplateStyle;
+  description: string;
+  backgroundClass: string;
+  icon: React.ComponentType<any>;
+  poem?: string;
+  author?: string;
+  layout: string[];
 }
 
+const templates: GalleryTemplate[] = [
+  {
+    id: "minimal-white",
+    name: "White Space",
+    style: "minimal",
+    description: "Inspired by e.e. cummings' minimalist poetry",
+    backgroundClass: "bg-white",
+    icon: Minimize2,
+    poem: "l(a\n\nle\naf\nfa\n\nll\n\ns)\none\nl\niness",
+    author: "e.e. cummings",
+    layout: [
+      "grid-cols-1 gap-8",
+      "aspect-[3/4] bg-gallery-soft/20",
+      "aspect-square bg-gallery-soft/20",
+      "aspect-[4/3] bg-gallery-soft/20"
+    ]
+  },
+  {
+    id: "brutalist-concrete",
+    name: "Concrete",
+    style: "brutalist",
+    description: "Raw typography meets architectural forms",
+    backgroundClass: "bg-gallery-accent",
+    icon: Box,
+    poem: "The city rises\nConcrete and steel\nAgainst the morning light",
+    author: "Contemporary Verse",
+    layout: [
+      "grid-cols-2 gap-2",
+      "col-span-2 aspect-[2/1] bg-white/10",
+      "aspect-square bg-white/10",
+      "aspect-square bg-white/10"
+    ]
+  },
+  {
+    id: "classic-frame",
+    name: "Classic Frame",
+    style: "classic",
+    description: "Inspired by William Wordsworth's nature poetry",
+    backgroundClass: "bg-gallery-soft",
+    icon: Frame,
+    poem: "I wandered lonely as a cloud\nThat floats on high o'er vales and hills",
+    author: "William Wordsworth",
+    layout: [
+      "grid-cols-3 gap-4",
+      "col-span-2 aspect-[2/1] bg-white border-2 border-gallery-accent/20",
+      "aspect-[3/4] bg-white border-2 border-gallery-accent/20",
+      "col-span-3 aspect-[3/1] bg-white border-2 border-gallery-accent/20"
+    ]
+  },
+  {
+    id: "modern-gradient",
+    name: "Modern Flow",
+    style: "modern",
+    description: "Contemporary poetry meets fluid design",
+    backgroundClass: "bg-gradient-to-r from-gallery-soft to-white",
+    icon: Layers,
+    poem: "Digital rivers flow\nPixels cascade through time's stream\nModern art evolves",
+    author: "Digital Haiku",
+    layout: [
+      "grid-cols-12 gap-4",
+      "col-span-8 aspect-video bg-gradient-to-r from-gallery-soft/40 to-white",
+      "col-span-4 aspect-square bg-gradient-to-l from-gallery-soft/40 to-white",
+      "col-span-12 aspect-[4/1] bg-gradient-to-t from-gallery-soft/40 to-white"
+    ]
+  },
+];
+>>>>>>> Stashed changes
+
+interface GalleryTemplatesProps {
+  season: Season;
+  onSelect: (templateId: string) => void;
+  selectedTemplate?: string;
+}
+
+<<<<<<< Updated upstream
 export const GalleryTemplates = ({
   selectedTemplate,
   onSelectTemplate,
@@ -31,6 +120,13 @@ export const GalleryTemplates = ({
     navigate(`/templates/design?template=${templateId}`);
   };
 
+=======
+export const GalleryTemplates: FC<GalleryTemplatesProps> = ({
+  season,
+  onSelect,
+  selectedTemplate
+}) => {
+>>>>>>> Stashed changes
   return (
     <div className={cn(
       "grid gap-6 max-w-4xl mx-auto transition-all duration-500",
@@ -56,9 +152,13 @@ export const GalleryTemplates = ({
               "group",
               isExpanded ? "h-[70vh]" : "aspect-square"
             )}
+<<<<<<< Updated upstream
             onClick={() => handleTemplateClick(template.id)}
             onMouseEnter={() => setHoveredTemplate(template.id)}
             onMouseLeave={() => setHoveredTemplate(null)}
+=======
+            onClick={() => onSelect(template.id)}
+>>>>>>> Stashed changes
           >
             <div className={cn(
               "absolute inset-0 transition-all duration-500",
