@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-
 import { Menu, LogOut, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +9,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { MessageSquare, Users, Image, DoorClosed, Circle } from "lucide-react";
 
 export const Navigation = () => {
   const navigate = useNavigate();
@@ -138,26 +138,63 @@ export const Navigation = () => {
     </nav>
   );
 };
-=======
-import React from 'react'
-import { Link } from 'react-router-dom'
 
-export const Navigation = () => {
+export const BottomNav = () => {
+  const location = useLocation();
+  
+  const navigation = [
+    {
+      name: "Prompts",
+      href: "/prompts",
+      icon: MessageSquare,
+    },
+    {
+      name: "Social",
+      href: "/social",
+      icon: Users,
+    },
+    {
+      name: "Gallery",
+      href: "/gallery",
+      icon: DoorClosed,
+    },
+    {
+      name: "Mindful",
+      href: "/mindfulness",
+      icon: Circle,
+    },
+  ];
+
   return (
-    <nav className="bg-white shadow-lg">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-xl font-bold">Gallery</Link>
-          <div className="space-x-4">
-            <Link to="/templates" className="hover:text-gray-600">Templates</Link>
-            <Link to="/community" className="hover:text-gray-600">Community</Link>
-            <Link to="/upload" className="hover:text-gray-600">Upload</Link>
-          </div>
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-white/80 backdrop-blur-sm">
+      <div className="mx-auto max-w-md">
+        <div className="flex justify-around">
+          {navigation.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.href;
+
+            return (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={cn(
+                  "flex flex-col items-center px-1 py-1.5 relative",
+                  "text-sm font-medium transition-all duration-500",
+                  isActive
+                    ? "text-gallery-accent scale-110"
+                    : "text-gallery-warm hover:text-gallery-accent hover:scale-105"
+                )}
+              >
+                <Icon className={cn(
+                  "h-5 w-5 transition-transform duration-500",
+                  isActive && "animate-float"
+                )} />
+                <span className="mt-0.5 text-[10px]">{item.name}</span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>
-  )
-}
-
-export default Navigation
->>>>>>> Stashed changes
+  );
+};
