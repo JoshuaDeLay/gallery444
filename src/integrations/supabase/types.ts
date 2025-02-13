@@ -110,6 +110,24 @@ export type Database = {
           },
         ]
       }
+      group_members: {
+        Row: {
+          medium: string
+          profiles: Json | null
+          user_id: string
+        }
+        Insert: {
+          medium: string
+          profiles?: Json | null
+          user_id?: string
+        }
+        Update: {
+          medium?: string
+          profiles?: Json | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       mindfulness_group_members: {
         Row: {
           created_at: string
