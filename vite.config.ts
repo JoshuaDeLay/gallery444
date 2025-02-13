@@ -1,3 +1,4 @@
+// vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -6,16 +7,19 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::", // This allows IPv6 connections; consider using "0.0.0.0" for IPv4
+    host: "0.0.0.0", // Allows both IPv4 and IPv6 connections
     port: 8080,
+    allowedHosts: [
+      "831c0854-d0cc-4d2c-bf8d-23814dd6ee48.lovableproject.com", // Add the host here
+    ],
   },
   plugins: [
     react(),
-    mode === 'development' && componentTagger(), // Only include componentTagger in development mode
+    mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"), // Alias for src directory
+      "@": path.resolve(__dirname, "./src"),
     },
   },
 }));
