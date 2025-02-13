@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Palette, 
@@ -10,11 +10,9 @@ import {
   Globe,
   Heart 
 } from 'lucide-react';
-import { useLocation } from '@/hooks/useLocationContext';
 
 export const PromptPage = () => {
   const [isLiked, setIsLiked] = useState(false);
-  const { weather, localTime } = useLocation();
   
   // Define roles with their icons and descriptions
   const roles = [
@@ -56,21 +54,8 @@ export const PromptPage = () => {
     }
   ];
 
-  // Get background style based on time and weather
-  const getBackgroundStyle = () => {
-    const hour = new Date(localTime).getHours();
-    const isNight = hour < 6 || hour > 18;
-    const isDawn = hour >= 6 && hour < 9;
-    const isDusk = hour >= 17 && hour < 19;
-
-    if (isNight) return "bg-[#1a1f2c] text-white";
-    if (isDawn) return "bg-gradient-to-br from-[#fec6a1] to-[#fee2d4] text-gray-800";
-    if (isDusk) return "bg-gradient-to-br from-[#f1f1f1] to-[#fde1d3] text-gray-800";
-    return "bg-gradient-to-br from-white to-[#f1f1f1] text-gray-800";
-  };
-
   return (
-    <div className={`min-h-screen transition-colors duration-1000 ${getBackgroundStyle()}`}>
+    <div className="min-h-screen bg-gradient-to-br from-white to-[#f1f1f1] text-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Main Content */}
         <motion.div 
