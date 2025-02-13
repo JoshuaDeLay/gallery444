@@ -57,15 +57,40 @@ export const PromptPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-[#f1f1f1] text-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Main Content */}
         <motion.div 
           className="space-y-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
+          {/* Roles Grid - Now at the top */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {roles.map((role, index) => (
+              <motion.div
+                key={role.title}
+                className={`
+                  p-6 rounded-xl backdrop-blur-sm
+                  bg-gradient-to-br ${role.gradient}
+                  ${role.title === 'All Roles' ? 'md:col-span-2 lg:col-span-3' : ''}
+                  hover:shadow-lg transition-shadow duration-300
+                `}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="flex items-center space-x-4">
+                  <role.icon className="w-8 h-8" />
+                  <div>
+                    <h3 className="text-xl font-semibold">{role.title}</h3>
+                    <p className="text-sm mt-1 opacity-80">{role.description}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
           {/* Header and Image */}
-          <div className="relative">
+          <div className="relative mt-8">
             <img 
               src="/starry-night.jpg" 
               className="w-full h-64 object-cover rounded-xl shadow-xl"
@@ -100,31 +125,6 @@ export const PromptPage = () => {
                 Take the week to reflect on this simultaneous fortitude and fragility, and how your story unfolds through these moments.
               </p>
             </div>
-          </div>
-
-          {/* Roles Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            {roles.map((role, index) => (
-              <motion.div
-                key={role.title}
-                className={`
-                  p-6 rounded-xl backdrop-blur-sm
-                  bg-gradient-to-br ${role.gradient}
-                  ${role.title === 'All Roles' ? 'md:col-span-2 lg:col-span-3' : ''}
-                `}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className="flex items-center space-x-4">
-                  <role.icon className="w-8 h-8" />
-                  <div>
-                    <h3 className="text-xl font-semibold">{role.title}</h3>
-                    <p className="text-sm mt-1 opacity-80">{role.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </motion.div>
       </div>
