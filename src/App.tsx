@@ -14,6 +14,7 @@ import Templates from "./pages/Templates";
 import Mindfulness from "./pages/Mindfulness";
 import Groups from "./pages/Groups";
 import Login from "./pages/Login";
+import Curator from "./pages/Curator";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -65,6 +66,7 @@ const App = () => {
             <Route path="/groups" element={<ProtectedRoute><Groups /></ProtectedRoute>} />
             <Route path="/gallery" element={<ProtectedRoute><Gallery /></ProtectedRoute>} />
             <Route path="/templates" element={<ProtectedRoute><Templates /></ProtectedRoute>} />
+            <Route path="/curator" element={<ProtectedRoute><Curator /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
