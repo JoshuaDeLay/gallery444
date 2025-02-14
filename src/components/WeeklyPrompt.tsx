@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const getGroupMembers = async () => {
   const { data: { session } } = await supabase.auth.getSession();
@@ -13,23 +14,15 @@ const getGroupMembers = async () => {
   }
 
   try {
-    // First get the user's role and group
     const { data: userRole, error: roleError } = await supabase
       .from('artistic_roles')
       .select('group_id')
       .eq('user_id', session.user.id)
       .maybeSingle();
 
-    if (roleError) {
-      console.error("Error fetching user role:", roleError);
-      throw roleError;
-    }
-    
-    if (!userRole?.group_id) {
-      return [];
-    }
+    if (roleError) throw roleError;
+    if (!userRole?.group_id) return [];
 
-    // Then get all members in the same group
     const { data: members, error: membersError } = await supabase
       .from('artistic_roles')
       .select(`
@@ -41,11 +34,7 @@ const getGroupMembers = async () => {
       `)
       .eq('group_id', userRole.group_id);
 
-    if (membersError) {
-      console.error("Error fetching group members:", membersError);
-      throw membersError;
-    }
-
+    if (membersError) throw membersError;
     return members || [];
   } catch (error: any) {
     console.error("Error in getGroupMembers:", error);
@@ -78,44 +67,28 @@ export const WeeklyPrompt = () => {
           </div>
           <h3 className="font-serif text-xl text-indigo-900 font-medium italic
             [text-shadow:_1px_1px_2px_rgb(94_75_86_/_10%)]">
-            This Week's Gallery Theme
+            GALLERY PROMPT: NIGHT INTO DAY
           </h3>
         </div>
       </CardHeader>
       
       <CardContent className="relative prose prose-gray max-w-none p-4">
-        <blockquote className={`
-          text-lg font-serif italic
-          border-l-4 border-indigo-300/30 pl-4 my-4
-          text-indigo-900 font-medium
-          transform transition-all duration-500
-          motion-safe:hover:scale-105
-          [text-shadow:_1px_1px_2px_rgb(94_75_86_/_10%)]
-          [font-family:'Playfair_Display',_serif]
-        `}>
-          "Whispers of Time: A Journey Through Epochs"
-        </blockquote>
         <p className="mt-2 text-base leading-relaxed text-indigo-800/80
           [font-family:'Playfair_Display',_serif]">
-          Create a gallery space that explores the dialogue between different eras.
-          Consider how ancient artifacts might converse with contemporary pieces,
-          or how traditional techniques could blend with modern aesthetics.
-          Let your curation tell a story of time's endless flow.
+          T.S. Eliot's Prelude No. 1 captures that fragile moment when night exhales into morning—restless thoughts flickering on the ceiling before light creeps through the shutters. Outside, the world stirs, indifferent. The street is awake, but it hardly understands.
         </p>
-        <div className="mt-4 flex items-center gap-2">
-          <div className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
-          <span className="text-xs text-indigo-800/60 font-serif italic">
-            New theme in: 5 days, 3 hours
-          </span>
-        </div>
+        <p className="mt-4 text-base leading-relaxed text-indigo-800/80
+          [font-family:'Playfair_Display',_serif]">
+          Every morning, we fold away dreams and step into the day—a quiet ritual of resilience and surrender. Where does your mind go in those liminal hours? What do you leave behind in the night, and what do you carry forward?
+        </p>
+        <p className="mt-4 text-sm text-indigo-800/60 italic">
+          Express in any medium—words, paint, pixels, sound.
+          There are no answers, only the act of seeing.
+        </p>
       </CardContent>
       
       <CardFooter className="relative border-t border-white/10 pt-3 pb-2">
         <div className="w-full">
-          <p className="text-xs mb-1.5 flex items-center gap-1.5 text-indigo-800/70">
-            <Eye className="h-3 w-3" />
-            Fellow Curators
-          </p>
           <div className="flex flex-wrap gap-1.5">
             {isLoading ? (
               <div className="animate-pulse bg-white/20 h-6 w-32 rounded-full" />
