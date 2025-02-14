@@ -1,6 +1,8 @@
+
 import React from 'react';
 
-export const Gallery = () => {
+// Rename to GalleryComponent to avoid naming conflicts
+export const GalleryComponent = () => {
     return (
         <div>
             <h1>Gallery Component</h1>
