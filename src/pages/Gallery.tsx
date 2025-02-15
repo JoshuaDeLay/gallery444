@@ -1,14 +1,13 @@
 
 import { Navigation } from "@/components/Navigation";
-import { BottomNav } from "@/components/Navigation";
+import { BottomNav } from "@/components/BottomNav";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { GalleryHeader } from "@/components/gallery/GalleryHeader";
 import { CountdownTimer } from "@/components/gallery/CountdownTimer";
 import { toast } from "sonner";
 
-// Change to named export
-export const Gallery = () => {
+const Gallery = () => {
   const [galleryName, setGalleryName] = useState("The Grand Gallery");
 
   useEffect(() => {
@@ -63,5 +62,5 @@ export const Gallery = () => {
   );
 };
 
-// Add default export that exports the Gallery component
 export default Gallery;
+
