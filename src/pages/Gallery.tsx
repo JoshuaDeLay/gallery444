@@ -1,49 +1,12 @@
 
 import { Navigation } from "@/components/Navigation";
 import { BottomNav } from "@/components/BottomNav";
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { GalleryHeader } from "@/components/gallery/GalleryHeader";
 import { CountdownTimer } from "@/components/gallery/CountdownTimer";
-import { toast } from "sonner";
+import { useState } from "react";
 
 const Gallery = () => {
   const [galleryName, setGalleryName] = useState("The Grand Gallery");
-
-  useEffect(() => {
-    const fetchGallerySettings = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data, error } = await supabase
-          .from('gallery_settings')
-          .select('gallery_name')
-          .eq('user_id', user.id)
-          .maybeSingle();
-
-        if (error) {
-          console.error('Error fetching gallery settings:', error);
-          return;
-        }
-
-        if (data) {
-          setGalleryName(data.gallery_name);
-        } else {
-          const { error: insertError } = await supabase
-            .from('gallery_settings')
-            .insert({ 
-              user_id: user.id,
-            });
-
-          if (insertError) {
-            console.error('Error creating gallery settings:', insertError);
-            toast.error("Failed to initialize gallery settings");
-          }
-        }
-      }
-    };
-
-    fetchGallerySettings();
-  }, []);
 
   return (
     <div className="min-h-screen bg-[#E6D5A7] pb-20 relative overflow-hidden">
@@ -63,4 +26,3 @@ const Gallery = () => {
 };
 
 export default Gallery;
-

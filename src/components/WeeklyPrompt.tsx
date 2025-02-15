@@ -1,54 +1,15 @@
 
-import { Calendar, Eye } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
-const getGroupMembers = async () => {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) {
-    toast.error("Please sign in to view group members");
-    return [];
-  }
-
-  try {
-    const { data: userRole, error: roleError } = await supabase
-      .from('artistic_roles')
-      .select('group_id')
-      .eq('user_id', session.user.id)
-      .maybeSingle();
-
-    if (roleError) throw roleError;
-    if (!userRole?.group_id) return [];
-
-    const { data: members, error: membersError } = await supabase
-      .from('artistic_roles')
-      .select(`
-        user_id,
-        medium,
-        profiles (
-          full_name
-        )
-      `)
-      .eq('group_id', userRole.group_id);
-
-    if (membersError) throw membersError;
-    return members || [];
-  } catch (error: any) {
-    console.error("Error in getGroupMembers:", error);
-    toast.error("Failed to load group members");
-    return [];
-  }
-};
+// Static data to replace Supabase data
+const mockGroupMembers = [
+  { user_id: '1', profiles: { full_name: 'Alex Chen' }, medium: 'painter' },
+  { user_id: '2', profiles: { full_name: 'Maya Patel' }, medium: 'writer' },
+  { user_id: '3', profiles: { full_name: 'Sam Kim' }, medium: 'photographer' }
+];
 
 export const WeeklyPrompt = () => {
-  const { data: groupMembers = [], isLoading } = useQuery({
-    queryKey: ['groupMembers'],
-    queryFn: getGroupMembers
-  });
-
   return (
     <Card className={`
       relative w-full
@@ -90,26 +51,18 @@ export const WeeklyPrompt = () => {
       <CardFooter className="relative border-t border-white/10 pt-3 pb-2">
         <div className="w-full">
           <div className="flex flex-wrap gap-1.5">
-            {isLoading ? (
-              <div className="animate-pulse bg-white/20 h-6 w-32 rounded-full" />
-            ) : groupMembers.length > 0 ? (
-              groupMembers.map((member) => (
-                <div
-                  key={member.user_id}
-                  className="px-2 py-0.5 rounded-full text-xs
-                    transition-all duration-300
-                    backdrop-blur-md font-serif
-                    bg-white/20 text-indigo-900 shadow-sm
-                    hover:bg-white/30"
-                >
-                  {member.profiles?.full_name || 'Anonymous'} • {member.medium}
-                </div>
-              ))
-            ) : (
-              <span className="text-xs text-indigo-800/60 italic">
-                No curators found in your group
-              </span>
-            )}
+            {mockGroupMembers.map((member) => (
+              <div
+                key={member.user_id}
+                className="px-2 py-0.5 rounded-full text-xs
+                  transition-all duration-300
+                  backdrop-blur-md font-serif
+                  bg-white/20 text-indigo-900 shadow-sm
+                  hover:bg-white/30"
+              >
+                {member.profiles?.full_name || 'Anonymous'} • {member.medium}
+              </div>
+            ))}
           </div>
         </div>
       </CardFooter>
