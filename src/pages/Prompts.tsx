@@ -66,6 +66,10 @@ const Prompts = () => {
             Daily Reflections
           </h1>
           
+          <div className="grid md:grid-cols-1 gap-8">
+            <WeeklyPrompt />
+          </div>
+
           <div className="mb-8 animate-fade-up">
             <ArtisticRole />
           </div>
@@ -105,10 +109,6 @@ const Prompts = () => {
                 </DialogContent>
               </Dialog>
             ))}
-          </div>
-
-          <div className="grid md:grid-cols-1 gap-8">
-            <WeeklyPrompt />
           </div>
 
           {/* Public Gallery Section */}
