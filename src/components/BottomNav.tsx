@@ -52,7 +52,7 @@ export const BottomNav = () => {
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "flex flex-col items-center px-3 py-2 relative",
+                  "flex flex-col items-center px-2 py-2 relative",
                   "text-sm font-medium transition-all duration-500",
                   isActive
                     ? "text-gallery-accent scale-110"
@@ -63,7 +63,12 @@ export const BottomNav = () => {
                   "h-6 w-6 transition-transform duration-500",
                   isActive && "animate-float"
                 )} />
-                <span className="mt-1 text-xs">{item.name}</span>
+                <span className={cn(
+                  "mt-0.5 text-[10px] leading-tight tracking-tight",
+                  item.name === "In Media Res" && "text-[9px] tracking-tighter"
+                )}>
+                  {item.name}
+                </span>
               </Link>
             );
           })}
