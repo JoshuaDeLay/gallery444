@@ -1,3 +1,4 @@
+
 import { Navigation } from "@/components/Navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";
@@ -96,7 +97,7 @@ const Mindfulness = () => {
     <div className="min-h-screen bg-white pb-16">
       <Navigation />
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-serif text-gallery-accent mb-8">Mindfulness Circle</h1>
+        <h1 className="text-3xl font-serif text-gallery-accent mb-8">In Media Res</h1>
         
         {/* Ephemeral Moments Section */}
         <div className="max-w-md mx-auto mb-12">
