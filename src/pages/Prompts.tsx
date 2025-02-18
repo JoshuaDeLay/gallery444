@@ -1,4 +1,3 @@
-
 import { Navigation } from "@/components/Navigation";
 import { WeeklyPrompt } from "@/components/WeeklyPrompt";
 import { BottomNav } from "@/components/BottomNav";
@@ -28,8 +27,8 @@ const Prompts = () => {
     {
       title: "Philosopher",
       icon: Brain,
-      description: "Asks questions, explores the meaning behind the moment",
-      longDescription: "As a Philosopher, you'll dive deep into the underlying meanings and connections within each prompt. Your role is to question, to wonder, and to help others see familiar things in new ways. Through contemplation and discourse, you'll help uncover hidden truths.",
+      description: "Curates weekly prompts, explores deeper meanings",
+      longDescription: "As a Philosopher, you'll guide the community's exploration by crafting and choosing weekly prompts that inspire meaningful reflection. Your role is to question, to wonder, and to help others see familiar things in new ways. Through contemplation and thoughtful prompt creation, you'll spark conversations and uncover hidden truths.",
       gradient: "from-[#9b87f5] to-[#b8a9f7]"
     },
     {
@@ -111,24 +110,75 @@ const Prompts = () => {
             ))}
           </div>
 
-          {/* Public Gallery Section */}
+          {/* Community Galleries with Voting */}
           <div className="mt-16 space-y-6">
             <h2 className="font-serif text-2xl text-center text-murakami.wood mb-8">
-              Public Galleries
+              University of Southern California Galleries
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {['Writers Circle', 'Visual Artists', 'Mixed Media Explorers'].map((community) => (
-                <Card key={community} className="p-6 hover:shadow-lg transition-all duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                {
+                  name: 'Nostalgia Through Time',
+                  creator: 'Visual Arts Department',
+                  votes: 127,
+                  description: 'A collection exploring memories through various mediums'
+                },
+                {
+                  name: 'Urban Perspectives',
+                  creator: 'Architecture Studio',
+                  votes: 143,
+                  description: 'Contemporary interpretations of city life and spaces'
+                }
+              ].map((gallery) => (
+                <Card key={gallery.name} className="p-6 hover:shadow-lg transition-all duration-300">
+                  <div className="flex flex-col gap-3">
+                    <h3 className="font-semibold text-lg">{gallery.name}</h3>
+                    <p className="text-sm text-murakami.wood/70">{gallery.description}</p>
+                    <div className="flex justify-between items-center text-sm mt-2">
+                      <span className="text-murakami.wood/60">{gallery.creator}</span>
+                      <div className="flex items-center gap-2">
+                        <Heart className="w-4 h-4 text-pink-500" />
+                        <span>{gallery.votes} votes</span>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Groups Section */}
+          <div className="mt-16 space-y-6">
+            <h2 className="font-serif text-2xl text-center text-murakami.wood mb-8">
+              Featured Communities
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+              {[
+                {
+                  name: 'University of Southern California',
+                  members: 234,
+                  description: 'A creative hub for USC students and faculty.'
+                },
+                {
+                  name: 'UCLEA Artist Collective',
+                  members: 156,
+                  description: 'Collaborative space for UCLEA members.'
+                }
+              ].map((community) => (
+                <Card key={community.name} className="p-6 hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center gap-3 mb-4">
                     <Users className="w-5 h-5 text-murakami.wood" />
-                    <h3 className="font-semibold text-lg">{community}</h3>
+                    <h3 className="font-semibold text-lg">{community.name}</h3>
                   </div>
                   <p className="text-sm text-murakami.wood/70 mb-4">
-                    Join fellow creators in exploring and sharing interpretations of our weekly prompts.
+                    {community.description}
                   </p>
-                  <Button variant="outline" className="w-full">
-                    View Gallery
-                  </Button>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-murakami.wood/60">{community.members} members</span>
+                    <Button variant="outline" className="text-sm">
+                      Join Community
+                    </Button>
+                  </div>
                 </Card>
               ))}
             </div>

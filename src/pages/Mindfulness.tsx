@@ -1,4 +1,3 @@
-
 import { Navigation } from "@/components/Navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";
@@ -71,12 +70,60 @@ const Mindfulness = () => {
     );
   };
 
+  // Mock ephemeral moments
+  const ephemeralMoments = [
+    {
+      id: 1,
+      time: "10:30 AM",
+      prompt: "What's the quality of your breath right now?",
+      responses: 3,
+    },
+    {
+      id: 2,
+      time: "2:15 PM",
+      prompt: "Share a sound that caught your attention",
+      responses: 5,
+    },
+    {
+      id: 3,
+      time: "4:45 PM",
+      prompt: "Capture a fleeting moment of beauty",
+      responses: 2,
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white pb-16">
       <Navigation />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-serif text-gallery-accent mb-8">Mindfulness Circle</h1>
         
+        {/* Ephemeral Moments Section */}
+        <div className="max-w-md mx-auto mb-12">
+          <h2 className="text-xl font-serif text-gallery-warm mb-4">Today's Moments</h2>
+          <div className="space-y-4">
+            {ephemeralMoments.map((moment) => (
+              <div 
+                key={moment.id}
+                className="bg-white rounded-lg shadow-md p-4 border border-gallery-accent/10"
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-gallery-warm/60">{moment.time}</span>
+                  <span className="text-sm text-gallery-accent">{moment.responses} responses</span>
+                </div>
+                <p className="text-gallery-warm font-serif">{moment.prompt}</p>
+                <Button 
+                  variant="ghost" 
+                  className="w-full mt-3 text-gallery-accent hover:text-gallery-accent/80"
+                >
+                  Share your moment
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Original Circle of Profiles */}
         <div className="max-w-md mx-auto space-y-8">
           {/* Circle of Profiles */}
           <div className="relative w-64 h-64 mx-auto">

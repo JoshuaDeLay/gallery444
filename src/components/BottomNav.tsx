@@ -13,7 +13,7 @@ export const BottomNav = () => {
       icon: MessageSquare,
     },
     {
-      name: "Social",
+      name: "Public",
       href: "/social",
       icon: Users,
     },
