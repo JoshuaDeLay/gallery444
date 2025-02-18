@@ -16,42 +16,42 @@ const Prompts = () => {
       icon: Palette,
       description: "Captures the mood through color, form, and texture",
       longDescription: "As a Painter in our creative community, you'll translate emotions and experiences into visual poetry. Using color, texture, and form, you'll create pieces that speak to the soul of each prompt. Whether working in traditional or digital mediums, your role is to capture the ineffable qualities of moments and memories.",
-      gradient: "from-[#8E9196] to-[#C8C8C9]" // Sophisticated neutral gray
+      gradient: "from-[#fec6a1] to-[#fee2d4]"
     },
     {
       title: "Designer",
       icon: Layout,
       description: "Shapes the experience, structuring space and composition",
       longDescription: "Designers in our community focus on the architecture of experience. You'll work with space, composition, and visual hierarchy to create meaningful interactions. Your designs will help others navigate through emotions and ideas with clarity and purpose.",
-      gradient: "from-[#F1F0FB] to-[#D6BCFA]" // Soft gray to tertiary purple
+      gradient: "from-[#98d8d8] to-[#c1e8e8]"
     },
     {
       title: "Philosopher",
       icon: Brain,
       description: "Curates weekly prompts, explores deeper meanings",
       longDescription: "As a Philosopher, you'll guide the community's exploration by crafting and choosing weekly prompts that inspire meaningful reflection. Your role is to question, to wonder, and to help others see familiar things in new ways. Through contemplation and thoughtful prompt creation, you'll spark conversations and uncover hidden truths.",
-      gradient: "from-[#403E43] to-[#6E59A5]" // Deep charcoal to muted purple
+      gradient: "from-[#9b87f5] to-[#b8a9f7]"
     },
     {
       title: "Writer",
       icon: PenTool,
       description: "Translates emotions into narrative and text",
       longDescription: "Writers in our community craft narratives that bridge the gap between experience and understanding. Your words will give voice to unspoken thoughts and feelings, creating stories that resonate with universal truths while maintaining personal intimacy.",
-      gradient: "from-[#222222] to-[#444444]" // Deep grays for sophistication
+      gradient: "from-[#f1f1f1] to-[#ffffff]"
     },
     {
       title: "Poet",
       icon: ScrollText,
       description: "Distills the essence of an idea into rhythmic expression",
       longDescription: "As a Poet, you'll work with the musicality of language to create concentrated expressions of emotion and insight. Your role is to find the perfect words and rhythms that capture the essence of a moment or feeling, creating verses that linger in the mind.",
-      gradient: "from-[#aaadb0] to-[#221F26]" // Cool gray to dark charcoal
+      gradient: "from-[#fde1d3] to-[#fef0e8]"
     },
     {
       title: "All Roles",
       icon: Globe,
       description: "Blends multiple forms of expression into one voice",
       longDescription: "Those who choose to embrace all roles become multidisciplinary artists, weaving together different forms of expression. You'll have the freedom to move between mediums, combining approaches to create rich, layered responses to each prompt.",
-      gradient: "from-[#243949] to-[#517fa4]" // Deep blue-gray gradient
+      gradient: "from-[#1eaedb] to-[#45bde3]"
     }
   ];
 
