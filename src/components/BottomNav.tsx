@@ -28,7 +28,7 @@ export const BottomNav = () => {
       icon: DoorClosed,
     },
     {
-      name: "Mindfulness",
+      name: "In Media Res",
       href: "/mindfulness",
       icon: Circle,
     },
