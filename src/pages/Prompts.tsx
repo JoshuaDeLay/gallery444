@@ -1,8 +1,9 @@
+
 import { Navigation } from "@/components/Navigation";
 import { WeeklyPrompt } from "@/components/WeeklyPrompt";
 import { BottomNav } from "@/components/BottomNav";
 import { ArtisticRole } from "@/components/ArtisticRole";
-import { Palette, Layout, Brain, PenTool, ScrollText, Globe, Users } from 'lucide-react';
+import { Palette, Layout, Brain, PenTool, ScrollText, Globe, Users, Heart } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
