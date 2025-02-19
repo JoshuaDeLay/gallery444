@@ -9,49 +9,54 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 const Prompts = () => {
-  // Define roles with their explanations
   const roles = [
     {
       title: "Painter",
       icon: Palette,
       description: "Captures the mood through color, form, and texture",
-      longDescription: "As a Painter in our creative community, you'll translate emotions and experiences into visual poetry. Using color, texture, and form, you'll create pieces that speak to the soul of each prompt. Whether working in traditional or digital mediums, your role is to capture the ineffable qualities of moments and memories.",
-      gradient: "from-[#fec6a1] to-[#fee2d4]"
+      longDescription: "As a Painter in our creative community, you'll translate emotions and experiences into visual poetry. Using color, texture, and form, you'll create pieces that speak to the soul of each prompt. Your work forms the visual foundation of our gallery collections, bringing abstract concepts to life through artistic expression.",
+      gradient: "from-[#fec6a1] to-[#fee2d4]",
+      contribution: "Creates the visual heart of gallery collections"
     },
     {
       title: "Designer",
       icon: Layout,
       description: "Shapes the experience, structuring space and composition",
-      longDescription: "Designers in our community focus on the architecture of experience. You'll work with space, composition, and visual hierarchy to create meaningful interactions. Your designs will help others navigate through emotions and ideas with clarity and purpose.",
-      gradient: "from-[#98d8d8] to-[#c1e8e8]"
+      longDescription: "Designers in our community focus on the architecture of experience. You'll work with space, composition, and visual hierarchy to create meaningful interactions. Your designs determine how viewers experience and navigate through the gallery, creating intuitive and engaging spatial narratives.",
+      gradient: "from-[#98d8d8] to-[#c1e8e8]",
+      contribution: "Crafts the gallery's spatial experience"
     },
     {
       title: "Philosopher",
       icon: Brain,
       description: "Curates weekly prompts, explores deeper meanings",
-      longDescription: "As a Philosopher, you'll guide the community's exploration by crafting and choosing weekly prompts that inspire meaningful reflection. Your role is to question, to wonder, and to help others see familiar things in new ways. Through contemplation and thoughtful prompt creation, you'll spark conversations and uncover hidden truths.",
-      gradient: "from-[#9b87f5] to-[#b8a9f7]"
+      longDescription: "As a Philosopher, you'll guide the community's exploration by crafting and choosing weekly prompts that inspire meaningful reflection. Your role shapes the conceptual framework of our galleries, ensuring each collection tells a coherent and thought-provoking story.",
+      gradient: "from-[#9b87f5] to-[#b8a9f7]",
+      contribution: "Develops the gallery's thematic direction"
     },
     {
       title: "Writer",
       icon: PenTool,
       description: "Translates emotions into narrative and text",
-      longDescription: "Writers in our community craft narratives that bridge the gap between experience and understanding. Your words will give voice to unspoken thoughts and feelings, creating stories that resonate with universal truths while maintaining personal intimacy.",
-      gradient: "from-[#f1f1f1] to-[#ffffff]"
+      longDescription: "Writers in our community craft narratives that bridge the gap between experience and understanding. Your words provide context and depth to visual works, creating a richer gallery experience that engages both the eye and mind.",
+      gradient: "from-[#f1f1f1] to-[#ffffff]",
+      contribution: "Adds narrative depth to visual works"
     },
     {
       title: "Poet",
       icon: ScrollText,
       description: "Distills the essence of an idea into rhythmic expression",
-      longDescription: "As a Poet, you'll work with the musicality of language to create concentrated expressions of emotion and insight. Your role is to find the perfect words and rhythms that capture the essence of a moment or feeling, creating verses that linger in the mind.",
-      gradient: "from-[#fde1d3] to-[#fef0e8]"
+      longDescription: "As a Poet, you'll work with the musicality of language to create concentrated expressions of emotion and insight. Your verses add another layer of meaning to gallery pieces, creating moments of reflection and emotional resonance.",
+      gradient: "from-[#fde1d3] to-[#fef0e8]",
+      contribution: "Enhances emotional impact through verse"
     },
     {
       title: "All Roles",
       icon: Globe,
       description: "Blends multiple forms of expression into one voice",
-      longDescription: "Those who choose to embrace all roles become multidisciplinary artists, weaving together different forms of expression. You'll have the freedom to move between mediums, combining approaches to create rich, layered responses to each prompt.",
-      gradient: "from-[#1eaedb] to-[#45bde3]"
+      longDescription: "Those who choose to embrace all roles become multidisciplinary artists, weaving together different forms of expression. You'll create comprehensive gallery experiences that seamlessly integrate visual, spatial, and textual elements.",
+      gradient: "from-[#1eaedb] to-[#45bde3]",
+      contribution: "Creates holistic gallery experiences"
     }
   ];
 
@@ -92,6 +97,9 @@ const Prompts = () => {
                       <div>
                         <h3 className="text-xl font-semibold">{role.title}</h3>
                         <p className="text-sm mt-1 opacity-80">{role.description}</p>
+                        <p className="text-xs mt-2 font-medium text-gallery-accent">
+                          {role.contribution}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -109,80 +117,6 @@ const Prompts = () => {
                 </DialogContent>
               </Dialog>
             ))}
-          </div>
-
-          {/* Community Galleries with Voting */}
-          <div className="mt-16 space-y-6">
-            <h2 className="font-serif text-2xl text-center text-murakami.wood mb-8">
-              University of Southern California Galleries
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  name: 'Nostalgia Through Time',
-                  creator: 'Visual Arts Department',
-                  votes: 127,
-                  description: 'A collection exploring memories through various mediums'
-                },
-                {
-                  name: 'Urban Perspectives',
-                  creator: 'Architecture Studio',
-                  votes: 143,
-                  description: 'Contemporary interpretations of city life and spaces'
-                }
-              ].map((gallery) => (
-                <Card key={gallery.name} className="p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="flex flex-col gap-3">
-                    <h3 className="font-semibold text-lg">{gallery.name}</h3>
-                    <p className="text-sm text-murakami.wood/70">{gallery.description}</p>
-                    <div className="flex justify-between items-center text-sm mt-2">
-                      <span className="text-murakami.wood/60">{gallery.creator}</span>
-                      <div className="flex items-center gap-2">
-                        <Heart className="w-4 h-4 text-pink-500" />
-                        <span>{gallery.votes} votes</span>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Groups Section */}
-          <div className="mt-16 space-y-6">
-            <h2 className="font-serif text-2xl text-center text-murakami.wood mb-8">
-              Featured Communities
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-              {[
-                {
-                  name: 'University of Southern California',
-                  members: 234,
-                  description: 'A creative hub for USC students and faculty.'
-                },
-                {
-                  name: 'UCLEA Artist Collective',
-                  members: 156,
-                  description: 'Collaborative space for UCLEA members.'
-                }
-              ].map((community) => (
-                <Card key={community.name} className="p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Users className="w-5 h-5 text-murakami.wood" />
-                    <h3 className="font-semibold text-lg">{community.name}</h3>
-                  </div>
-                  <p className="text-sm text-murakami.wood/70 mb-4">
-                    {community.description}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-murakami.wood/60">{community.members} members</span>
-                    <Button variant="outline" className="text-sm">
-                      Join Community
-                    </Button>
-                  </div>
-                </Card>
-              ))}
-            </div>
           </div>
         </div>
       </div>
