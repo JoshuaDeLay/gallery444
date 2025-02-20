@@ -64,9 +64,9 @@ const Login = () => {
           email,
           password,
           options: {
-            emailRedirectTo: window.location.origin + '/gallery',
+            emailRedirectTo: `${window.location.origin}/gallery`,
             data: {
-              username: username
+              username
             }
           }
         });
