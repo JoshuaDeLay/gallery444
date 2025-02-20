@@ -9,247 +9,24 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      artistic_roles: {
+      user_roles: {
         Row: {
-          created_at: string
-          group_id: string
-          id: string
-          medium: Database["public"]["Enums"]["artistic_medium"]
-          updated_at: string
-          user_id: string
+          ID: string
+          role: string | null
+          "user id": string
+          "week #": number | null
         }
         Insert: {
-          created_at?: string
-          group_id: string
-          id?: string
-          medium: Database["public"]["Enums"]["artistic_medium"]
-          updated_at?: string
-          user_id: string
+          ID?: string
+          role?: string | null
+          "user id": string
+          "week #"?: number | null
         }
         Update: {
-          created_at?: string
-          group_id?: string
-          id?: string
-          medium?: Database["public"]["Enums"]["artistic_medium"]
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "artistic_roles_group_id_fkey"
-            columns: ["group_id"]
-            isOneToOne: false
-            referencedRelation: "mindfulness_groups"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "artistic_roles_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      gallery_settings: {
-        Row: {
-          background_image: string | null
-          created_at: string
-          gallery_name: string
-          id: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          background_image?: string | null
-          created_at?: string
-          gallery_name?: string
-          id?: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          background_image?: string | null
-          created_at?: string
-          gallery_name?: string
-          id?: string
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      group_invitations: {
-        Row: {
-          created_at: string
-          group_id: string
-          id: string
-          invitee_email: string
-          status: string
-        }
-        Insert: {
-          created_at?: string
-          group_id: string
-          id?: string
-          invitee_email: string
-          status?: string
-        }
-        Update: {
-          created_at?: string
-          group_id?: string
-          id?: string
-          invitee_email?: string
-          status?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "group_invitations_group_id_fkey"
-            columns: ["group_id"]
-            isOneToOne: false
-            referencedRelation: "mindfulness_groups"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      group_members: {
-        Row: {
-          medium: string
-          profiles: Json | null
-          user_id: string
-        }
-        Insert: {
-          medium: string
-          profiles?: Json | null
-          user_id?: string
-        }
-        Update: {
-          medium?: string
-          profiles?: Json | null
-          user_id?: string
-        }
-        Relationships: []
-      }
-      mindfulness_group_members: {
-        Row: {
-          created_at: string
-          group_id: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          group_id: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          group_id?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "mindfulness_group_members_group_id_fkey"
-            columns: ["group_id"]
-            isOneToOne: false
-            referencedRelation: "mindfulness_groups"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      mindfulness_groups: {
-        Row: {
-          created_at: string
-          description: string | null
-          id: string
-          name: string
-          owner_id: string
-        }
-        Insert: {
-          created_at?: string
-          description?: string | null
-          id?: string
-          name: string
-          owner_id?: string
-        }
-        Update: {
-          created_at?: string
-          description?: string | null
-          id?: string
-          name?: string
-          owner_id?: string
-        }
-        Relationships: []
-      }
-      mindfulness_reminders: {
-        Row: {
-          created_at: string | null
-          id: string
-          message: string
-          read_at: string | null
-          recipient_id: string
-          sender_id: string
-          type: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          message: string
-          read_at?: string | null
-          recipient_id: string
-          sender_id: string
-          type?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          message?: string
-          read_at?: string | null
-          recipient_id?: string
-          sender_id?: string
-          type?: string | null
-        }
-        Relationships: []
-      }
-      profiles: {
-        Row: {
-          avatar_url: string | null
-          created_at: string
-          full_name: string | null
-          id: string
-        }
-        Insert: {
-          avatar_url?: string | null
-          created_at?: string
-          full_name?: string | null
-          id: string
-        }
-        Update: {
-          avatar_url?: string | null
-          created_at?: string
-          full_name?: string | null
-          id?: string
-        }
-        Relationships: []
-      }
-      social_connections: {
-        Row: {
-          created_at: string
-          friend_id: string
-          id: string
-          status: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          friend_id: string
-          id?: string
-          status?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          friend_id?: string
-          id?: string
-          status?: string
-          user_id?: string
+          ID?: string
+          role?: string | null
+          "user id"?: string
+          "week #"?: number | null
         }
         Relationships: []
       }
@@ -261,14 +38,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      artistic_medium:
-        | "writer"
-        | "poet"
-        | "musician"
-        | "sculptor"
-        | "painter"
-        | "photographer"
-        | "dancer"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
