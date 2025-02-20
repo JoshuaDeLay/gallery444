@@ -11,6 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
 
@@ -24,7 +25,7 @@ const Login = () => {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         navigate('/gallery');
       }
@@ -39,34 +40,39 @@ const Login = () => {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
+        // Sign up process
+        const { error: signUpError } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: window.location.origin + '/gallery'
+            emailRedirectTo: window.location.origin + '/gallery',
+            data: {
+              username: username || email.split('@')[0] // Use username if provided, otherwise use email prefix
+            }
           }
         });
 
-        if (error) {
-          toast.error(error.message);
+        if (signUpError) {
+          toast.error(signUpError.message);
         } else {
           toast.success("Check your email to confirm your account!");
         }
       } else {
-        const { error } = await supabase.auth.signInWithPassword({
+        // Sign in process
+        const { error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password
         });
 
-        if (error) {
-          toast.error(error.message);
+        if (signInError) {
+          toast.error(signInError.message);
         } else {
           toast.success("Successfully logged in!");
           navigate("/gallery");
         }
       }
     } catch (error) {
-      toast.error("An error occurred");
+      toast.error("An error occurred during authentication");
     } finally {
       setIsLoading(false);
     }
@@ -87,6 +93,17 @@ const Login = () => {
           </div>
           <form onSubmit={handleAuth} className="mt-8 space-y-6">
             <div className="space-y-4">
+              {isSignUp && (
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="bg-white/50 border-white/30 text-gallery.accent placeholder:text-gallery.accent/50"
+                  />
+                </div>
+              )}
               <div>
                 <Input
                   type="email"
