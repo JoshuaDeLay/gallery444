@@ -34,8 +34,27 @@ const Login = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
+  const validateForm = () => {
+    if (!email || !password) {
+      toast.error("Please fill in all required fields");
+      return false;
+    }
+    if (isSignUp && !username) {
+      toast.error("Username is required for registration");
+      return false;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return false;
+    }
+    return true;
+  };
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) return;
+    
     setIsLoading(true);
 
     try {
@@ -47,7 +66,7 @@ const Login = () => {
           options: {
             emailRedirectTo: window.location.origin + '/gallery',
             data: {
-              username: username || email.split('@')[0] // Use username if provided, otherwise use email prefix
+              username: username
             }
           }
         });
@@ -55,7 +74,7 @@ const Login = () => {
         if (signUpError) {
           toast.error(signUpError.message);
         } else {
-          toast.success("Check your email to confirm your account!");
+          toast.success("Account created! Please check your email to confirm your account.");
         }
       } else {
         // Sign in process
@@ -67,12 +86,13 @@ const Login = () => {
         if (signInError) {
           toast.error(signInError.message);
         } else {
-          toast.success("Successfully logged in!");
+          toast.success("Welcome back!");
           navigate("/gallery");
         }
       }
     } catch (error) {
       toast.error("An error occurred during authentication");
+      console.error("Auth error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -100,6 +120,7 @@ const Login = () => {
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    required
                     className="bg-white/50 border-white/30 text-gallery.accent placeholder:text-gallery.accent/50"
                   />
                 </div>
