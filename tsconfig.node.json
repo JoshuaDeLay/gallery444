@@ -5,7 +5,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "noEmit": false,
+    "noEmit": true,
     "emitDeclarationOnly": false
   },
   "include": ["vite.config.ts"]
