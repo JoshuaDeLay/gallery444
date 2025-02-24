@@ -9,6 +9,38 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      group_invitations: {
+        Row: {
+          created_at: string | null
+          group_id: string | null
+          id: string
+          invitee_email: string
+          status: string
+        }
+        Insert: {
+          created_at?: string | null
+          group_id?: string | null
+          id?: string
+          invitee_email: string
+          status?: string
+        }
+        Update: {
+          created_at?: string | null
+          group_id?: string | null
+          id?: string
+          invitee_email?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_invitations_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "mindfulness_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       login_profiles: {
         Row: {
           created_at: string | null
@@ -33,6 +65,56 @@ export type Database = {
           last_login?: string | null
           updated_at?: string | null
           username?: string
+        }
+        Relationships: []
+      }
+      mindfulness_group_members: {
+        Row: {
+          group_id: string
+          joined_at: string | null
+          user_id: string
+        }
+        Insert: {
+          group_id: string
+          joined_at?: string | null
+          user_id: string
+        }
+        Update: {
+          group_id?: string
+          joined_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mindfulness_group_members_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "mindfulness_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mindfulness_groups: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          owner_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          owner_id: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          owner_id?: string
         }
         Relationships: []
       }
