@@ -30,5 +30,5 @@
     "src/**/*.tsx",
     "src/types/jsx.d.ts"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+
 }
