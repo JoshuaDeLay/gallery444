@@ -17,15 +17,16 @@ const Login = () => {
 
   // Check if user is already logged in
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
       if (session) {
         navigate('/gallery');
       }
-    });
+    };
+    
+    checkSession();
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         navigate('/gallery');
       }
@@ -35,16 +36,26 @@ const Login = () => {
   }, [navigate]);
 
   const validateForm = () => {
-    if (!email || !password) {
-      toast.error("Please fill in all required fields");
+    if (!email) {
+      toast.error("Please enter your email");
+      return false;
+    }
+    if (!password) {
+      toast.error("Please enter your password");
       return false;
     }
     if (isSignUp && !username) {
-      toast.error("Username is required for registration");
+      toast.error("Please enter a username");
       return false;
     }
     if (password.length < 6) {
       toast.error("Password must be at least 6 characters long");
+      return false;
+    }
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
       return false;
     }
     return true;
@@ -59,12 +70,10 @@ const Login = () => {
 
     try {
       if (isSignUp) {
-        // Sign up process
-        const { error: signUpError } = await supabase.auth.signUp({
+        const { data, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/gallery`,
             data: {
               username
             }
@@ -72,27 +81,33 @@ const Login = () => {
         });
 
         if (signUpError) {
+          console.error("Signup error:", signUpError);
           toast.error(signUpError.message);
-        } else {
+        } else if (data) {
           toast.success("Account created! Please check your email to confirm your account.");
+          // Don't navigate yet as they need to verify email
         }
       } else {
-        // Sign in process
-        const { error: signInError } = await supabase.auth.signInWithPassword({
+        const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email,
-          password
+          password,
         });
 
         if (signInError) {
-          toast.error(signInError.message);
-        } else {
-          toast.success("Welcome back!");
+          console.error("Login error:", signInError);
+          if (signInError.message.includes("Invalid login credentials")) {
+            toast.error("Invalid email or password");
+          } else {
+            toast.error(signInError.message);
+          }
+        } else if (data.session) {
+          toast.success("Successfully logged in!");
           navigate("/gallery");
         }
       }
     } catch (error) {
-      toast.error("An error occurred during authentication");
       console.error("Auth error:", error);
+      toast.error("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -120,7 +135,6 @@ const Login = () => {
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    required
                     className="bg-white/50 border-white/30 text-gallery.accent placeholder:text-gallery.accent/50"
                   />
                 </div>
@@ -131,7 +145,6 @@ const Login = () => {
                   placeholder="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
                   className="bg-white/50 border-white/30 text-gallery.accent placeholder:text-gallery.accent/50"
                 />
               </div>
@@ -141,7 +154,6 @@ const Login = () => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
                   className="bg-white/50 border-white/30 text-gallery.accent placeholder:text-gallery.accent/50"
                 />
               </div>
