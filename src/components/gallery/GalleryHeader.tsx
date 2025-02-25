@@ -22,14 +22,33 @@ export const GalleryHeader = ({ galleryName, setGalleryName }: GalleryHeaderProp
       return;
     }
 
-    const { error } = await supabase
+    // First try to update existing settings
+    const { error: updateError, data: updateData } = await supabase
       .from('gallery_settings')
       .update({ gallery_name: editedName })
-      .eq('user_id', user.id);
+      .eq('user_id', user.id)
+      .select()
+      .single();
 
-    if (error) {
-      console.error('Error updating gallery name:', error);
-      toast.error("Failed to update gallery name");
+    // If no rows were updated, create new settings
+    if (!updateData) {
+      const { error: insertError } = await supabase
+        .from('gallery_settings')
+        .insert({
+          user_id: user.id,
+          gallery_name: editedName
+        })
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error('Error creating gallery settings:', insertError);
+        toast.error("Failed to create gallery settings");
+        return;
+      }
+    } else if (updateError) {
+      console.error('Error updating gallery settings:', updateError);
+      toast.error("Failed to update gallery settings");
       return;
     }
 

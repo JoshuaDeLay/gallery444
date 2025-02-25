@@ -9,6 +9,62 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      gallery_settings: {
+        Row: {
+          created_at: string | null
+          gallery_name: string
+          id: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          gallery_name: string
+          id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          gallery_name?: string
+          id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      group_invitations: {
+        Row: {
+          created_at: string | null
+          group_id: string | null
+          id: string
+          invitee_email: string
+          status: string
+        }
+        Insert: {
+          created_at?: string | null
+          group_id?: string | null
+          id?: string
+          invitee_email: string
+          status?: string
+        }
+        Update: {
+          created_at?: string | null
+          group_id?: string | null
+          id?: string
+          invitee_email?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_invitations_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "mindfulness_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       group_members: {
         Row: {
           group_id: string
@@ -65,6 +121,30 @@ export type Database = {
           invite_code?: string | null
           name?: string
           owner_id?: string
+        }
+        Relationships: []
+      }
+      mindfulness_reminders: {
+        Row: {
+          created_at: string | null
+          id: string
+          message: string
+          recipient_id: string | null
+          sender_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          message: string
+          recipient_id?: string | null
+          sender_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          message?: string
+          recipient_id?: string | null
+          sender_id?: string | null
         }
         Relationships: []
       }
