@@ -25,11 +25,11 @@ const Groups = () => {
 
       if (groupsError) throw groupsError;
 
-      // Then, for each group, fetch its members and their profiles
+      // Then, for each group, fetch its members
       const groupsWithMembers = await Promise.all(groupsData.map(async (group) => {
         const { data: membersData, error: membersError } = await supabase
-          .from('mindfulness_group_members')
-          .select('user_id')
+          .from('group_members')
+          .select('user_id, role')
           .eq('group_id', group.id);
 
         if (membersError) throw membersError;
@@ -45,6 +45,7 @@ const Groups = () => {
 
           return {
             user_id: member.user_id,
+            role: member.role,
             profile: profileData
           };
         }));

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { UserRole } from "@/integrations/supabase/customTypes";
 
 interface CreateGroupFormProps {
   onCancel: () => void;
@@ -35,10 +36,15 @@ export const CreateGroupForm = ({ onCancel, onSuccess }: CreateGroupFormProps) =
 
       if (groupError) throw groupError;
 
+      // Add the creator as a member with the writer role
       const { error: memberError } = await supabase
-        .from('mindfulness_group_members')
+        .from('group_members')
         .insert([
-          { group_id: group.id, user_id: user.id }
+          { 
+            group_id: group.id, 
+            user_id: user.id,
+            role: 'writer' as UserRole 
+          }
         ]);
 
       if (memberError) throw memberError;
