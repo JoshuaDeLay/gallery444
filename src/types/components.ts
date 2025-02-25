@@ -1,3 +1,4 @@
+
 import { ReactNode } from 'react';
 import { LucideIcon } from 'lucide-react';
 
@@ -30,7 +31,6 @@ export interface GalleryPageProps {
   error?: Error;
 }
 
-// Add shared types
 export type Season = 'winter' | 'spring' | 'summer' | 'autumn';
 export type Weather = 'clear' | 'rain' | 'snow' | 'storm' | 'cloudy';
 export type TimeOfDay = 'dawn' | 'day' | 'dusk' | 'night';
@@ -58,11 +58,18 @@ export interface Gallery {
 export interface GalleryContent {
   id: string;
   type: Zone['type'];
-  data: any; // Replace with specific content types
+  data: any;
 }
 
 export interface SeasonalEffect {
   type: string;
   intensity: number;
   duration: number;
-} 
+}
+
+export interface LocationData {
+  latitude: number;
+  longitude: number;
+  city?: string;
+  country?: string;
+}
