@@ -14,7 +14,6 @@ export interface GroupMember {
   user_id: string;
   role: UserRole;
   joined_at: string;
-  profile: Profile;
 }
 
 export interface MindfulnessGroup {
@@ -23,8 +22,31 @@ export interface MindfulnessGroup {
   description: string | null;
   created_at: string;
   owner_id: string;
-  invite_code: string;
-  members: GroupMember[];
+  invite_code: string | null;
+}
+
+export interface GroupInvitation {
+  id: string;
+  group_id: string;
+  invitee_email: string;
+  status: 'pending' | 'accepted' | 'rejected';
+  created_at: string;
+}
+
+export interface GallerySettings {
+  id: string;
+  user_id: string;
+  gallery_name: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MindfulnessReminder {
+  id: string;
+  sender_id: string;
+  recipient_id: string;
+  message: string;
+  created_at: string;
 }
 
 export interface Database {
@@ -46,14 +68,14 @@ export interface Database {
         };
       };
       mindfulness_groups: {
-        Row: Omit<MindfulnessGroup, 'members'>;
+        Row: MindfulnessGroup;
         Insert: {
           id?: string;
           name: string;
           description?: string | null;
           created_at?: string;
           owner_id: string;
-          invite_code?: string;
+          invite_code?: string | null;
         };
         Update: {
           id?: string;
@@ -61,11 +83,11 @@ export interface Database {
           description?: string | null;
           created_at?: string;
           owner_id?: string;
-          invite_code?: string;
+          invite_code?: string | null;
         };
       };
       group_members: {
-        Row: Omit<GroupMember, 'profile'>;
+        Row: GroupMember;
         Insert: {
           id?: string;
           group_id: string;
@@ -79,6 +101,57 @@ export interface Database {
           user_id?: string;
           role?: UserRole;
           joined_at?: string;
+        };
+      };
+      group_invitations: {
+        Row: GroupInvitation;
+        Insert: {
+          id?: string;
+          group_id: string;
+          invitee_email: string;
+          status?: 'pending' | 'accepted' | 'rejected';
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          group_id?: string;
+          invitee_email?: string;
+          status?: 'pending' | 'accepted' | 'rejected';
+          created_at?: string;
+        };
+      };
+      gallery_settings: {
+        Row: GallerySettings;
+        Insert: {
+          id?: string;
+          user_id: string;
+          gallery_name: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          gallery_name?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      mindfulness_reminders: {
+        Row: MindfulnessReminder;
+        Insert: {
+          id?: string;
+          sender_id: string;
+          recipient_id: string;
+          message: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          sender_id?: string;
+          recipient_id?: string;
+          message?: string;
+          created_at?: string;
         };
       };
     };
