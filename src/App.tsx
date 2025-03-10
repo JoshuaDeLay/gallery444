@@ -16,6 +16,7 @@ import Groups from "./pages/Groups";
 import RolePage from "./pages/RolePage";
 import Curator from "./pages/Curator";
 import ForagePage from "./pages/Forage";
+import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="/curator" element={<Curator />} />
             <Route path="/forage" element={<ForagePage />} />
             <Route path="/role" element={<RolePage />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

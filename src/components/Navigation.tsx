@@ -19,6 +19,7 @@ export const Navigation = () => {
     { name: "Create Gallery", path: "/create" },
     { name: "Groups", path: "/groups" },
     { name: "Role", path: "/role" },
+    { name: "Login", path: "/login" },
   ];
 
   return (
