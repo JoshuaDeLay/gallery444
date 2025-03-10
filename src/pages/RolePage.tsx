@@ -3,7 +3,7 @@ import { Navigation, BottomNav } from "@/components/Navigation";
 import { motion } from "framer-motion";
 import { 
   Paintbrush, Feather, Camera, BookOpen, 
-  Layers, ArrowRight, ExternalLink, Quote
+  Layers, ArrowRight, ExternalLink, Quote, Eye, Clock
 } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -21,51 +21,42 @@ const RolePage = () => {
       id: "writer",
       title: "THE WRITER",
       icon: Feather,
-      color: "#000000",
-      accentColor: "#000000",
-      description: "The writer connects words to emotions, crafting narratives that explore the human experience.",
-      skills: ["Storytelling", "Emotional Depth", "Critical Thinking"],
-      quote: "IN WORDS LIES THE POWER TO TRANSCEND THE ORDINARY",
-      projects: ["Personal Essays", "Poetry Collections", "Literary Critique"]
+      description: "CONNECTS WORDS TO EMOTIONS",
+      skills: ["STORYTELLING", "EMOTION", "THINKING"],
+      quote: "IN WORDS LIES POWER",
+      prompt: "WHAT STORY IS UNTOLD?"
     },
     {
       id: "painter",
       title: "THE PAINTER",
       icon: Paintbrush,
-      color: "#000000",
-      accentColor: "#000000",
-      description: "The painter sees beyond surface reality, using color and form to interpret universal truths.",
-      skills: ["Color Theory", "Composition", "Medium Mastery"],
-      quote: "WHAT IS UNSEEN BECOMES VISIBLE THROUGH THE BRUSH",
-      projects: ["Abstract Expressions", "Visual Narratives", "Experimental Works"]
+      description: "SEES BEYOND SURFACE REALITY",
+      skills: ["COLOR", "FORM", "VISION"],
+      quote: "MAKE INVISIBLE VISIBLE",
+      prompt: "WHAT COLOR IS FEELING?"
     },
     {
       id: "photographer",
       title: "THE PHOTOGRAPHER",
       icon: Camera,
-      color: "#000000",
-      accentColor: "#000000",
-      description: "The photographer captures moments of truth, freezing time to reveal what might otherwise be missed.",
-      skills: ["Timing", "Perspective", "Light Manipulation"],
-      quote: "THE FRAME IS A WINDOW TO ALTERED PERCEPTION",
-      projects: ["Conceptual Series", "Documentary Work", "Surreal Portraits"]
+      description: "CAPTURES MOMENTS OF TRUTH",
+      skills: ["TIMING", "LIGHT", "PERSPECTIVE"],
+      quote: "FREEZE TIME TO SEE",
+      prompt: "WHAT MOMENT MATTERS?"
     },
     {
       id: "philosopher",
       icon: BookOpen,
       title: "THE PHILOSOPHER",
-      color: "#000000",
-      accentColor: "#000000",
-      description: "The philosopher questions the nature of existence and meaning, challenging perspectives through deep inquiry.",
-      skills: ["Logical Analysis", "Conceptual Thinking", "Disciplined Questioning"],
-      quote: "TO INTERROGATE REALITY IS TO TRANSFORM IT",
-      projects: ["Thought Experiments", "Conceptual Frameworks", "Social Commentary"],
+      description: "QUESTIONS EXISTENCE & MEANING",
+      skills: ["INQUIRY", "LOGIC", "WISDOM"],
+      quote: "INTERROGATE REALITY",
       prompts: [
-        "What does it mean to truly see?",
-        "How does art transcend language?",
-        "In what ways does creation connect to destruction?",
-        "Can silence communicate more than words?",
-        "How does memory shape identity?"
+        "WHAT IF THE UNIVERSE HAS ALREADY SENT YOU THE MESSAGE?",
+        "HOW DOES ART TRANSCEND LANGUAGE?",
+        "IS CREATION A FORM OF DESTRUCTION?",
+        "CAN SILENCE COMMUNICATE MORE THAN WORDS?",
+        "ARE MEMORIES WHO WE ARE?"
       ]
     }
   ];
@@ -82,54 +73,68 @@ const RolePage = () => {
   const selectedRoleData = selectedRole ? roles.find(role => role.id === selectedRole) : null;
 
   return (
-    <div className="min-h-screen bg-white pb-16">
+    <div className="min-h-screen bg-black text-white overflow-hidden">
       <Navigation />
       
-      <main className="container mx-auto px-4 py-20">
-        <header className="mb-12 max-w-2xl mx-auto text-center">
+      <main className="container mx-auto px-4 pt-14 pb-20 md:py-16">
+        <header className="mb-6 md:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
+            className="text-center"
           >
-            <h1 className="text-5xl font-mono tracking-tight text-black uppercase mb-4">
-              <span className="font-bold">"ARTISTIC</span> ROLE"
+            <div className="inline-flex items-center gap-2 mb-2">
+              <Badge variant="outline" className="text-[10px] font-mono tracking-wider border-white/40 uppercase">
+                LIMITED EDITION GALLERY™
+              </Badge>
+              <div className="flex items-center gap-1 text-[10px] text-white/70">
+                <Eye size={10} />
+                <span>1247</span>
+              </div>
+              <div className="flex items-center gap-1 text-[10px] text-white/70">
+                <Clock size={10} />
+                <span>7D 14H 23M</span>
+              </div>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-mono tracking-tight text-white uppercase">
+              "ARTISTIC <span className="font-bold">ROLE</span>"
             </h1>
-            <p className="text-zinc-700 text-lg leading-relaxed uppercase font-mono">
-              Your creative identity within the Gallery ecosystem
+            <p className="text-white/70 text-xs uppercase font-mono tracking-wide mt-1">
+              FIND A PATTERN IN THE ORDINARY.
             </p>
           </motion.div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {roles.map((role, index) => (
             <motion.div
               key={role.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              whileHover={{ y: -3 }}
               onClick={() => handleRoleSelection(role.id)}
             >
-              <Card className={`h-full cursor-pointer transition-all duration-300 border-2 ${selectedRole === role.id ? 'border-black bg-white' : 'border-zinc-200 bg-white hover:border-black'}`}>
-                <CardHeader className="pb-2">
+              <Card className={`cursor-pointer transition-all duration-300 border ${selectedRole === role.id ? 'border-white bg-white/5' : 'border-white/10 bg-black hover:border-white/30'} overflow-hidden h-full`}>
+                <CardHeader className="pt-4 pb-1 px-3">
                   <div className="flex items-center justify-between">
-                    <role.icon className="h-6 w-6 text-black" />
-                    <Badge variant="outline" className="font-mono text-xs uppercase tracking-wide px-2 py-0 h-5 text-black border-black">
-                      Role
+                    <role.icon className="h-5 w-5 text-white/80" />
+                    <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-wide px-2 py-0 h-4 text-white/80 border-white/30">
+                      ROLE
                     </Badge>
                   </div>
-                  <h2 className="text-xl font-mono font-bold tracking-tight text-black uppercase mt-4">
+                  <h2 className="text-sm font-mono font-bold tracking-tight text-white uppercase mt-2">
                     {role.title}
                   </h2>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-zinc-700 text-sm leading-relaxed mb-4">
+                <CardContent className="p-3 pt-0">
+                  <p className="text-white/70 text-[10px] leading-tight mb-2 font-mono uppercase">
                     {role.description}
                   </p>
-                  <div className="flex flex-wrap gap-1 mt-auto">
+                  <div className="flex flex-wrap gap-1">
                     {role.skills.map((skill) => (
-                      <Badge key={skill} variant="outline" className="bg-white text-black text-xs border-black">
+                      <Badge key={skill} variant="outline" className="bg-transparent text-white/80 text-[8px] border-white/20 font-mono">
                         {skill}
                       </Badge>
                     ))}
@@ -146,150 +151,101 @@ const RolePage = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-12"
+            className="mt-4"
           >
-            <Card className="overflow-hidden border-none shadow-lg">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div 
-                  className="p-8 flex flex-col justify-between relative bg-black"
-                >
-                  <div className="absolute top-0 left-0 w-full h-full opacity-5">
-                    <div className="h-full w-full flex items-center justify-center overflow-hidden">
-                      <selectedRoleData.icon className="w-[150%] h-[150%] text-white" />
-                    </div>
-                  </div>
-                  
-                  <div className="relative z-10">
-                    <Badge className="mb-4 uppercase font-mono bg-white text-black">
-                      {selectedRoleData.id}
-                    </Badge>
-                    <h3 className="text-3xl font-mono font-bold text-white uppercase tracking-tight mb-4">
-                      {selectedRoleData.title}
-                    </h3>
-                    <p className="text-white/80 mb-8">
-                      {selectedRoleData.description}
-                    </p>
-                  </div>
-                  
-                  <div className="relative z-10 border-l-4 pl-4 border-white">
-                    <blockquote className="text-lg font-mono text-white italic">
-                      "{selectedRoleData.quote}"
-                    </blockquote>
+            <Card className="overflow-hidden border-none shadow-lg bg-gradient-to-b from-black to-gray-900">
+              <div className="p-4 relative">
+                <div className="mb-2 flex justify-between items-center">
+                  <Badge className="uppercase font-mono text-[10px] bg-white text-black border-0">
+                    {selectedRoleData.id}
+                  </Badge>
+                  <div className="flex items-center gap-1 text-[10px] text-white/70">
+                    <Eye size={10} />
+                    <span>3892</span>
+                    <Clock size={10} className="ml-2" />
+                    <span>3D 8H 45M</span>
                   </div>
                 </div>
-
-                <div className="bg-white p-8 border-t lg:border-t-0 lg:border-l border-black">
-                  <h4 className="text-lg font-mono uppercase tracking-wider mb-6 flex items-center">
-                    <Layers className="w-5 h-5 mr-2 text-black" />
-                    Featured Projects
-                  </h4>
-                  
-                  <ul className="space-y-4 mb-8">
-                    {selectedRoleData.projects.map((project, index) => (
-                      <motion.li 
-                        key={project}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 }}
-                        className="flex items-center"
-                      >
-                        <ArrowRight className="w-4 h-4 mr-3 text-black" />
-                        <span className="text-black">{project}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                  
-                  <div className="flex flex-wrap gap-3 mb-8">
-                    {selectedRoleData.skills.map((skill) => (
-                      <Badge key={skill} variant="outline" className="border-2 border-black text-black font-medium py-1">
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  {selectedRoleData.id === "philosopher" && (
-                    <div className="mb-8">
-                      <h4 className="text-lg font-mono uppercase tracking-wider mb-4 flex items-center">
-                        <Quote className="w-5 h-5 mr-2 text-black" />
-                        Philosophical Prompts
-                      </h4>
-                      <ul className="space-y-2">
-                        {selectedRoleData.prompts?.map((prompt, index) => (
-                          <motion.li
-                            key={index}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: index * 0.1 }}
-                            className={`border p-3 cursor-pointer transition-all ${activePrompt === index ? 'border-black bg-zinc-50' : 'border-zinc-200 hover:border-black'}`}
-                            onClick={() => handlePromptClick(index)}
-                          >
-                            <div className="flex justify-between items-center">
-                              <p className="font-mono text-sm">{prompt}</p>
-                              <Badge variant="outline" className="bg-black text-white text-xs border-0">
-                                {index + 1}
-                              </Badge>
-                            </div>
-                            {activePrompt === index && (
-                              <motion.div 
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                className="mt-3 pt-3 border-t border-zinc-200"
+                
+                <h3 className="text-xl font-mono font-bold text-white uppercase tracking-tight mb-2">
+                  "{selectedRoleData.title}"
+                </h3>
+                
+                <div className="relative border-l-2 pl-3 border-white/30 my-4">
+                  <Quote className="absolute -left-4 -top-2 h-4 w-4 text-white/50" />
+                  <blockquote className="text-sm font-mono text-white/90 uppercase">
+                    "{selectedRoleData.quote}"
+                  </blockquote>
+                </div>
+                
+                {selectedRoleData.id === "philosopher" && (
+                  <div className="mt-4">
+                    <h4 className="text-xs font-mono uppercase tracking-wider mb-3 flex items-center">
+                      <Quote className="w-4 h-4 mr-1 text-white/70" />
+                      UNIVERSAL PROMPT™
+                    </h4>
+                    <div className="space-y-2">
+                      {selectedRoleData.prompts?.map((prompt, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: index * 0.1 }}
+                          className={`border p-3 cursor-pointer transition-all ${activePrompt === index ? 'border-white bg-white/5' : 'border-white/20 hover:border-white/50'}`}
+                          onClick={() => handlePromptClick(index)}
+                        >
+                          <div className="flex justify-between items-center">
+                            <p className="font-mono text-xs text-white uppercase">{prompt}</p>
+                            <Badge variant="outline" className="bg-black text-white text-[10px] border-white/30">
+                              {index + 1}
+                            </Badge>
+                          </div>
+                          {activePrompt === index && (
+                            <motion.div 
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              className="mt-2 pt-2 border-t border-white/20"
+                            >
+                              <p className="text-[10px] text-white/60 italic font-mono">
+                                FIND A PATTERN IN THE ORDINARY.
+                              </p>
+                              <Button 
+                                onClick={() => navigate('/prompts')}
+                                variant="outline"
+                                className="mt-2 text-[10px] border-white/50 text-white hover:bg-white hover:text-black w-full font-mono"
                               >
-                                <p className="text-xs text-zinc-600 italic">
-                                  Reflect on this question. Consider how it relates to your artistic practice.
-                                </p>
-                                <Button 
-                                  onClick={() => navigate('/prompts')}
-                                  variant="outline"
-                                  className="mt-2 text-xs border-black text-black hover:bg-black hover:text-white w-full"
-                                >
-                                  Explore Related Prompts
-                                </Button>
-                              </motion.div>
-                            )}
-                          </motion.li>
-                        ))}
-                      </ul>
+                                EXPLORE RELATED PROMPTS
+                              </Button>
+                            </motion.div>
+                          )}
+                        </motion.div>
+                      ))}
                     </div>
-                  )}
-                  
-                  <Button 
-                    onClick={() => navigate('/groups')}
-                    className="flex items-center gap-2 w-full bg-black hover:bg-zinc-800 text-white"
-                  >
-                    Discover Related Groups
-                    <ExternalLink className="w-4 h-4" />
-                  </Button>
-                </div>
+                  </div>
+                )}
+                
+                <Button 
+                  onClick={() => navigate('/groups')}
+                  className="flex items-center gap-2 w-full bg-white hover:bg-white/90 text-black mt-4 font-mono text-xs"
+                >
+                  SEE YOUR GALLERY™
+                  <ExternalLink className="w-3 h-3" />
+                </Button>
               </div>
             </Card>
           </motion.div>
         )}
 
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="fixed bottom-16 md:bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent pt-12 pb-2 px-4 z-10">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex items-center justify-center max-w-lg mx-auto"
           >
-            <p className="text-zinc-700 text-lg mb-6 font-mono uppercase">
-              "Your role influences your interaction with Gallery spaces"
-            </p>
-            <div className="flex items-center justify-center">
-              <Button 
-                onClick={() => navigate('/groups')} 
-                variant="outline" 
-                className="mr-4 border-black text-black hover:bg-black hover:text-white"
-              >
-                Explore Groups
-              </Button>
-              <Button 
-                onClick={() => navigate('/prompts')}
-                className="bg-black hover:bg-zinc-800 text-white"
-              >
-                Weekly Prompts
-              </Button>
-            </div>
+            <Badge className="text-[10px] uppercase font-mono border-white/20 bg-transparent text-white/70">
+              VIRGIL ABLOH'S DESIGN PRINCIPLES
+            </Badge>
           </motion.div>
         </div>
       </main>
