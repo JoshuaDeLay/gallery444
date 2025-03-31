@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/sheet";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { MessageSquare, Users, DoorClosed, Circle, Palette } from "lucide-react";
+import { MessageSquare, Users, DoorClosed, Circle, Palette, PresentationChart } from "lucide-react";
 
 export const Navigation = () => {
   const location = useLocation();
@@ -19,6 +19,7 @@ export const Navigation = () => {
     { name: "Create Gallery", path: "/create" },
     { name: "Groups", path: "/groups" },
     { name: "Role", path: "/role" },
+    { name: "Pitch Deck", path: "/pitch" },
     { name: "Login", path: "/login" },
   ];
 
@@ -93,9 +94,9 @@ export const BottomNav = () => {
       icon: Circle,
     },
     {
-      name: "Role",
-      href: "/role",
-      icon: Palette,
+      name: "Pitch",
+      href: "/pitch",
+      icon: PresentationChart,
     }
   ];
 
