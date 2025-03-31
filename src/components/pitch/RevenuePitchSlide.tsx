@@ -2,8 +2,8 @@
 import { motion } from "framer-motion";
 import { 
   DollarSign, Briefcase, TrendingUp, 
-  Users, PaintBrush, Bookmark, Museum, 
-  Instagram, Lock
+  Users, Paintbrush, Bookmark, 
+  Instagram, Lock, Landmark
 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -75,7 +75,7 @@ export const RevenuePitchSlide = () => {
                   transition={{ delay: 0.3 }}
                   className="flex items-start gap-3"
                 >
-                  <PaintBrush className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
+                  <Paintbrush className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-mono uppercase font-bold">ARTIST & AUTHOR FEATURES</p>
                     <p className="text-xs text-black/70 font-mono">Monetize exposure through in-app promotions and events</p>
@@ -102,7 +102,7 @@ export const RevenuePitchSlide = () => {
                   transition={{ delay: 0.4 }}
                   className="flex items-start gap-3"
                 >
-                  <Museum className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
+                  <Landmark className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-mono uppercase font-bold">LITERARY HOUSES & MUSEUMS</p>
                     <p className="text-xs text-black/70 font-mono">Feature renowned works and create immersive digital archives</p>
@@ -114,7 +114,7 @@ export const RevenuePitchSlide = () => {
                   transition={{ delay: 0.5 }}
                   className="flex items-start gap-3"
                 >
-                  <PaintBrush className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
+                  <Paintbrush className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-mono uppercase font-bold">ARTISTS & WRITERS</p>
                     <p className="text-xs text-black/70 font-mono">Promote exclusive collaborations and commission-based art sales</p>
@@ -126,7 +126,7 @@ export const RevenuePitchSlide = () => {
                   transition={{ delay: 0.6 }}
                   className="flex items-start gap-3"
                 >
-                  <Museum className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
+                  <Landmark className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-mono uppercase font-bold">CULTURAL INSTITUTIONS</p>
                     <p className="text-xs text-black/70 font-mono">Establish credibility and drive engagement</p>
@@ -165,7 +165,7 @@ export const RevenuePitchSlide = () => {
                   transition={{ delay: 0.8 }}
                   className="flex items-start gap-3"
                 >
-                  <Museum className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
+                  <Landmark className="h-5 w-5 text-black/70 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-mono uppercase font-bold">MUSEUM ACTIVATIONS</p>
                     <p className="text-xs text-black/70 font-mono">Unlock digital artwork templates when visiting a museum, creating a seamless offline-to-online bridge</p>
