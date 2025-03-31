@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { MessageSquare, Users, Image, DoorClosed, GalleryHorizontal, Circle, PresentationChart } from "lucide-react";
+import { MessageSquare, Users, Image, DoorClosed, GalleryHorizontal, Presentation } from "lucide-react";
 
 export const BottomNav = () => {
   const location = useLocation();
@@ -30,7 +30,7 @@ export const BottomNav = () => {
     {
       name: "Pitch",
       href: "/pitch",
-      icon: PresentationChart,
+      icon: Presentation,
     },
     {
       name: "Memories",

@@ -1,4 +1,5 @@
-import { Home, Grid, Gallery, Users, Settings } from 'lucide-react';
+
+import { Home, Grid, Users, Settings, DoorClosed } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const BottomNav = () => {
@@ -8,7 +9,7 @@ export const BottomNav = () => {
   const navItems = [
     { icon: Home, path: '/', label: 'Prompt' },
     { icon: Grid, path: '/templates', label: 'Templates' },
-    { icon: Gallery, path: '/galleries', label: 'Galleries' },
+    { icon: DoorClosed, path: '/galleries', label: 'Galleries' },
     { icon: Users, path: '/community', label: 'Community' },
     { icon: Settings, path: '/settings', label: 'Settings' }
   ];

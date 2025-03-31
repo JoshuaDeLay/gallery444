@@ -1,4 +1,3 @@
-
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,7 +7,7 @@ import {
 } from "@/components/ui/sheet";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { MessageSquare, Users, DoorClosed, Circle, Palette, PresentationChart } from "lucide-react";
+import { MessageSquare, Users, DoorClosed, Circle, Presentation } from "lucide-react";
 
 export const Navigation = () => {
   const location = useLocation();
@@ -96,7 +95,7 @@ export const BottomNav = () => {
     {
       name: "Pitch",
       href: "/pitch",
-      icon: PresentationChart,
+      icon: Presentation,
     }
   ];
 
