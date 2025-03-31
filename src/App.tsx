@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,6 +16,7 @@ import RolePage from "./pages/RolePage";
 import Curator from "./pages/Curator";
 import ForagePage from "./pages/Forage";
 import Login from "./pages/Login";
+import RevenuePitchSlide from "./components/pitch/RevenuePitchSlide";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +41,7 @@ const App = () => {
             <Route path="/forage" element={<ForagePage />} />
             <Route path="/role" element={<RolePage />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/pitch" element={<RevenuePitchSlide />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
