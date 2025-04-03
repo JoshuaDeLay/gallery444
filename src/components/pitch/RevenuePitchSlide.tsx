@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { 
-  DollarSign, Briefcase, TrendingUp, 
+  DollarSign, TrendingUp, 
   Users, Paintbrush, Bookmark, 
   Instagram, Lock, Landmark, HeartHandshake
 } from "lucide-react";
@@ -11,9 +11,9 @@ import { HeartbeatContainer } from "@/components/LoveableAnimations";
 
 export const RevenuePitchSlide = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gallery-soft text-black overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#F1F0FB] to-[#E5DEFF] text-black overflow-hidden">
       <main className="container mx-auto px-4 py-8 max-h-[calc(100vh-4rem)] overflow-auto">
-        <header className="mb-8">
+        <header className="mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -22,47 +22,47 @@ export const RevenuePitchSlide = () => {
           >
             <HeartbeatContainer>
               <div className="inline-flex items-center gap-2 mb-2">
-                <Badge variant="outline" className="text-[10px] font-mono tracking-wider border-gallery-accent/40 bg-white/50 uppercase">
+                <Badge variant="outline" className="text-[10px] font-mono tracking-wider border-[#8B4513]/20 bg-white/50 uppercase">
                   GALLERY™ INVESTOR PITCH
                 </Badge>
               </div>
             </HeartbeatContainer>
-            <h1 className="text-3xl md:text-4xl font-serif tracking-tight text-gallery-accent uppercase">
-              "Business <span className="font-bold italic">Model</span>"
+            <h1 className="text-3xl md:text-4xl font-serif tracking-tight text-[#5E4B56] uppercase">
+              "Business <span className="font-normal italic">Model</span>"
             </h1>
-            <p className="text-gallery-accent/70 text-xs uppercase font-mono tracking-wide mt-1">
+            <p className="text-[#8E9196] text-xs uppercase font-mono tracking-wide mt-1">
               MONETIZATION STRATEGY & GROWTH ROADMAP
             </p>
           </motion.div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {/* Revenue Streams Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="border border-gallery-accent/10 overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader className="bg-gradient-to-r from-murakami-teal to-murakami-teal/70 text-white font-mono uppercase text-sm pt-3 pb-3 px-4 flex flex-row items-center justify-between">
+            <Card className="border-none overflow-hidden rounded-2xl shadow-md hover:shadow-lg transition-shadow bg-white/80 backdrop-blur-sm">
+              <CardHeader className="bg-gradient-to-r from-[#FAF3E0] to-[#FDE1D3] text-[#5E4B56] font-mono uppercase text-sm pt-4 pb-4 px-5 flex flex-row items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <DollarSign className="h-4 w-4" />
+                  <DollarSign className="h-4 w-4 text-[#8B4513]" />
                   <h2>Revenue Streams</h2>
                 </div>
-                <Badge className="bg-white/90 text-gallery-accent text-[10px] font-mono">01</Badge>
+                <Badge className="bg-white/90 text-[#8B4513] text-[10px] font-mono">01</Badge>
               </CardHeader>
-              <CardContent className="p-4 bg-white">
-                <ul className="space-y-4">
+              <CardContent className="p-5 bg-white/90">
+                <ul className="space-y-5">
                   <motion.li 
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 }}
                     className="flex items-start gap-3"
                   >
-                    <Bookmark className="h-5 w-5 text-murakami-teal mt-0.5 flex-shrink-0" />
+                    <Bookmark className="h-5 w-5 text-[#FFB5C5] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">EXCLUSIVE CATALOGUES</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Partner with literary houses and artists to offer paid digital experiences</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">EXCLUSIVE CATALOGUES</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Partner with literary houses and artists to offer paid digital experiences</p>
                     </div>
                   </motion.li>
                   <motion.li 
@@ -71,10 +71,10 @@ export const RevenuePitchSlide = () => {
                     transition={{ delay: 0.2 }}
                     className="flex items-start gap-3"
                   >
-                    <Lock className="h-5 w-5 text-murakami-teal mt-0.5 flex-shrink-0" />
+                    <Lock className="h-5 w-5 text-[#FFB5C5] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">PREMIUM MEMBERSHIP</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Unlock exclusive templates, collaborative tools, and private galleries</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">PREMIUM MEMBERSHIP</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Unlock exclusive templates, collaborative tools, and private galleries</p>
                     </div>
                   </motion.li>
                   <motion.li 
@@ -83,10 +83,10 @@ export const RevenuePitchSlide = () => {
                     transition={{ delay: 0.3 }}
                     className="flex items-start gap-3"
                   >
-                    <Paintbrush className="h-5 w-5 text-murakami-teal mt-0.5 flex-shrink-0" />
+                    <Paintbrush className="h-5 w-5 text-[#FFB5C5] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">ARTIST FEATURES</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Monetize exposure through in-app promotions and events</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">ARTIST FEATURES</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Monetize exposure through in-app promotions and events</p>
                     </div>
                   </motion.li>
                 </ul>
@@ -100,26 +100,26 @@ export const RevenuePitchSlide = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card className="border border-gallery-accent/10 overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader className="bg-gradient-to-r from-murakami-pink to-murakami-pink/70 text-white font-mono uppercase text-sm pt-3 pb-3 px-4 flex flex-row items-center justify-between">
+            <Card className="border-none overflow-hidden rounded-2xl shadow-md hover:shadow-lg transition-shadow bg-white/80 backdrop-blur-sm">
+              <CardHeader className="bg-gradient-to-r from-[#D3E4FD] to-[#98D8D8] text-[#5E4B56] font-mono uppercase text-sm pt-4 pb-4 px-5 flex flex-row items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <HeartHandshake className="h-4 w-4" />
+                  <HeartHandshake className="h-4 w-4 text-[#5E4B56]" />
                   <h2>Key Partnerships</h2>
                 </div>
-                <Badge className="bg-white/90 text-gallery-accent text-[10px] font-mono">02</Badge>
+                <Badge className="bg-white/90 text-[#5E4B56] text-[10px] font-mono">02</Badge>
               </CardHeader>
-              <CardContent className="p-4 bg-white">
-                <ul className="space-y-4">
+              <CardContent className="p-5 bg-white/90">
+                <ul className="space-y-5">
                   <motion.li 
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
                     className="flex items-start gap-3"
                   >
-                    <Landmark className="h-5 w-5 text-murakami-pink mt-0.5 flex-shrink-0" />
+                    <Landmark className="h-5 w-5 text-[#98D8D8] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">MUSEUMS & GALLERIES</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Feature renowned works and create immersive digital archives</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">MUSEUMS & GALLERIES</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Feature renowned works and create immersive digital archives</p>
                     </div>
                   </motion.li>
                   <motion.li 
@@ -128,10 +128,10 @@ export const RevenuePitchSlide = () => {
                     transition={{ delay: 0.5 }}
                     className="flex items-start gap-3"
                   >
-                    <Paintbrush className="h-5 w-5 text-murakami-pink mt-0.5 flex-shrink-0" />
+                    <Paintbrush className="h-5 w-5 text-[#98D8D8] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">ARTISTS & WRITERS</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Promote exclusive collaborations and commission-based art sales</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">ARTISTS & WRITERS</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Promote exclusive collaborations and commission-based art sales</p>
                     </div>
                   </motion.li>
                   <motion.li 
@@ -140,10 +140,10 @@ export const RevenuePitchSlide = () => {
                     transition={{ delay: 0.6 }}
                     className="flex items-start gap-3"
                   >
-                    <Landmark className="h-5 w-5 text-murakami-pink mt-0.5 flex-shrink-0" />
+                    <Landmark className="h-5 w-5 text-[#98D8D8] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">CULTURAL INSTITUTIONS</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Establish credibility and drive engagement</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">CULTURAL INSTITUTIONS</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Establish credibility and drive engagement</p>
                     </div>
                   </motion.li>
                 </ul>
@@ -157,26 +157,26 @@ export const RevenuePitchSlide = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            <Card className="border border-gallery-accent/10 overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader className="bg-gradient-to-r from-murakami-cream to-murakami-wood/20 text-gallery-accent font-mono uppercase text-sm pt-3 pb-3 px-4 flex flex-row items-center justify-between">
+            <Card className="border-none overflow-hidden rounded-2xl shadow-md hover:shadow-lg transition-shadow bg-white/80 backdrop-blur-sm">
+              <CardHeader className="bg-gradient-to-r from-[#FEF7CD] to-[#FEC6A1] text-[#5E4B56] font-mono uppercase text-sm pt-4 pb-4 px-5 flex flex-row items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4" />
+                  <TrendingUp className="h-4 w-4 text-[#8B4513]" />
                   <h2>Growth Strategy</h2>
                 </div>
-                <Badge className="bg-white/90 text-gallery-accent text-[10px] font-mono">03</Badge>
+                <Badge className="bg-white/90 text-[#8B4513] text-[10px] font-mono">03</Badge>
               </CardHeader>
-              <CardContent className="p-4 bg-white">
-                <ul className="space-y-4">
+              <CardContent className="p-5 bg-white/90">
+                <ul className="space-y-5">
                   <motion.li 
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.7 }}
                     className="flex items-start gap-3"
                   >
-                    <Instagram className="h-5 w-5 text-murakami-wood mt-0.5 flex-shrink-0" />
+                    <Instagram className="h-5 w-5 text-[#FEC6A1] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">CREATOR COLLABORATIONS</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Leverage niche creators on Instagram to drive adoption</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">CREATOR COLLABORATIONS</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Leverage niche creators on Instagram to drive adoption</p>
                     </div>
                   </motion.li>
                   <motion.li 
@@ -185,10 +185,10 @@ export const RevenuePitchSlide = () => {
                     transition={{ delay: 0.8 }}
                     className="flex items-start gap-3"
                   >
-                    <Landmark className="h-5 w-5 text-murakami-wood mt-0.5 flex-shrink-0" />
+                    <Landmark className="h-5 w-5 text-[#FEC6A1] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">MUSEUM INTEGRATIONS</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Unlock digital artwork templates when visiting a museum, creating a seamless experience</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">MUSEUM INTEGRATIONS</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Unlock digital artwork templates when visiting a museum</p>
                     </div>
                   </motion.li>
                   <motion.li 
@@ -197,10 +197,10 @@ export const RevenuePitchSlide = () => {
                     transition={{ delay: 0.9 }}
                     className="flex items-start gap-3"
                   >
-                    <Users className="h-5 w-5 text-murakami-wood mt-0.5 flex-shrink-0" />
+                    <Users className="h-5 w-5 text-[#FEC6A1] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-mono uppercase font-bold text-gallery-accent">COMMUNITY BUILDING</p>
-                      <p className="text-xs text-gallery-accent/70 font-mono">Foster a network of creators who contribute to and promote the platform</p>
+                      <p className="text-sm font-mono uppercase font-medium text-[#5E4B56]">COMMUNITY BUILDING</p>
+                      <p className="text-xs text-[#8E9196] font-sans mt-1">Foster a network of creators who contribute to the platform</p>
                     </div>
                   </motion.li>
                 </ul>
@@ -209,17 +209,17 @@ export const RevenuePitchSlide = () => {
           </motion.div>
         </div>
 
-        <div className="border-t border-gallery-accent/10 pt-6 text-center">
-          <p className="text-xs text-gallery-accent/60 font-serif italic tracking-wide">
+        <div className="border-t border-[#E5DEFF] pt-8 text-center">
+          <p className="text-sm text-[#8E9196] font-serif italic tracking-wide">
             "Cultural spaces reimagined for the digital era"
           </p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="mt-4 flex justify-center"
+            className="mt-6 flex justify-center"
           >
-            <Badge variant="outline" className="text-[10px] font-mono border-gallery-accent/20 bg-white/50 text-gallery-accent/70 uppercase">
+            <Badge variant="outline" className="text-[10px] font-mono border-[#98D8D8]/40 bg-white/50 text-[#5E4B56]/70 uppercase px-4 py-1">
               GALLERY™ 2024
             </Badge>
           </motion.div>
